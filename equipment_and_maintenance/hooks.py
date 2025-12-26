@@ -241,13 +241,43 @@ scheduler_events = {
 # Fixtures
 # ------------
 # Fixtures to export using bench export-fixtures
-# Export custom fields and property setters for this app
+# Export custom fields, property setters, and links for this app
 fixtures = [
 	{
 		"dt": "Custom Field",
 	},
 	{
 		"dt": "Property Setter",
+	},
+	{
+		"dt": "DocType Link",
+		"filters": {
+			"link_doctype": ["in", [
+				"Equipment Master",
+				"Asset Sub Category",
+				"Preventive Maintenance Task Interval",
+				"Preventive Maintenance Schedule Item",
+				"Preventive Maintenance Template",
+				"Preventive Maintenance Schedule",
+				"Preventive Maintenance Log Task",
+				"Preventive Maintenance Task",
+				"Preventive Maintenance Log",
+				"Maintenance Interval",
+				"Maintenance Job Completion",
+				"Maintenance Request",
+				"Maintenance Work Order",
+				"Maintenance Cost Summary",
+				"Maintenance Outside Repair Cost",
+				"Maintenance Miscellaneous Item Cost",
+				"Maintenance Lubricant Cost",
+				"Maintenance Spare Parts Cost",
+				"Maintenance Labor Cost",
+				"Maintenance Work Done",
+				"Maintenance Request Items"
+                "Asset Category",
+                "Asset Sub Category"
+			]]
+		}
 	}
 ]
 
