@@ -4,7 +4,6 @@ __pycache__/
 *$py.class
 *.pyc
 *.py~
-pyproject.toml
 
 # Distribution / packaging
 .Python
