@@ -1,0 +1,177 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:JC-{YYYY}-{####}",
+ "creation": "2025-12-26 14:14:54.032055",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_mtk8",
+  "amended_from",
+  "date",
+  "time",
+  "customers_name",
+  "maintenance_location",
+  "column_break_xbpd",
+  "work_order_no",
+  "equipment_type",
+  "plate_no",
+  "engine_hour__km_reading",
+  "section_break_yipn",
+  "note",
+  "section_break_jqsz",
+  "prepared_by",
+  "repair_sign",
+  "column_break_eihe",
+  "checked_by",
+  "checker_sign",
+  "column_break_dzeh",
+  "collected_by",
+  "collector_sign"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_mtk8",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Maintenance Job Completion",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "label": "Time"
+  },
+  {
+   "fieldname": "customers_name",
+   "fieldtype": "Data",
+   "label": "Customers Name"
+  },
+  {
+   "fieldname": "maintenance_location",
+   "fieldtype": "Link",
+   "label": "Maintenance Location",
+   "options": "Location"
+  },
+  {
+   "fieldname": "column_break_xbpd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "work_order_no",
+   "fieldtype": "Link",
+   "label": "Work Order No",
+   "options": "Maintenance Work Order"
+  },
+  {
+   "fieldname": "equipment_type",
+   "fieldtype": "Link",
+   "label": "Equipment Type",
+   "options": "Asset Category"
+  },
+  {
+   "fetch_from": "work_order_no.plate_no",
+   "fieldname": "plate_no",
+   "fieldtype": "Data",
+   "label": "Plate No"
+  },
+  {
+   "fieldname": "engine_hour__km_reading",
+   "fieldtype": "Float",
+   "label": "Engine Hour / Km Reading"
+  },
+  {
+   "fieldname": "section_break_jqsz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "prepared_by",
+   "fieldtype": "Data",
+   "label": "Repaired by"
+  },
+  {
+   "fieldname": "column_break_eihe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "checked_by",
+   "fieldtype": "Data",
+   "label": "Checked by"
+  },
+  {
+   "fieldname": "checker_sign",
+   "fieldtype": "Signature",
+   "label": "Sign"
+  },
+  {
+   "fieldname": "column_break_dzeh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "collected_by",
+   "fieldtype": "Data",
+   "label": "Checked and Collected by"
+  },
+  {
+   "fieldname": "collector_sign",
+   "fieldtype": "Signature",
+   "label": "Sign"
+  },
+  {
+   "fieldname": "section_break_yipn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Text Editor",
+   "label": "Note"
+  },
+  {
+   "fieldname": "repair_sign",
+   "fieldtype": "Signature",
+   "label": "Sign"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-12-26 14:28:17.518741",
+ "modified_by": "Administrator",
+ "module": "Maintenance and Admin",
+ "name": "Maintenance Job Completion",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
