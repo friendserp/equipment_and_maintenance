@@ -3,18 +3,21 @@
 
 frappe.ui.form.on("Maintenance Work Order", {
 	refresh(frm) {
-		update_cost_summary(frm);
 		setup_queries(frm);
 	},
 	
+	overhead_percentage(frm) {
+		update_cost_summary(frm);
+	},
 
 	maintenance_request_id(frm) {
-
+		// Fetch items from Maintenance Request when selected
 		if (frm.doc.maintenance_request_id) {
 			frappe.db.get_doc("Maintenance Request", frm.doc.maintenance_request_id)
 				.then(doc => {
-					
-					let request_items_table = doc.request_items;
+					// Copy items from Maintenance Request to request_items
+					// Maintenance Request uses table_yamh as the field name
+					let request_items_table = doc.table_yamh || doc.request_items;
 					if (request_items_table && request_items_table.length > 0) {
 						frm.clear_table("request_items");
 						request_items_table.forEach(item => {

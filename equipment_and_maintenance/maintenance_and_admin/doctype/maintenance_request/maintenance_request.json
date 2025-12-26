@@ -15,8 +15,8 @@
   "engine_hour__km_reading",
   "driver_name",
   "project",
-  "section_break_lmdk",
-  "table_yamh",
+  "section_break_snti",
+  "request_items",
   "section_break_tapv",
   "requested_by",
   "date_requested",
@@ -83,16 +83,6 @@
    "options": "Project"
   },
   {
-   "fieldname": "section_break_lmdk",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "table_yamh",
-   "fieldtype": "Table",
-   "label": "Maintenance Request Items",
-   "options": "Maintenance Request Items"
-  },
-  {
    "fieldname": "section_break_tapv",
    "fieldtype": "Section Break"
   },
@@ -148,12 +138,21 @@
    "fieldname": "receiver_sign",
    "fieldtype": "Signature",
    "label": "Signature"
+  },
+  {
+   "fieldname": "section_break_snti",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "request_items",
+   "fieldtype": "Table",
+   "options": "Maintenance Request Items"
   }
  ],
-  "grid_page_length": 50,
-  "index_web_pages_for_search": 1,
-  "links": [],
-  "modified": "2025-12-26 11:09:58.450612",
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-26 14:05:57.954191",
  "modified_by": "Administrator",
  "module": "Maintenance and Admin",
  "name": "Maintenance Request",
