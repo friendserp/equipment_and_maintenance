@@ -1,0 +1,76 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:task_name",
+ "creation": "2025-12-26 15:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "task",
+  "task_name",
+  "task_category",
+  "is_completed",
+  "column_break_1",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "task",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Task",
+   "options": "Preventive Maintenance Task",
+   "unique": 1
+  },
+  {
+   "fetch_from": "task.task_name",
+   "fieldname": "task_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Task Name",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fetch_from": "task.task_category",
+   "fieldname": "task_category",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Task Category",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_completed",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Completed"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-12-26 16:41:03.521683",
+ "modified_by": "Administrator",
+ "module": "Maintenance and Admin",
+ "name": "Preventive Maintenance Log Task",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

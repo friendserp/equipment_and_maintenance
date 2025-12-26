@@ -143,23 +143,11 @@ app_license = "mit"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"equipment_and_maintenance.tasks.all"
-# 	],
-# 	"daily": [
-# 		"equipment_and_maintenance.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"equipment_and_maintenance.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"equipment_and_maintenance.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"equipment_and_maintenance.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"daily": [
+		"equipment_and_maintenance.maintenance_and_admin.tasks.daily"
+	]
+}
 
 # Testing
 # -------

@@ -1,0 +1,88 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:task_name",
+ "creation": "2025-12-26 15:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "task_name",
+  "task_category",
+  "description",
+  "column_break_1",
+  "is_mandatory",
+  "estimated_duration",
+  "is_active"
+ ],
+ "fields": [
+  {
+   "fieldname": "task_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Task Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "task_category",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Task Category",
+   "options": "LUBRICATION CHECK\nENGINE SECTION (MAIN & AUX. ENGINES) CHECK\nELECTRICAL SECTION CHECK\nSTEERING SECTION CHECK\nCHASSIS/AIR SYSTEM CHECK\nBUCKET, BLADE CHECK\nTRANS, DIFF, ALL GEAR CASES, FINAL DRIVES\nBRAKE SECTION CHECK\nWHEEL, AXLES, HUB CHECK\nMAIN HYDRAULIC SECTION CHECK\nCAB AND BODY SECTION CHECK\nADDITIONAL CHECK FOR TRACKED EQUIPMENT\nROAD TEST INSPECTION\nADDITIONAL WORK INCLUDED"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_mandatory",
+   "fieldtype": "Check",
+   "label": "Is Mandatory"
+  },
+  {
+   "fieldname": "estimated_duration",
+   "fieldtype": "Float",
+   "label": "Estimated Duration (Hours)"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-26 16:40:22.185920",
+ "modified_by": "Administrator",
+ "module": "Maintenance and Admin",
+ "name": "Preventive Maintenance Task",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
