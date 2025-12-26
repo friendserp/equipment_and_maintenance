@@ -1,0 +1,63 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-12-26 11:44:03.026312",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "repaired_part_description",
+  "outside_wo_no",
+  "labor_cost",
+  "material_cost",
+  "total_cost"
+ ],
+ "fields": [
+  {
+   "fieldname": "repaired_part_description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Repaired Part Description"
+  },
+  {
+   "fieldname": "outside_wo_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Outside WO No",
+   "options": "Maintenance Work Order"
+  },
+  {
+   "fieldname": "labor_cost",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Labor Cost"
+  },
+  {
+   "fieldname": "material_cost",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Material Cost"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Cost"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-12-26 11:45:47.023124",
+ "modified_by": "Administrator",
+ "module": "Maintenance and Admin",
+ "name": "Maintenance Outside Repair Cost",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

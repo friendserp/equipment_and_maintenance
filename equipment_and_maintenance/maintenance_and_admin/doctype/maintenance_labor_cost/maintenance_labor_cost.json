@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-12-26 11:26:46.017694",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "assigned_technician",
+  "work_description",
+  "job_started_date",
+  "job_started_hr",
+  "job_ended_date",
+  "job_ended_hr",
+  "total_hrs_taken",
+  "unit_cost",
+  "total_cost"
+ ],
+ "fields": [
+  {
+   "fieldname": "assigned_technician",
+   "fieldtype": "Data",
+   "label": "Assigned Technician"
+  },
+  {
+   "fieldname": "work_description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Work Description"
+  },
+  {
+   "fieldname": "job_started_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Job Started Date"
+  },
+  {
+   "columns": 1,
+   "fieldname": "job_started_hr",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Job Started Hr"
+  },
+  {
+   "fieldname": "job_ended_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Job Ended Date"
+  },
+  {
+   "columns": 1,
+   "fieldname": "job_ended_hr",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Job Ended Hr"
+  },
+  {
+   "fieldname": "total_hrs_taken",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Hrs Taken"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_cost",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Unit Cost"
+  },
+  {
+   "columns": 1,
+   "fieldname": "total_cost",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Cost"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-12-26 11:30:04.114104",
+ "modified_by": "Administrator",
+ "module": "Maintenance and Admin",
+ "name": "Maintenance Labor Cost",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

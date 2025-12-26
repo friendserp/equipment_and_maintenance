@@ -1,0 +1,235 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:WO-{YYYY}-{####}",
+ "creation": "2025-12-26 11:14:10.190486",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_jkf1",
+  "amended_from",
+  "maintenance_request_id",
+  "plate_no",
+  "engine_hour__km_reading",
+  "column_break_pthv",
+  "requested_by",
+  "date_in",
+  "date_out",
+  "drivers__operators_request_section",
+  "request_items",
+  "description_of_work_done_section",
+  "work_done_items",
+  "column_break_mien",
+  "inspector_comment",
+  "labor_cost_section",
+  "labor_cost_items",
+  "total_labor_cost",
+  "spare_parts_cost_section",
+  "spare_cost_items",
+  "total_spare_parts_cost",
+  "lubricants_cost_section",
+  "lubricant_cost_items",
+  "total_lubricants_cost",
+  "miscellaneous_item_cost_section",
+  "miscellaneous_cost_items",
+  "total_miscellaneous_item_cost",
+  "outside_required_part_and_cost_section",
+  "outside_cost_items",
+  "cost_summary_section",
+  "cost_summary_items"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_jkf1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Maintenance Work Order",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "maintenance_request_id",
+   "fieldtype": "Link",
+   "label": "Maintenance Request Id",
+   "options": "Maintenance Request"
+  },
+  {
+   "fetch_from": "maintenance_request_id.plate_no",
+   "fieldname": "plate_no",
+   "fieldtype": "Data",
+   "label": "Plate No"
+  },
+  {
+   "fetch_from": "maintenance_request_id.engine_hour__km_reading",
+   "fieldname": "engine_hour__km_reading",
+   "fieldtype": "Float",
+   "label": "Engine Hour / Km Reading"
+  },
+  {
+   "fieldname": "column_break_pthv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "maintenance_request_id.requested_by",
+   "fieldname": "requested_by",
+   "fieldtype": "Data",
+   "label": "Requested by"
+  },
+  {
+   "fieldname": "date_in",
+   "fieldtype": "Datetime",
+   "label": "Date in"
+  },
+  {
+   "fieldname": "date_out",
+   "fieldtype": "Datetime",
+   "label": "Date out"
+  },
+  {
+   "fieldname": "drivers__operators_request_section",
+   "fieldtype": "Section Break",
+   "label": "Drivers / Operators Request"
+  },
+  {
+   "fieldname": "description_of_work_done_section",
+   "fieldtype": "Section Break",
+   "label": "Description of work done"
+  },
+  {
+   "fieldname": "column_break_mien",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "inspector_comment",
+   "fieldtype": "Small Text",
+   "label": "Inspector Comment"
+  },
+  {
+   "fieldname": "labor_cost_section",
+   "fieldtype": "Section Break",
+   "label": "Labor Cost"
+  },
+  {
+   "fieldname": "total_labor_cost",
+   "fieldtype": "Float",
+   "label": "Total Labor Cost"
+  },
+  {
+   "fieldname": "spare_parts_cost_section",
+   "fieldtype": "Section Break",
+   "label": "Spare Parts Cost"
+  },
+  {
+   "fieldname": "total_spare_parts_cost",
+   "fieldtype": "Float",
+   "label": "Total Spare Parts Cost"
+  },
+  {
+   "fieldname": "lubricants_cost_section",
+   "fieldtype": "Section Break",
+   "label": "Lubricants Cost"
+  },
+  {
+   "fieldname": "miscellaneous_item_cost_section",
+   "fieldtype": "Section Break",
+   "label": "Miscellaneous Item Cost"
+  },
+  {
+   "fieldname": "total_lubricants_cost",
+   "fieldtype": "Float",
+   "label": "Total Lubricants Cost"
+  },
+  {
+   "fieldname": "total_miscellaneous_item_cost",
+   "fieldtype": "Float",
+   "label": "Total Miscellaneous Item Cost"
+  },
+  {
+   "fieldname": "outside_required_part_and_cost_section",
+   "fieldtype": "Section Break",
+   "label": "Outside Required Part and Cost"
+  },
+  {
+   "fieldname": "cost_summary_section",
+   "fieldtype": "Section Break",
+   "label": "Cost Summary"
+  },
+  {
+   "fieldname": "request_items",
+   "fieldtype": "Table",
+   "options": "Maintenance Request Items"
+  },
+  {
+   "fieldname": "work_done_items",
+   "fieldtype": "Table",
+   "options": "Maintenance Work Done"
+  },
+  {
+   "fieldname": "labor_cost_items",
+   "fieldtype": "Table",
+   "options": "Maintenance Labor Cost"
+  },
+  {
+   "fieldname": "spare_cost_items",
+   "fieldtype": "Table",
+   "options": "Maintenance Spare Parts Cost"
+  },
+  {
+   "fieldname": "lubricant_cost_items",
+   "fieldtype": "Table",
+   "options": "Maintenance Lubricant Cost"
+  },
+  {
+   "fieldname": "miscellaneous_cost_items",
+   "fieldtype": "Table",
+   "options": "Maintenance Miscellaneous Item Cost"
+  },
+  {
+   "fieldname": "outside_cost_items",
+   "fieldtype": "Table",
+   "options": "Maintenance Outside Repair Cost"
+  },
+  {
+   "fieldname": "cost_summary_items",
+   "fieldtype": "Table",
+   "options": "Maintenance Cost Summary",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-12-26 13:32:00.768417",
+ "modified_by": "Administrator",
+ "module": "Maintenance and Admin",
+ "name": "Maintenance Work Order",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

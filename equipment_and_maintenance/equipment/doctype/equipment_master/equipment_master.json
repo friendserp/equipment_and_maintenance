@@ -1,0 +1,154 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "autoname",
+ "creation": "2025-12-25 22:44:35.356392",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "equipment_code",
+  "make",
+  "equipment_category",
+  "equipment_sub_category",
+  "model",
+  "plate_number",
+  "serial_number",
+  "engine_number",
+  "current_status",
+  "asset_id",
+  "column_break_zgfc",
+  "hp",
+  "cc",
+  "capacity",
+  "yom",
+  "location",
+  "operators_name",
+  "operators_phone_no"
+ ],
+ "fields": [
+  {
+   "fieldname": "make",
+   "fieldtype": "Data",
+   "label": "Make"
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
+  },
+  {
+   "fieldname": "plate_number",
+   "fieldtype": "Data",
+   "label": "Plate Number"
+  },
+  {
+   "fieldname": "serial_number",
+   "fieldtype": "Data",
+   "label": "Serial Number"
+  },
+  {
+   "fieldname": "engine_number",
+   "fieldtype": "Data",
+   "label": "Engine Number"
+  },
+  {
+   "fieldname": "current_status",
+   "fieldtype": "Select",
+   "label": "Current Status"
+  },
+  {
+   "fieldname": "asset_id",
+   "fieldtype": "Link",
+   "label": "Asset Id",
+   "options": "Asset"
+  },
+  {
+   "fieldname": "column_break_zgfc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hp",
+   "fieldtype": "Data",
+   "label": "HP"
+  },
+  {
+   "fieldname": "cc",
+   "fieldtype": "Data",
+   "label": "CC"
+  },
+  {
+   "fieldname": "capacity",
+   "fieldtype": "Data",
+   "label": "Capacity"
+  },
+  {
+   "fieldname": "yom",
+   "fieldtype": "Data",
+   "label": "YOM"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Link",
+   "label": "Location",
+   "options": "Project"
+  },
+  {
+   "fieldname": "operators_name",
+   "fieldtype": "Link",
+   "label": "Operators Name",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "operators_phone_no",
+   "fieldtype": "Data",
+   "label": "Operators Phone No"
+  },
+  {
+   "fieldname": "equipment_code",
+   "fieldtype": "Data",
+   "label": "Equipment Code",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "equipment_category",
+   "fieldtype": "Link",
+   "label": "Equipment Category",
+   "options": "Asset Category"
+  },
+  {
+   "fieldname": "equipment_sub_category",
+   "fieldtype": "Link",
+   "label": "Equipment Sub Category",
+   "options": "Asset Sub Category"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-25 23:45:12.767272",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Equipment Master",
+ "naming_rule": "By fieldname",
+ "owner": "lijsamuael@gmail.com",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

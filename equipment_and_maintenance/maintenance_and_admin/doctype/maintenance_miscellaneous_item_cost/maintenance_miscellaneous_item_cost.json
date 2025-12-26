@@ -1,0 +1,74 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-12-26 11:39:21.317047",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "miscellaneous_item",
+  "part_no",
+  "uom",
+  "qty",
+  "unit_cost",
+  "total_cost"
+ ],
+ "fields": [
+  {
+   "fieldname": "part_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Part No"
+  },
+  {
+   "columns": 1,
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_cost",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Unit Cost"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Cost"
+  },
+  {
+   "fieldname": "miscellaneous_item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Miscellaneous Item",
+   "options": "Item"
+  },
+  {
+   "columns": 1,
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "UOM",
+   "options": "UOM"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-12-26 11:40:53.302707",
+ "modified_by": "Administrator",
+ "module": "Maintenance and Admin",
+ "name": "Maintenance Miscellaneous Item Cost",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
