@@ -13,7 +13,7 @@ class EquipmentMaster(Document):
 			frappe.throw("Equipment Category and Equipment Sub Category are required to generate Equipment Code")
 		
 		# Get category code
-		category_code = frappe.db.get_value("Asset Category", self.equipment_category, "asset_category_code")
+		category_code = frappe.db.get_value("Asset Category", self.equipment_category, "custom_asset_category_code")
 		if not category_code:
 			# If no code, use the name (sanitized)
 			category_code = frappe.scrub(self.equipment_category)
