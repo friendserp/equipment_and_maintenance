@@ -1,0 +1,168 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-12-26 17:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "plate_no",
+  "km_reading",
+  "section_break_fuel",
+  "fuel_type",
+  "fuel_liter",
+  "fuel_birr",
+  "section_break_oils",
+  "engine_oil_liter",
+  "engine_oil_birr",
+  "steering_oil_liter",
+  "steering_oil_birr",
+  "differential_oil_liter",
+  "differential_oil_birr",
+  "brake_fluid_liter",
+  "brake_fluid_birr",
+  "section_break_other",
+  "grease_kg",
+  "grease_birr",
+  "battery_charge_birr",
+  "wash_birr",
+  "remark"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "plate_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Plate No"
+  },
+  {
+   "fieldname": "km_reading",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Km Reading"
+  },
+  {
+   "fieldname": "section_break_fuel",
+   "fieldtype": "Section Break",
+   "label": "Fuel"
+  },
+  {
+   "fieldname": "fuel_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Fuel Type",
+   "options": "Gasoline\nDiesel"
+  },
+  {
+   "fieldname": "fuel_liter",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Fuel Liter"
+  },
+  {
+   "fieldname": "fuel_birr",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Fuel Birr"
+  },
+  {
+   "fieldname": "section_break_oils",
+   "fieldtype": "Section Break",
+   "label": "Oils"
+  },
+  {
+   "fieldname": "engine_oil_liter",
+   "fieldtype": "Float",
+   "label": "Engine Oil Liter"
+  },
+  {
+   "fieldname": "engine_oil_birr",
+   "fieldtype": "Currency",
+   "label": "Engine Oil Birr"
+  },
+  {
+   "fieldname": "steering_oil_liter",
+   "fieldtype": "Float",
+   "label": "Steering Oil Liter"
+  },
+  {
+   "fieldname": "steering_oil_birr",
+   "fieldtype": "Currency",
+   "label": "Steering Oil Birr"
+  },
+  {
+   "fieldname": "differential_oil_liter",
+   "fieldtype": "Float",
+   "label": "Differential Oil Liter"
+  },
+  {
+   "fieldname": "differential_oil_birr",
+   "fieldtype": "Currency",
+   "label": "Differential Oil Birr"
+  },
+  {
+   "fieldname": "brake_fluid_liter",
+   "fieldtype": "Float",
+   "label": "Brake Fluid Liter"
+  },
+  {
+   "fieldname": "brake_fluid_birr",
+   "fieldtype": "Currency",
+   "label": "Brake Fluid Birr"
+  },
+  {
+   "fieldname": "section_break_other",
+   "fieldtype": "Section Break",
+   "label": "Other Items"
+  },
+  {
+   "fieldname": "grease_kg",
+   "fieldtype": "Float",
+   "label": "Grease Kg"
+  },
+  {
+   "fieldname": "grease_birr",
+   "fieldtype": "Currency",
+   "label": "Grease Birr"
+  },
+  {
+   "fieldname": "battery_charge_birr",
+   "fieldtype": "Currency",
+   "label": "Battery Charge Birr"
+  },
+  {
+   "fieldname": "wash_birr",
+   "fieldtype": "Currency",
+   "label": "Wash Birr"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remark"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-12-26 17:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Cost Control Registration Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "date",
+ "sort_order": "DESC",
+ "states": []
+}
+

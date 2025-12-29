@@ -1,0 +1,80 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-12-27 14:26:54.517779",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "plate_number",
+  "equipment_type",
+  "insuring_company",
+  "column_break_zmfg",
+  "insured_date",
+  "expiry_date",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "plate_number",
+   "fieldtype": "Link",
+   "label": "Plate Number",
+   "options": "Equipment Master"
+  },
+  {
+   "fieldname": "equipment_type",
+   "fieldtype": "Data",
+   "label": "Equipment Type"
+  },
+  {
+   "fieldname": "insuring_company",
+   "fieldtype": "Data",
+   "label": "Insuring Company"
+  },
+  {
+   "fieldname": "column_break_zmfg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "insured_date",
+   "fieldtype": "Date",
+   "label": "Insured Date"
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-27 14:28:15.684993",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Insurance Followup Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

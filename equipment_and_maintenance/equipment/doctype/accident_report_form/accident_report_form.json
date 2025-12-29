@@ -1,0 +1,273 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:ARF-{YYYY}-{####}",
+ "creation": "2025-12-26 19:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "section_break_1",
+  "project",
+  "plate_number",
+  "equipment_type",
+  "model",
+  "column_break_1",
+  "drivers_name",
+  "id_number",
+  "driving_license_number",
+  "section_break_3",
+  "accident_time",
+  "accident_time_night",
+  "accident_time_day",
+  "accident_hour",
+  "column_break_mtga",
+  "whether_condition",
+  "weather_rainy",
+  "weather_sunny",
+  "weather_foggy",
+  "column_break_bydw",
+  "accident_place",
+  "accident_place_bush_fallow",
+  "accident_place_uphill",
+  "accident_place_escarp",
+  "accident_place_muddy",
+  "accident_place_dry",
+  "section_break_6",
+  "short_story",
+  "section_break_7",
+  "number_of_people",
+  "column_break_3",
+  "death_count",
+  "injury_count",
+  "section_break_8",
+  "signature_date",
+  "signature"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break",
+   "label": "Basic Information"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fetch_from": "plate_number.equipment_category",
+   "fieldname": "equipment_type",
+   "fieldtype": "Data",
+   "label": "Equipment Type"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "plate_number.operators_name",
+   "fieldname": "drivers_name",
+   "fieldtype": "Data",
+   "label": "Driver's Name"
+  },
+  {
+   "fetch_from": "plate_number.model",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
+  },
+  {
+   "fieldname": "id_number",
+   "fieldtype": "Data",
+   "label": "ID Number"
+  },
+  {
+   "fieldname": "plate_number",
+   "fieldtype": "Link",
+   "label": "Plate Number",
+   "options": "Equipment Master"
+  },
+  {
+   "fieldname": "driving_license_number",
+   "fieldtype": "Data",
+   "label": "Driving License Number"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break",
+   "label": "More Informations"
+  },
+  {
+   "default": "0",
+   "fieldname": "accident_time_night",
+   "fieldtype": "Check",
+   "label": "Night"
+  },
+  {
+   "default": "0",
+   "fieldname": "accident_time_day",
+   "fieldtype": "Check",
+   "label": "Day"
+  },
+  {
+   "fieldname": "accident_hour",
+   "fieldtype": "Data",
+   "label": "Accident Hour"
+  },
+  {
+   "default": "0",
+   "fieldname": "weather_rainy",
+   "fieldtype": "Check",
+   "label": "Rainy"
+  },
+  {
+   "default": "0",
+   "fieldname": "weather_sunny",
+   "fieldtype": "Check",
+   "label": "Sunny"
+  },
+  {
+   "default": "0",
+   "fieldname": "weather_foggy",
+   "fieldtype": "Check",
+   "label": "Foggy"
+  },
+  {
+   "default": "0",
+   "fieldname": "accident_place_bush_fallow",
+   "fieldtype": "Check",
+   "label": "Bush Fallow"
+  },
+  {
+   "default": "0",
+   "fieldname": "accident_place_uphill",
+   "fieldtype": "Check",
+   "label": "Uphill"
+  },
+  {
+   "default": "0",
+   "fieldname": "accident_place_escarp",
+   "fieldtype": "Check",
+   "label": "Escarp"
+  },
+  {
+   "default": "0",
+   "fieldname": "accident_place_muddy",
+   "fieldtype": "Check",
+   "label": "Muddy"
+  },
+  {
+   "default": "0",
+   "fieldname": "accident_place_dry",
+   "fieldtype": "Check",
+   "label": "Dry"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break",
+   "label": "Accident Details"
+  },
+  {
+   "fieldname": "short_story",
+   "fieldtype": "Text Editor",
+   "label": "Short Story of the Accident"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break",
+   "label": "Casualties"
+  },
+  {
+   "fieldname": "number_of_people",
+   "fieldtype": "Int",
+   "label": "Number of People in the Vehicle during the Accident"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "death_count",
+   "fieldtype": "Int",
+   "label": "Death"
+  },
+  {
+   "fieldname": "injury_count",
+   "fieldtype": "Int",
+   "label": "Injury"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "signature_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "signature",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "accident_time",
+   "fieldtype": "Heading",
+   "label": "Accident time"
+  },
+  {
+   "fieldname": "column_break_mtga",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "whether_condition",
+   "fieldtype": "Heading",
+   "label": "Whether Condition"
+  },
+  {
+   "fieldname": "column_break_bydw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "accident_place",
+   "fieldtype": "Heading",
+   "label": "Accident Place"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-27 14:23:46.211031",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Accident Report Form",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

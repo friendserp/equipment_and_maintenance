@@ -1,0 +1,382 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:PCF-{YYYY}-{####}",
+ "creation": "2025-12-27 15:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_from",
+  "parts_cannibalized_form_column",
+  "cannibalized_from_plate_no",
+  "cannibalized_from_model",
+  "cannibalized_from_type",
+  "cannibalized_from_project",
+  "fitted_to_column",
+  "fitted_to_plate_no",
+  "fitted_to_model",
+  "fitted_to_type",
+  "fitted_to_project",
+  "section_break_parts",
+  "cannibalized_parts",
+  "section_break_reason",
+  "reason_of_cannibalization",
+  "section_break_pr",
+  "purchase_requisition_no",
+  "purchase_requisition_date",
+  "certified_by",
+  "section_break_approval_1",
+  "dsfdsf",
+  "request_by_name",
+  "request_by_title",
+  "request_by_sign",
+  "request_by_date",
+  "2_equipment_maintenance_department_column",
+  "maintenance_dept_name",
+  "maintenance_dept_title",
+  "maintenance_dept_sign",
+  "maintenance_dept_date",
+  "section_break_eqcp",
+  "3_equipment_administration_department_column",
+  "admin_dept_name",
+  "admin_dept_title",
+  "admin_dept_sign",
+  "admin_dept_date",
+  "4_final_cannibalization_authorization_general_manager_column",
+  "gm_name",
+  "gm_title",
+  "gm_sign",
+  "gm_date",
+  "section_break_comment",
+  "comment",
+  "section_break_technician",
+  "cannibalized_by_column",
+  "cannibalized_by_name",
+  "cannibalized_by_title",
+  "cannibalized_by_sign",
+  "cannibalized_by_date",
+  "received_by_column",
+  "received_by_name",
+  "received_by_title",
+  "received_by_sign",
+  "received_by_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_from",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cannibalized_from_plate_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Plate No",
+   "options": "Equipment Master",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "cannibalized_from_plate_no.model",
+   "fieldname": "cannibalized_from_model",
+   "fieldtype": "Data",
+   "label": "Model",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "cannibalized_from_plate_no.equipment_category",
+   "fieldname": "cannibalized_from_type",
+   "fieldtype": "Data",
+   "label": "Type",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "cannibalized_from_plate_no.location",
+   "fieldname": "cannibalized_from_project",
+   "fieldtype": "Data",
+   "label": "Project",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fitted_to_plate_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Plate No",
+   "options": "Equipment Master",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "fitted_to_plate_no.model",
+   "fieldname": "fitted_to_model",
+   "fieldtype": "Data",
+   "label": "Model",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "fitted_to_plate_no.equipment_category",
+   "fieldname": "fitted_to_type",
+   "fieldtype": "Data",
+   "label": "Type",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "fitted_to_plate_no.location",
+   "fieldname": "fitted_to_project",
+   "fieldtype": "Data",
+   "label": "Project",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_parts",
+   "fieldtype": "Section Break",
+   "label": "List of Cannibalized Parts"
+  },
+  {
+   "fieldname": "cannibalized_parts",
+   "fieldtype": "Table",
+   "label": "Cannibalized Parts",
+   "options": "Cannibalized Part Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_reason",
+   "fieldtype": "Section Break",
+   "label": "Reason"
+  },
+  {
+   "fieldname": "reason_of_cannibalization",
+   "fieldtype": "Small Text",
+   "label": "Reason of Cannibalization"
+  },
+  {
+   "fieldname": "section_break_pr",
+   "fieldtype": "Section Break",
+   "label": "Purchase Requisition"
+  },
+  {
+   "fieldname": "purchase_requisition_no",
+   "fieldtype": "Link",
+   "label": "Purchase Requisition No",
+   "options": "Material Request"
+  },
+  {
+   "fieldname": "purchase_requisition_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "certified_by",
+   "fieldtype": "Link",
+   "label": "Certified by",
+   "options": "User"
+  },
+  {
+   "fieldname": "section_break_approval_1",
+   "fieldtype": "Section Break",
+   "label": "Maintenance Autorization"
+  },
+  {
+   "fieldname": "request_by_name",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fieldname": "request_by_title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "request_by_sign",
+   "fieldtype": "Signature",
+   "label": "Sign"
+  },
+  {
+   "fieldname": "request_by_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "maintenance_dept_name",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fieldname": "maintenance_dept_title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "maintenance_dept_sign",
+   "fieldtype": "Signature",
+   "label": "Sign"
+  },
+  {
+   "fieldname": "maintenance_dept_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "admin_dept_name",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fieldname": "admin_dept_title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "admin_dept_sign",
+   "fieldtype": "Signature",
+   "label": "Sign"
+  },
+  {
+   "fieldname": "admin_dept_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "gm_name",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fieldname": "gm_title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "gm_sign",
+   "fieldtype": "Signature",
+   "label": "Sign"
+  },
+  {
+   "fieldname": "gm_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "section_break_comment",
+   "fieldtype": "Section Break",
+   "label": "Comment"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Text Editor",
+   "label": "Comment"
+  },
+  {
+   "fieldname": "section_break_technician",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cannibalized_by_name",
+   "fieldtype": "Data",
+   "label": "Technician Name"
+  },
+  {
+   "fieldname": "cannibalized_by_title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "cannibalized_by_sign",
+   "fieldtype": "Signature",
+   "label": "Sign"
+  },
+  {
+   "fieldname": "cannibalized_by_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "received_by_name",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fieldname": "received_by_title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "received_by_sign",
+   "fieldtype": "Signature",
+   "label": "Sign"
+  },
+  {
+   "fieldname": "received_by_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "parts_cannibalized_form_column",
+   "fieldtype": "Column Break",
+   "label": "Parts Cannibalized Form"
+  },
+  {
+   "fieldname": "fitted_to_column",
+   "fieldtype": "Column Break",
+   "label": "Fitted To"
+  },
+  {
+   "fieldname": "dsfdsf",
+   "fieldtype": "Column Break",
+   "label": "1. Project Equipment Administration & Maintenance "
+  },
+  {
+   "fieldname": "2_equipment_maintenance_department_column",
+   "fieldtype": "Column Break",
+   "label": "2. Equipment Maintenance Department"
+  },
+  {
+   "fieldname": "3_equipment_administration_department_column",
+   "fieldtype": "Column Break",
+   "label": "3. Equipment Administration Department"
+  },
+  {
+   "fieldname": "4_final_cannibalization_authorization_general_manager_column",
+   "fieldtype": "Column Break",
+   "label": "4. Final Cannibalization Authorization (General Manager)"
+  },
+  {
+   "fieldname": "cannibalized_by_column",
+   "fieldtype": "Column Break",
+   "label": "Cannibalized By"
+  },
+  {
+   "fieldname": "received_by_column",
+   "fieldtype": "Column Break",
+   "label": "Received By"
+  },
+  {
+   "fieldname": "section_break_eqcp",
+   "fieldtype": "Section Break",
+   "label": "Admin Authorization"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-29 10:20:21.175131",
+ "modified_by": "Administrator",
+ "module": "Maintenance and Admin",
+ "name": "Cannibalization Form",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
