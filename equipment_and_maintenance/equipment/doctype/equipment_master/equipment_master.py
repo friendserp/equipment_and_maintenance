@@ -28,29 +28,38 @@ class EquipmentMaster(Document):
 		prefix = f"{category_code}{sub_category_code}-"
 		
 		# Find the highest existing number for this prefix
+		# This ensures sequential numbering: highest + 1
 		conditions = ["equipment_code LIKE %s"]
 		values = [f"{prefix}%"]
 		
-		# Exclude current document if it exists
+		# Exclude current document if it exists (for updates)
 		if self.name:
 			conditions.append("name != %s")
 			values.append(self.name)
 		
+		# Get all existing codes for this prefix
 		existing_codes = frappe.db.sql(f"""
 			SELECT equipment_code 
 			FROM `tabEquipment Master`
 			WHERE {' AND '.join(conditions)}
 			ORDER BY equipment_code DESC
-			LIMIT 1
 		""", tuple(values), as_dict=True)
 		
-		# Extract the number from existing codes and find the next one
+		# Extract the highest number from existing codes
 		next_number = 1
-		if existing_codes and existing_codes[0].equipment_code:
-			# Extract number from code like "MaintCATSUB-0001"
-			match = re.search(r'-(\d+)$', existing_codes[0].equipment_code)
-			if match:
-				next_number = int(match.group(1)) + 1
+		max_number = 0
+		for code_row in existing_codes:
+			if code_row.equipment_code:
+				# Extract number from code like "HMCR-0001" or "CATSUB-0001"
+				match = re.search(r'-(\d+)$', code_row.equipment_code)
+				if match:
+					num = int(match.group(1))
+					if num > max_number:
+						max_number = num
+		
+		# Next number is highest + 1
+		if max_number > 0:
+			next_number = max_number + 1
 		
 		# Format the number with leading zeros (4 digits)
 		formatted_number = f"{next_number:04d}"
