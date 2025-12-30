@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-12-30 10:46:57.835134",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "column_break_lceh",
+  "type_of_equipment",
+  "plate_number",
+  "qty",
+  "price_per_day",
+  "price_per_month"
+ ],
+ "fields": [
+  {
+   "fieldname": "column_break_lceh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "type_of_equipment",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "\u12e8\u1218\u1223\u122a\u12eb\u12cd \u12d3\u12ed\u1290\u1275",
+   "options": "Equipment Master"
+  },
+  {
+   "fetch_from": "type_of_equipment.plate_number",
+   "fieldname": "plate_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u12e8\u1230\u120c\u12f3 \u1241\u1325\u122d"
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "\u1265\u12db\u1275"
+  },
+  {
+   "description": "Price is with out VAT",
+   "fieldname": "price_per_day",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "\u12e8\u12aa\u122b\u12ed \u12cb\u130b \u1260\u1240\u1295"
+  },
+  {
+   "description": "Price is with out VAT",
+   "fieldname": "price_per_month",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "\u12e8\u12aa\u122b\u12ed \u12cb\u130b \u1260\u12c8\u122d"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-12-30 10:53:54.076173",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Rental Agreement Items",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,410 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:EDR-{YYYY}-{####}",
+ "creation": "2025-01-27 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "assigned_user",
+  "equipment_location",
+  "section_break_equipment",
+  "plate_no",
+  "type",
+  "model",
+  "description",
+  "column_break_pbxm",
+  "purchase_price",
+  "replacement_cost",
+  "service_year",
+  "current_value",
+  "section_break_reason",
+  "reason_beyond_repair",
+  "reason_part_unobtainable",
+  "reason_repair_costs_unjustified",
+  "reason_inferior_productivity",
+  "reason_equipment_missing",
+  "reason_equipment_preempted",
+  "reason_equipment_surplus",
+  "reason_other",
+  "column_break_reason",
+  "comment",
+  "reason_other_explain",
+  "section_break_disposition",
+  "disposition_sell_as_it",
+  "disposition_scrap",
+  "disposition_cannibalize",
+  "disposition_other",
+  "column_break_edrp",
+  "disposition_other_explain",
+  "section_break_prepared",
+  "prepared_by",
+  "prepared_by_signature",
+  "column_break_approved",
+  "approved_by",
+  "approved_by_signature",
+  "section_break_approvals",
+  "equip_dept_column",
+  "equip_dept_date",
+  "equip_dept_approved",
+  "equip_dept_rejected",
+  "column_break_dgm",
+  "dgm_date",
+  "dgm_approved",
+  "dgm_rejected",
+  "column_break_survey",
+  "survey_committee_date",
+  "survey_committee_approved",
+  "survey_committee_rejected",
+  "section_break_gm",
+  "general_manager_comment",
+  "column_break_gm_decision",
+  "general_manager_approved",
+  "general_manager_rejected"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "assigned_user",
+   "fieldtype": "Link",
+   "label": "Assigned User",
+   "options": "User"
+  },
+  {
+   "fieldname": "equipment_location",
+   "fieldtype": "Link",
+   "label": "Equipment Location",
+   "options": "Project"
+  },
+  {
+   "fieldname": "section_break_equipment",
+   "fieldtype": "Section Break",
+   "label": "Equipment Identification"
+  },
+  {
+   "fieldname": "plate_no",
+   "fieldtype": "Link",
+   "label": "Plate No.",
+   "options": "Equipment Master"
+  },
+  {
+   "depends_on": "plate_no",
+   "fetch_from": "plate_no.equipment_sub_category",
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "label": "Type",
+   "read_only": 1
+  },
+  {
+   "depends_on": "plate_no",
+   "fetch_from": "plate_no.model",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model",
+   "read_only": 1
+  },
+  {
+   "depends_on": "plate_no",
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "purchase_price",
+   "fieldtype": "Currency",
+   "label": "Purchase Price"
+  },
+  {
+   "fieldname": "replacement_cost",
+   "fieldtype": "Currency",
+   "label": "Replacement Cost"
+  },
+  {
+   "fieldname": "service_year",
+   "fieldtype": "Int",
+   "label": "Service Year"
+  },
+  {
+   "fieldname": "current_value",
+   "fieldtype": "Currency",
+   "label": "Current Value"
+  },
+  {
+   "fieldname": "section_break_reason",
+   "fieldtype": "Section Break",
+   "label": "Reason for Disposal"
+  },
+  {
+   "default": "0",
+   "fieldname": "reason_beyond_repair",
+   "fieldtype": "Check",
+   "label": "Beyond Repair"
+  },
+  {
+   "default": "0",
+   "fieldname": "reason_part_unobtainable",
+   "fieldtype": "Check",
+   "label": "Part Unobtainable"
+  },
+  {
+   "default": "0",
+   "fieldname": "reason_repair_costs_unjustified",
+   "fieldtype": "Check",
+   "label": "Repair Costs Unjustified"
+  },
+  {
+   "default": "0",
+   "fieldname": "reason_inferior_productivity",
+   "fieldtype": "Check",
+   "label": "Inferior Productivity"
+  },
+  {
+   "default": "0",
+   "fieldname": "reason_equipment_missing",
+   "fieldtype": "Check",
+   "label": "Equipment Missing"
+  },
+  {
+   "default": "0",
+   "fieldname": "reason_equipment_preempted",
+   "fieldtype": "Check",
+   "label": "Equipment Pre-empted"
+  },
+  {
+   "default": "0",
+   "fieldname": "reason_equipment_surplus",
+   "fieldtype": "Check",
+   "label": "Equipment Surplus"
+  },
+  {
+   "default": "0",
+   "fieldname": "reason_other",
+   "fieldtype": "Check",
+   "label": "Other (explain)"
+  },
+  {
+   "depends_on": "reason_other",
+   "fieldname": "reason_other_explain",
+   "fieldtype": "Small Text",
+   "label": "Other Explanation"
+  },
+  {
+   "fieldname": "column_break_reason",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Small Text",
+   "label": "Comment"
+  },
+  {
+   "fieldname": "section_break_disposition",
+   "fieldtype": "Section Break",
+   "label": "Recommended Disposition"
+  },
+  {
+   "default": "0",
+   "fieldname": "disposition_sell_as_it",
+   "fieldtype": "Check",
+   "label": "Sell as it"
+  },
+  {
+   "default": "0",
+   "fieldname": "disposition_scrap",
+   "fieldtype": "Check",
+   "label": "Scrap"
+  },
+  {
+   "default": "0",
+   "fieldname": "disposition_cannibalize",
+   "fieldtype": "Check",
+   "label": "Cannibalize for Parts"
+  },
+  {
+   "default": "0",
+   "fieldname": "disposition_other",
+   "fieldtype": "Check",
+   "label": "Other"
+  },
+  {
+   "depends_on": "disposition_other",
+   "fieldname": "disposition_other_explain",
+   "fieldtype": "Small Text",
+   "label": "Other Explanation"
+  },
+  {
+   "fieldname": "section_break_prepared",
+   "fieldtype": "Section Break",
+   "label": "Approvals"
+  },
+  {
+   "fieldname": "prepared_by",
+   "fieldtype": "Link",
+   "label": "Prepared By",
+   "options": "User"
+  },
+  {
+   "fieldname": "prepared_by_signature",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "column_break_approved",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User"
+  },
+  {
+   "fieldname": "approved_by_signature",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "section_break_approvals",
+   "fieldtype": "Section Break",
+   "label": "Disposal Approval"
+  },
+  {
+   "default": "0",
+   "fieldname": "equip_dept_approved",
+   "fieldtype": "Check",
+   "label": "Equip. Dept Approved"
+  },
+  {
+   "depends_on": "equip_dept_approved",
+   "fieldname": "equip_dept_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "equip_dept_rejected",
+   "fieldtype": "Check",
+   "label": "Equip. Dept Rejected"
+  },
+  {
+   "fieldname": "column_break_dgm",
+   "fieldtype": "Column Break",
+   "label": "DGM"
+  },
+  {
+   "default": "0",
+   "fieldname": "dgm_approved",
+   "fieldtype": "Check",
+   "label": "DGM Approved"
+  },
+  {
+   "depends_on": "dgm_approved",
+   "fieldname": "dgm_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "dgm_rejected",
+   "fieldtype": "Check",
+   "label": "DGM Rejected"
+  },
+  {
+   "fieldname": "column_break_survey",
+   "fieldtype": "Column Break",
+   "label": "Survey Committee"
+  },
+  {
+   "default": "0",
+   "fieldname": "survey_committee_approved",
+   "fieldtype": "Check",
+   "label": "Survey Committee Approved"
+  },
+  {
+   "depends_on": "survey_committee_approved",
+   "fieldname": "survey_committee_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "survey_committee_rejected",
+   "fieldtype": "Check",
+   "label": "Survey Committee Rejected"
+  },
+  {
+   "fieldname": "section_break_gm",
+   "fieldtype": "Section Break",
+   "label": "General Manager"
+  },
+  {
+   "fieldname": "general_manager_comment",
+   "fieldtype": "Long Text",
+   "label": "General Manager Comment"
+  },
+  {
+   "fieldname": "column_break_gm_decision",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "general_manager_approved",
+   "fieldtype": "Check",
+   "label": "General Manager Disposal Approved"
+  },
+  {
+   "default": "0",
+   "fieldname": "general_manager_rejected",
+   "fieldtype": "Check",
+   "label": "General Manager Disposal Rejected"
+  },
+  {
+   "fieldname": "equip_dept_column",
+   "fieldtype": "Column Break",
+   "label": "Equip. Dept"
+  },
+  {
+   "fieldname": "column_break_pbxm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_edrp",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-30 11:33:12.227271",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Equipment Disposal Request",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

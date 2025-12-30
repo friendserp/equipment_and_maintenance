@@ -1,0 +1,224 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:KIG-RA-{####}",
+ "creation": "2025-12-30 10:29:40.299374",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "amended_from",
+  "\u1240\u1295",
+  "project",
+  "column_break_depm",
+  "end_date",
+  "section_break_3yb7",
+  "tenannt_info",
+  "tenant",
+  "district_t",
+  "city_t",
+  "wereda_t",
+  "house_no_t",
+  "office_phone_no_t",
+  "business_license_no_t",
+  "tin_t",
+  "hirere_inf0",
+  "hirer",
+  "district_h",
+  "city_h",
+  "wereda_h",
+  "house_no_h",
+  "office_phone_no_h",
+  "business_license_no_h",
+  "tin_h",
+  "section_break_ssji",
+  "equipments",
+  "section_break_evbm",
+  "advance_payment",
+  "column_break_jlna",
+  "check_number"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_3yb7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Rental Agreement",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "tenannt_info",
+   "fieldtype": "Column Break",
+   "label": "\u12e8\u1270\u12a8\u122b\u12ed \u1218\u1228\u1303"
+  },
+  {
+   "fieldname": "tenant",
+   "fieldtype": "Data",
+   "label": "\u1270\u12a8\u122b\u12ed"
+  },
+  {
+   "fieldname": "district_t",
+   "fieldtype": "Data",
+   "label": "\u12ad\u134d\u1208 \u12a8\u1270\u121b"
+  },
+  {
+   "fieldname": "city_t",
+   "fieldtype": "Data",
+   "label": "\u12a8\u1270\u121b"
+  },
+  {
+   "fieldname": "wereda_t",
+   "fieldtype": "Data",
+   "label": "\u12c8\u1228\u12f3"
+  },
+  {
+   "fieldname": "house_no_t",
+   "fieldtype": "Data",
+   "label": "\u12e8\u1264\u1275 \u1241\u1325\u122d"
+  },
+  {
+   "fieldname": "office_phone_no_t",
+   "fieldtype": "Data",
+   "label": "\u1235\u120d\u12ad \u1241\u1325\u122d \u12e8\u1262\u122e"
+  },
+  {
+   "fieldname": "business_license_no_t",
+   "fieldtype": "Data",
+   "label": "\u12e8\u1295\u130d\u12f5 \u1225\u122b \u1348\u1243\u12f5 \u1241\u1325\u122d"
+  },
+  {
+   "fieldname": "tin_t",
+   "fieldtype": "Data",
+   "label": "\u1272\u1295 \u1241\u1325\u122d"
+  },
+  {
+   "fieldname": "hirere_inf0",
+   "fieldtype": "Column Break",
+   "label": "\u12e8\u12a0\u12a8\u122b\u12ed \u1218\u1228\u1303"
+  },
+  {
+   "fieldname": "\u1240\u1295",
+   "fieldtype": "Date",
+   "label": "\u1240\u1295"
+  },
+  {
+   "fieldname": "hirer",
+   "fieldtype": "Data",
+   "label": "\u12a0\u12a8\u122b\u12ed"
+  },
+  {
+   "fieldname": "district_h",
+   "fieldtype": "Data",
+   "label": "\u12ad\u134d\u1208 \u12a8\u1270\u121b"
+  },
+  {
+   "fieldname": "city_h",
+   "fieldtype": "Data",
+   "label": "\u12a8\u1270\u121b"
+  },
+  {
+   "fieldname": "wereda_h",
+   "fieldtype": "Data",
+   "label": "\u12c8\u1228\u12f3"
+  },
+  {
+   "fieldname": "house_no_h",
+   "fieldtype": "Data",
+   "label": "\u12e8\u1264\u1275 \u1241\u1325\u122d"
+  },
+  {
+   "fieldname": "office_phone_no_h",
+   "fieldtype": "Data",
+   "label": "\u1235\u120d\u12ad \u1241\u1325\u122d \u12e8\u1262\u122e"
+  },
+  {
+   "fieldname": "business_license_no_h",
+   "fieldtype": "Data",
+   "label": "\u12e8\u1295\u130d\u12f5 \u1225\u122b \u1348\u1243\u12f5 \u1241\u1325\u122d"
+  },
+  {
+   "fieldname": "tin_h",
+   "fieldtype": "Data",
+   "label": "\u1272\u1295 \u1241\u1325\u122d"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "\u1355\u122e\u1300\u12ad\u1275",
+   "options": "Project"
+  },
+  {
+   "fieldname": "section_break_ssji",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "equipments",
+   "fieldtype": "Table",
+   "label": "\u12e8\u1270\u1238\u12a8\u122d\u12ab\u122a\u12cd \u1218\u1228\u1303 \u12a5\u1293 \u12e8\u12aa\u122b\u12ed \u12cb\u130b",
+   "options": "Rental Agreement Items"
+  },
+  {
+   "fieldname": "column_break_depm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "\u12cd\u1209 \u12e8\u121a\u12eb\u1260\u1243\u1260\u1275 \u1240\u1295"
+  },
+  {
+   "fieldname": "section_break_evbm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "advance_payment",
+   "fieldtype": "Float",
+   "label": "\u12a0\u12f5\u126b\u1295\u1235 \u1354\u12ed\u1218\u1295\u1275"
+  },
+  {
+   "fieldname": "column_break_jlna",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "check_number",
+   "fieldtype": "Data",
+   "label": "\u12e8\u127c\u12ad \u1241\u1325\u122d"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-12-30 11:02:29.746738",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Rental Agreement",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
