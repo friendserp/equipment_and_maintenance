@@ -8,9 +8,10 @@
  "field_order": [
   "equipment_code",
   "make",
+  "model",
   "equipment_category",
   "equipment_sub_category",
-  "model",
+  "equipment_name",
   "plate_number",
   "serial_number",
   "engine_number",
@@ -23,18 +24,15 @@
   "yom",
   "location",
   "operators_name",
-  "operators_phone_no"
+  "operators_phone_no",
+  "ownership_type",
+  "rental_agreement"
  ],
  "fields": [
   {
    "fieldname": "make",
    "fieldtype": "Data",
    "label": "Make"
-  },
-  {
-   "fieldname": "model",
-   "fieldtype": "Data",
-   "label": "Model"
   },
   {
    "fieldname": "plate_number",
@@ -104,6 +102,21 @@
    "label": "Operators Phone No"
   },
   {
+   "default": "Own",
+   "fieldname": "ownership_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Own or Rental",
+   "options": "Own\nRental"
+  },
+  {
+   "depends_on": "eval:doc.ownership_type == \"Rental\"",
+   "fieldname": "rental_agreement",
+   "fieldtype": "Link",
+   "label": "Rental Agreement",
+   "options": "Rental Agreement"
+  },
+  {
    "fieldname": "equipment_code",
    "fieldtype": "Data",
    "label": "Equipment Code",
@@ -121,12 +134,42 @@
    "fieldtype": "Link",
    "label": "Equipment Sub Category",
    "options": "Asset Sub Category"
+  },
+  {
+   "fieldname": "equipment_name",
+   "fieldtype": "Data",
+   "label": "Equipment Name"
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2025-12-25 23:45:12.767272",
+ "links": [
+  {
+   "is_child_table": 1,
+   "link_doctype": "Rental Agreement Items",
+   "link_fieldname": "created_equipment_id",
+   "parent_doctype": "Rental Agreement",
+   "table_fieldname": "equipments"
+  },
+  {
+   "link_doctype": "Bollo Followup Form",
+   "link_fieldname": "plate_number"
+  },
+  {
+   "link_doctype": "Insurance Followup Form",
+   "link_fieldname": "plate_number"
+  },
+  {
+   "link_doctype": "Fuel Request",
+   "link_fieldname": "plate_number"
+  }
+ ],
+ "modified": "2026-01-01 12:57:01.032375",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Equipment Master",
@@ -150,5 +193,6 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "plate_number"
 }

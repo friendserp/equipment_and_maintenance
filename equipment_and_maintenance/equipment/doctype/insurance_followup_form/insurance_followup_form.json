@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:KIG-IF-{####}",
  "creation": "2025-12-27 14:26:54.517779",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -21,6 +22,7 @@
    "options": "Equipment Master"
   },
   {
+   "fetch_from": "plate_number.equipment_category",
    "fieldname": "equipment_type",
    "fieldtype": "Data",
    "label": "Equipment Type"
@@ -47,16 +49,18 @@
   {
    "fieldname": "status",
    "fieldtype": "Select",
-   "label": "Status"
+   "label": "Status",
+   "options": "Active\nExpired"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-27 14:28:15.684993",
+ "modified": "2026-01-01 12:40:57.175046",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Insurance Followup Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

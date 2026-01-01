@@ -49,17 +49,10 @@ frappe.ui.form.on("Preventive Maintenance Schedule", {
 	},
 
 	template(frm) {
-		// Populate schedule items when template is selected
-		// Wait for document to be saved first if it's new
-		if (frm.doc.template && (!frm.doc.schedule_items || frm.doc.schedule_items.length === 0)) {
-			if (!frm.doc.name) {
-				// For new documents, save first then populate
-				frm.save().then(() => {
-					populate_template_items(frm);
-				});
-			} else {
-				populate_template_items(frm);
-			}
+		// When template is selected, populate items will happen in Python before_save
+		// For existing documents, populate immediately using server-side method
+		if (frm.doc.template && frm.doc.name && (!frm.doc.schedule_items || frm.doc.schedule_items.length === 0)) {
+			populate_template_items(frm);
 		}
 	},
 
@@ -124,7 +117,76 @@ frappe.ui.form.on("Preventive Maintenance Schedule", {
 	}
 });
 
+function determine_target_interval(frm) {
+	// Determine which interval milestone we're targeting based on current readings
+	// This finds the next upcoming interval
+	
+	const hour_intervals = [250, 500, 1000, 2000, 6000];
+	const km_intervals = [2500, 5000, 10000, 30000, 60000];
+	
+	let target_hour_interval = null;
+	let target_km_interval = null;
+	
+	// Determine target hour interval
+	if (frm.doc.current_hours) {
+		let last_hours = flt(frm.doc.last_service_hours) || 0;
+		let current = flt(frm.doc.current_hours);
+		
+		// Find the smallest interval that hasn't been reached yet
+		for (let interval of hour_intervals) {
+			let next_interval_value = last_hours + interval;
+			if (current < next_interval_value) {
+				if (!target_hour_interval || next_interval_value < target_hour_interval.value) {
+					target_hour_interval = {
+						type: "Hours",
+						value: interval,
+						name: `${interval} Hours`
+					};
+				}
+			}
+		}
+	}
+	
+	// Determine target km interval
+	if (frm.doc.current_kilometers) {
+		let last_km = flt(frm.doc.last_service_kilometers) || 0;
+		let current = flt(frm.doc.current_kilometers);
+		
+		// Find the smallest interval that hasn't been reached yet
+		for (let interval of km_intervals) {
+			let next_interval_value = last_km + interval;
+			if (current < next_interval_value) {
+				if (!target_km_interval || next_interval_value < target_km_interval.value) {
+					target_km_interval = {
+						type: "Kilometers",
+						value: interval,
+						name: `${interval} KM`
+					};
+				}
+			}
+		}
+	}
+	
+	// Return the interval that comes first (or the one that exists)
+	if (target_hour_interval && target_km_interval) {
+		// Compare which one comes first
+		let hour_next = (frm.doc.last_service_hours || 0) + target_hour_interval.value;
+		let km_next = (frm.doc.last_service_kilometers || 0) + target_km_interval.value;
+		
+		// Use the one that comes first, or prefer hours if equal
+		if (hour_next <= km_next) {
+			return target_hour_interval;
+		} else {
+			return target_km_interval;
+		}
+	}
+	
+	return target_hour_interval || target_km_interval;
+}
+
 function populate_template_items(frm) {
+	// Use server-side method to populate and save items
+	// This ensures items are saved to the database
 	frappe.call({
 		method: "equipment_and_maintenance.maintenance_and_admin.doctype.preventive_maintenance_schedule.preventive_maintenance_schedule.populate_from_template",
 		args: {

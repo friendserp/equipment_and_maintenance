@@ -194,8 +194,13 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2025-12-30 11:02:29.746738",
+ "links": [
+  {
+   "link_doctype": "Equipment Master",
+   "link_fieldname": "rental_agreement"
+  }
+ ],
+ "modified": "2026-01-01 12:09:42.786507",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Rental Agreement",

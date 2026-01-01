@@ -1,0 +1,33 @@
+{
+ "attach_print": 0,
+ "channel": "System Notification",
+ "condition": "",
+ "creation": "2026-01-01 12:00:00",
+ "days_in_advance": 7,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Bollo Followup Form",
+ "enabled": 1,
+ "event": "Days Before",
+ "idx": 0,
+ "is_standard": 1,
+ "message_type": "HTML",
+ "modified": "2026-01-01 12:00:00",
+ "modified_by": "Administrator",
+ "module": "Equipment And Maintenance",
+ "name": "Notification for Bollo Expiry",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_role": "System Manager"
+  },
+  {
+   "receiver_by_role": "Equipment Manager"
+  }
+ ],
+ "send_system_notification": 1,
+ "send_to_all_assignees": 0,
+ "subject": "Bollo Expiry Alert: {{ doc.plate_number }} expires soon",
+ "date_changed": "expiry_date"
+}
+

@@ -12,6 +12,16 @@ frappe.ui.form.on("Fuel Request", {
 		if (frm.doc.date && !frm.doc.date_issued) {
 			frm.set_value("date_issued", frm.doc.date);
 		}
+		
+		// Set query filter for fuel_type from settings
+		frm.set_query("fuel_type", function() {
+			return {
+				filters: {
+					item_group: "Fuel, Oil & Lubricants",
+					custom_subcategory: "Fuel"
+				}
+			};
+		});
 	},
 	
 	date(frm) {
@@ -19,15 +29,40 @@ frappe.ui.form.on("Fuel Request", {
 		if (frm.doc.date && !frm.doc.date_issued) {
 			frm.set_value("date_issued", frm.doc.date);
 		}
+		// Refetch fuel price if fuel type is already selected
+		if (frm.doc.fuel_type) {
+			fetch_fuel_price(frm);
+		}
+	},
+	
+	plate_number(frm) {
+		// Fetch previous fuel data from Stock Entry when plate number is selected
+		if (frm.doc.plate_number) {
+			fetch_previous_fuel_data(frm);
+		} else {
+			// Clear previous fields if plate number is cleared
+			frm.set_value("previous_km_hr_reading", 0);
+			frm.set_value("previous_fuel_consumption_liter", 0);
+			frm.set_value("previous_fuel_consumption_birr", 0);
+		}
+	},
+	
+	fuel_type(frm) {
+		// Fetch price from settings when fuel type is selected
+		if (frm.doc.fuel_type) {
+			fetch_fuel_price(frm);
+		} else {
+			frm.set_value("current_price_per_liter", 0);
+			calculate_current_fuel_cost(frm);
+		}
 	},
 	
 	previous_fuel_consumption_liter(frm) {
 		calculate_fuel_efficiency(frm);
-		calculate_current_fuel_cost(frm);
 	},
 	
 	previous_fuel_consumption_birr(frm) {
-		calculate_current_fuel_cost(frm);
+		// Previous section logic will be handled separately
 	},
 	
 	previous_km_hr_reading(frm) {
@@ -60,17 +95,61 @@ function calculate_fuel_efficiency(frm) {
 	}
 }
 
+function fetch_fuel_price(frm) {
+	// Fetch fuel price from Equipment and Maintenance Setting
+	if (!frm.doc.fuel_type) return;
+	
+	frappe.call({
+		method: "equipment_and_maintenance.equipment.doctype.fuel_request.fuel_request.get_fuel_price",
+		args: {
+			fuel_item: frm.doc.fuel_type,
+			date: frm.doc.date || frappe.datetime.get_today()
+		},
+		callback: function(r) {
+			if (r.message) {
+				frm.set_value("current_price_per_liter", r.message);
+				calculate_current_fuel_cost(frm);
+			}
+		}
+	});
+}
+
+function fetch_previous_fuel_data(frm) {
+	// Fetch previous fuel consumption data from Stock Entry
+	if (!frm.doc.plate_number) return;
+	
+	frappe.call({
+		method: "equipment_and_maintenance.equipment.doctype.fuel_request.fuel_request.get_previous_fuel_data",
+		args: {
+			plate_number: frm.doc.plate_number
+		},
+		callback: function(r) {
+			if (r.message && Object.keys(r.message).length > 0) {
+				// Populate previous section fields
+				if (r.message.previous_km_hr_reading) {
+					frm.set_value("previous_km_hr_reading", r.message.previous_km_hr_reading);
+				}
+				if (r.message.previous_fuel_consumption_liter) {
+					frm.set_value("previous_fuel_consumption_liter", r.message.previous_fuel_consumption_liter);
+				}
+				if (r.message.previous_fuel_consumption_birr) {
+					frm.set_value("previous_fuel_consumption_birr", r.message.previous_fuel_consumption_birr);
+				}
+				// Recalculate fuel efficiency if current reading is available
+				if (frm.doc.current_km_hr_reading) {
+					calculate_fuel_efficiency(frm);
+				}
+			}
+		}
+	});
+}
+
 function calculate_current_fuel_cost(frm) {
-	// Calculate current fuel cost based on previous fuel price per liter
-	if (frm.doc.current_fuel_requested_liter && 
-		frm.doc.previous_fuel_consumption_liter && 
-		frm.doc.previous_fuel_consumption_birr) {
-		
-		let price_per_liter = flt(frm.doc.previous_fuel_consumption_birr) / flt(frm.doc.previous_fuel_consumption_liter);
-		let current_cost = flt(frm.doc.current_fuel_requested_liter) * price_per_liter;
+	// Calculate current fuel cost = quantity * price per liter
+	if (frm.doc.current_fuel_requested_liter && frm.doc.current_price_per_liter) {
+		let current_cost = flt(frm.doc.current_fuel_requested_liter) * flt(frm.doc.current_price_per_liter);
 		frm.set_value("current_fuel_requested_birr", current_cost);
-	} else if (frm.doc.current_fuel_requested_liter) {
-		// If no previous data, set to 0
+	} else {
 		frm.set_value("current_fuel_requested_birr", 0);
 	}
 }

@@ -3,7 +3,6 @@
 
 frappe.ui.form.on("Equipment Master", {
 	refresh(frm) {
-		// Set up query filter for sub category based on main category
 		frm.set_query("equipment_sub_category", function() {
 			return {
 				filters: {
@@ -11,6 +10,30 @@ frappe.ui.form.on("Equipment Master", {
 				}
 			};
 		});
+	},
+	
+	after_save(frm) {
+		console.log("afater save triggerd");
+		console.log("rental agreement", frm.doc.rental_agreement);
+		console.log("make", frm.doc.make);
+		console.log("name", frm.doc.name);
+
+		if (frm.doc.rental_agreement && frm.doc.make && frm.doc.name) {
+			console.log("linking to rental agreement");
+			frappe.call({
+				method: "equipment_and_maintenance.equipment.doctype.rental_agreement.rental_agreement.link_equipment_to_agreement",
+				args: {
+					agreement: frm.doc.rental_agreement,
+					equipment_type: frm.doc.make,
+					equipment_name: frm.doc.name
+				},
+				callback: function(r) {
+					if (r.message?.success) {
+						frappe.show_alert({ message: __("Linked to Rental Agreement"), indicator: "green" });
+					}
+				}
+			});
+		}
 	},
 	
 	equipment_category(frm) {

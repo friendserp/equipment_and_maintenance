@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:KIG-BF-{####}",
  "creation": "2025-12-27 16:51:41.636605",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -9,6 +10,7 @@
   "equipment_type",
   "annual_inspection_renewed__date",
   "expiry_date",
+  "status",
   "remark"
  ],
  "fields": [
@@ -19,6 +21,7 @@
    "options": "Equipment Master"
   },
   {
+   "fetch_from": "plate_number.equipment_category",
    "fieldname": "equipment_type",
    "fieldtype": "Data",
    "label": "Equipment Type"
@@ -37,15 +40,22 @@
    "fieldname": "remark",
    "fieldtype": "Small Text",
    "label": "Remark"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nExpired"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-27 16:52:45.822039",
+ "modified": "2026-01-01 12:45:11.472098",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Bollo Followup Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

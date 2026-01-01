@@ -56,3 +56,21 @@ class PreventiveMaintenanceLog(Document):
 			schedule.calculate_next_service()
 			schedule.save()
 
+
+@frappe.whitelist()
+def get_schedule_items_for_interval(schedule, interval_name):
+	"""Get schedule items for a specific interval"""
+	try:
+		items = frappe.get_all("Preventive Maintenance Schedule Item",
+			filters={
+				"parent": schedule,
+				"interval_name": interval_name,
+				"is_completed": 0
+			},
+			fields=["task", "task_name", "task_category", "interval_name", "interval_type", "interval_value"]
+		)
+		return items
+	except Exception as e:
+		frappe.log_error(f"Error fetching schedule items: {str(e)}")
+		return []
+

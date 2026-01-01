@@ -4,7 +4,7 @@
 frappe.ui.form.on("Preventive Maintenance Log", {
 	refresh(frm) {
 		// Load tasks from schedule when schedule is selected
-		if (frm.doc.schedule && !frm.doc.completed_tasks || frm.doc.completed_tasks.length === 0) {
+		if (frm.doc.schedule) {
 			frm.add_custom_button(__("Load Tasks from Schedule"), function() {
 				load_tasks_from_schedule(frm);
 			});
@@ -43,79 +43,142 @@ function load_tasks_from_schedule(frm) {
 		return;
 	}
 	
+	// Fetch schedule document
 	frappe.db.get_doc("Preventive Maintenance Schedule", frm.doc.schedule)
-		.then(doc => {
-			// Get current interval
-			let current_hours = flt(frm.doc.service_hours) || flt(doc.current_hours);
-			let current_km = flt(frm.doc.service_kilometers) || flt(doc.current_kilometers);
+		.then(schedule_doc => {
+			// Get current readings
+			let current_hours = flt(frm.doc.service_hours) || flt(schedule_doc.current_hours);
+			let current_km = flt(frm.doc.service_kilometers) || flt(schedule_doc.current_kilometers);
+			let last_hours = flt(schedule_doc.last_service_hours) || 0;
+			let last_km = flt(schedule_doc.last_service_kilometers) || 0;
 			
 			// Determine which interval this service is for
-			let interval_name = determine_interval(current_hours, current_km, doc);
+			let target_interval = determine_target_interval_for_log(current_hours, current_km, last_hours, last_km);
 			
-			if (interval_name) {
-				frm.set_value("interval_name", interval_name);
-			}
-			
-			// Load tasks for this interval
-			frm.clear_table("completed_tasks");
-			
-			if (doc.schedule_items) {
-				doc.schedule_items.forEach(item => {
-					if (item.interval_name === interval_name && !item.is_completed) {
-						let row = frm.add_child("completed_tasks");
-						row.task = item.task;
-						row.task_name = item.task_name;
-						row.task_category = item.task_category;
-						row.is_completed = 0;
-					}
+			if (!target_interval) {
+				frappe.msgprint({
+					title: __("No Interval Found"),
+					message: __("Could not determine the service interval. Please check current hours/kilometers and last service readings."),
+					indicator: "orange"
 				});
+				return;
 			}
 			
-			frm.refresh_field("completed_tasks");
+			// Set interval name
+			frm.set_value("interval_name", target_interval.name);
+			
+			// Fetch schedule items using server-side method
+			frappe.call({
+				method: "equipment_and_maintenance.maintenance_and_admin.doctype.preventive_maintenance_log.preventive_maintenance_log.get_schedule_items_for_interval",
+				args: {
+					schedule: frm.doc.schedule,
+					interval_name: target_interval.name
+				},
+				callback: function(r) {
+					if (r.message) {
+						let items = r.message;
+						
+						if (!items || items.length === 0) {
+							frappe.msgprint({
+								title: __("No Tasks Found"),
+								message: __("No incomplete tasks found for interval {0}. All tasks may already be completed.", [target_interval.name]),
+								indicator: "blue"
+							});
+							return;
+						}
+						
+						// Clear existing tasks
+						frm.clear_table("completed_tasks");
+						
+						// Add tasks
+						items.forEach(item => {
+							let row = frm.add_child("completed_tasks");
+							row.task = item.task;
+							row.task_name = item.task_name;
+							row.task_category = item.task_category;
+							row.is_completed = 0;
+						});
+						
+						frm.refresh_field("completed_tasks");
+						
+						frappe.show_progress(__("Loading Tasks"), items.length, items.length);
+						frappe.msgprint({
+							title: __("Tasks Loaded"),
+							message: __("Loaded {0} task(s) for interval {1}", [items.length, target_interval.name]),
+							indicator: "green"
+						});
+					}
+				}
+			});
+		})
+		.catch(err => {
+			frappe.msgprint({
+				title: __("Error"),
+				message: __("Error loading tasks: {0}", [err.message || err]),
+				indicator: "red"
+			});
 		});
 }
 
-function determine_interval(current_hours, current_km, schedule) {
-	// Determine which interval this service is for based on current readings
-	const hour_intervals = [
-		{name: "250 Hours", value: 250},
-		{name: "500 Hours", value: 500},
-		{name: "1000 Hours", value: 1000},
-		{name: "2000 Hours", value: 2000},
-		{name: "6000 Hours", value: 6000}
-	];
+function determine_target_interval_for_log(current_hours, current_km, last_hours, last_km) {
+	// Determine which interval milestone we're targeting based on current readings
+	// This finds the next upcoming interval (same logic as schedule)
 	
-	const km_intervals = [
-		{name: "2500 KM", value: 2500},
-		{name: "5000 KM", value: 5000},
-		{name: "10000 KM", value: 10000},
-		{name: "30000 KM", value: 30000},
-		{name: "60000 KM", value: 60000}
-	];
+	const hour_intervals = [250, 500, 1000, 2000, 6000];
+	const km_intervals = [2500, 5000, 10000, 30000, 60000];
 	
-	let last_hours = flt(schedule.last_service_hours) || 0;
-	let last_km = flt(schedule.last_service_kilometers) || 0;
+	let target_hour_interval = null;
+	let target_km_interval = null;
 	
-	// Find the interval that matches
+	// Determine target hour interval
 	if (current_hours) {
+		// Find the smallest interval that hasn't been reached yet
 		for (let interval of hour_intervals) {
-			if (current_hours >= last_hours + interval.value && 
-				current_hours < last_hours + interval.value + 100) {
-				return interval.name;
+			let next_interval_value = last_hours + interval;
+			if (current_hours < next_interval_value) {
+				if (!target_hour_interval || next_interval_value < (last_hours + target_hour_interval.value)) {
+					target_hour_interval = {
+						type: "Hours",
+						value: interval,
+						name: `${interval} Hours`
+					};
+				}
 			}
 		}
 	}
 	
+	// Determine target km interval
 	if (current_km) {
+		// Find the smallest interval that hasn't been reached yet
 		for (let interval of km_intervals) {
-			if (current_km >= last_km + interval.value && 
-				current_km < last_km + interval.value + 500) {
-				return interval.name;
+			let next_interval_value = last_km + interval;
+			if (current_km < next_interval_value) {
+				if (!target_km_interval || next_interval_value < (last_km + target_km_interval.value)) {
+					target_km_interval = {
+						type: "Kilometers",
+						value: interval,
+						name: `${interval} KM`
+					};
+				}
 			}
 		}
 	}
 	
-	return null;
+	// Return the interval that comes first (or the one that exists)
+	if (target_hour_interval && target_km_interval) {
+		// Compare which one comes first
+		let hour_next = last_hours + target_hour_interval.value;
+		let km_next = last_km + target_km_interval.value;
+		
+		// Use the one that comes first, or prefer hours if equal
+		if (hour_next <= km_next) {
+			return target_hour_interval;
+		} else {
+			return target_km_interval;
+		}
+	}
+	
+	return target_hour_interval || target_km_interval;
 }
 
 function calculate_next_service(frm) {
