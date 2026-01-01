@@ -1,0 +1,40 @@
+[
+ {
+  "allow_guest": 0,
+  "api_method": null,
+  "cron_format": null,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Server Script",
+  "doctype_event": "After Submit",
+  "enable_rate_limit": 0,
+  "event_frequency": "All",
+  "modified": "2026-01-01 16:11:48.784866",
+  "module": null,
+  "name": "Change Status on Submit",
+  "rate_limit_count": 5,
+  "rate_limit_seconds": 86400,
+  "reference_doctype": "Stock Entry",
+  "script": "if doc.stock_entry_type == \"Fuel and Lubricant Distribution Voucher\":\n\tfuel_requests = set()\n\tfor item in doc.items:\n\t\tif item.custom_fuel_request:\n\t\t\tfuel_requests.add(item.custom_fuel_request)\n\t\n\tfor fuel_request_name in fuel_requests:\n\t\ttry:\n\t\t\tfuel_request_doc = frappe.get_doc(\"Fuel Request\", fuel_request_name)\n\t\t\tif fuel_request_doc.status != \"Distributed\":\n\t\t\t\tfuel_request_doc.status = \"Distributed\"\n\t\t\t\tfuel_request_doc.save(ignore_permissions=True)\n\t\texcept frappe.DoesNotExistError:\n\t\t\tcontinue",
+  "script_type": "DocType Event"
+ },
+ {
+  "allow_guest": 0,
+  "api_method": null,
+  "cron_format": null,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Server Script",
+  "doctype_event": "After Cancel",
+  "enable_rate_limit": 0,
+  "event_frequency": "All",
+  "modified": "2026-01-01 16:11:41.548341",
+  "module": null,
+  "name": "Change Status on Cancel",
+  "rate_limit_count": 5,
+  "rate_limit_seconds": 86400,
+  "reference_doctype": "Stock Entry",
+  "script": "if doc.stock_entry_type == \"Fuel and Lubricant Distribution Voucher\":\n\tfuel_requests = set()\n\tfor item in doc.items:\n\t\tif item.custom_fuel_request:\n\t\t\tfuel_requests.add(item.custom_fuel_request)\n\t\n\tfor fuel_request_name in fuel_requests:\n\t\ttry:\n\t\t\tfuel_request_doc = frappe.get_doc(\"Fuel Request\", fuel_request_name)\n\t\t\tif fuel_request_doc.status == \"Distributed\":\n\t\t\t\tfuel_request_doc.status = \"Pending\"\n\t\t\t\tfuel_request_doc.save(ignore_permissions=True)\n\t\texcept frappe.DoesNotExistError:\n\t\t\tcontinue",
+  "script_type": "DocType Event"
+ }
+]

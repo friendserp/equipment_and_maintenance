@@ -49,5 +49,22 @@
   "parentfield": "links",
   "parenttype": "DocType",
   "table_fieldname": null
+ },
+ {
+  "custom": 0,
+  "docstatus": 0,
+  "doctype": "DocType Link",
+  "group": null,
+  "hidden": 0,
+  "is_child_table": 0,
+  "link_doctype": "Equipment Master",
+  "link_fieldname": "rental_agreement",
+  "modified": "2026-01-01 12:28:32.423936",
+  "name": "rk4amadnag",
+  "parent": "Rental Agreement",
+  "parent_doctype": null,
+  "parentfield": "links",
+  "parenttype": "DocType",
+  "table_fieldname": null
  }
 ]
