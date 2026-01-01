@@ -17,7 +17,7 @@ frappe.ui.form.on("Fuel Request", {
 		frm.set_query("fuel_type", function() {
 			return {
 				filters: {
-					item_group: "Fuel, Oil & Lubricants",
+					item_group: "Fuel, Oils & Lubricant",
 					custom_subcategory: "Fuel"
 				}
 			};

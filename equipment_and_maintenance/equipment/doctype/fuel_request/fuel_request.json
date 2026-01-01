@@ -55,6 +55,7 @@
   {
    "fieldname": "project",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Project (Location)",
    "options": "Project"
   },
@@ -67,6 +68,7 @@
   {
    "fieldname": "plate_number",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Plate No.",
    "options": "Equipment Master",
    "reqd": 1
@@ -118,12 +120,14 @@
   {
    "fieldname": "current_fuel_requested_liter",
    "fieldtype": "Float",
+   "in_list_view": 1,
    "label": "Current Fuel Requested (in Liter)",
    "reqd": 1
   },
   {
    "fieldname": "current_fuel_requested_birr",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Current Fuel Requested (In Birr)",
    "read_only": 1
   },
@@ -190,6 +194,7 @@
   {
    "fieldname": "fuel_type",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Fuel Type",
    "options": "Item",
    "reqd": 1
@@ -215,6 +220,7 @@
    "default": "Pending",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "Pending\nDistributed",
    "read_only": 1
