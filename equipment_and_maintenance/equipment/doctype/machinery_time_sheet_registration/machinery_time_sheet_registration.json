@@ -14,12 +14,15 @@
   "section_break_2",
   "date",
   "column_break_1",
-  "morning_start",
-  "morning_end",
-  "afternoon_start",
-  "afternoon_end",
-  "total_working_hour",
+  "total_operation_hours",
+  "total_idle_hours",
+  "total_down_hours",
+  "operation_tab",
+  "operation_time",
+  "idle_tab",
   "idle_time",
+  "down_tab",
+  "down_time",
   "section_break_3",
   "operators_signature",
   "time_keeper",
@@ -90,40 +93,58 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "morning_start",
-   "fieldtype": "Data",
-   "label": "Morning Start",
-   "description": "Format: HH:mm AM/PM (e.g., 05:56 AM)"
-  },
-  {
-   "fieldname": "morning_end",
-   "fieldtype": "Data",
-   "label": "Morning End",
-   "description": "Format: HH:mm AM/PM (e.g., 12:30 PM)"
-  },
-  {
-   "fieldname": "afternoon_start",
-   "fieldtype": "Data",
-   "label": "Afternoon Start",
-   "description": "Format: HH:mm AM/PM (e.g., 01:00 PM)"
-  },
-  {
-   "fieldname": "afternoon_end",
-   "fieldtype": "Data",
-   "label": "Afternoon End",
-   "description": "Format: HH:mm AM/PM (e.g., 05:30 PM)"
-  },
-  {
-   "fieldname": "total_working_hour",
+   "fieldname": "total_operation_hours",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Total Working Hour",
+   "label": "Total Operation Hours",
    "read_only": 1
   },
   {
-   "fieldname": "idle_time",
+   "fieldname": "total_idle_hours",
    "fieldtype": "Float",
-   "label": "Idle Time (Hours)"
+   "in_list_view": 1,
+   "label": "Total Idle Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_down_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Down Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "operation_tab",
+   "fieldtype": "Tab Break",
+   "label": "Operation"
+  },
+  {
+   "fieldname": "operation_time",
+   "fieldtype": "Table",
+   "label": "Operation Time",
+   "options": "Operation Time"
+  },
+  {
+   "fieldname": "idle_tab",
+   "fieldtype": "Tab Break",
+   "label": "Idle"
+  },
+  {
+   "fieldname": "idle_time",
+   "fieldtype": "Table",
+   "label": "Idle Time",
+   "options": "Idle Time"
+  },
+  {
+   "fieldname": "down_tab",
+   "fieldtype": "Tab Break",
+   "label": "Down"
+  },
+  {
+   "fieldname": "down_time",
+   "fieldtype": "Table",
+   "label": "Down Time",
+   "options": "Down Time"
   },
   {
    "fieldname": "section_break_3",
@@ -203,7 +224,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-30 14:41:13.491804",
+ "modified": "2026-01-08 15:06:02.201174",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Machinery Time Sheet Registration",

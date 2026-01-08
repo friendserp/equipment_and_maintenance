@@ -131,7 +131,8 @@ def get_fuel_request_data(fuel_request):
 			"custom_previous_kmhr_reading": fuel_request_doc.previous_km_hr_reading or 0,
 			"custom_current_kmhr_reading": fuel_request_doc.current_km_hr_reading or 0,
 			"custom_kmhr_difference": fuel_request_doc.current_km_hr_reading - fuel_request_doc.previous_km_hr_reading or 0,
-			"custom_plate_no": fuel_request_doc.plate_number or ""
+			"custom_plate_no": fuel_request_doc.plate_number or "",
+			"project": fuel_request_doc.project or ""
 		}
 	except frappe.DoesNotExistError:
 		return {}
@@ -227,6 +228,7 @@ def make_stock_entry(source_name, target_doc=None):
 		item_row.amount = (fuel_request_doc.current_fuel_requested_liter or 0) * (fuel_request_doc.current_price_per_liter or 0)
 		item_row.basic_amount = item_row.amount
 		item_row.valuation_rate = item_row.basic_rate
+		item_row.project = fuel_request_doc.project or ""
 		
 		# Set custom fields from Fuel Request
 		item_row.custom_fuel_request = fuel_request_doc.name

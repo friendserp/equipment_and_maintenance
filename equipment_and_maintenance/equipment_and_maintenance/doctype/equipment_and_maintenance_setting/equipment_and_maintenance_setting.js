@@ -7,7 +7,7 @@ frappe.ui.form.on("Equipment and Maintenance Setting", {
 		frm.set_query("fuel_item", "fuel_prices", function() {
 			return {
 				filters: {
-					item_group: "Fuel, Oils & Lubricant",
+					item_group: "Fuel, Oils & Lubricants",
 					custom_subcategory: "Fuel"
 				}
 			};

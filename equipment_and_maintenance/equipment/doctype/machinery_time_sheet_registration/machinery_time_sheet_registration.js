@@ -7,9 +7,15 @@ frappe.ui.form.on("Machinery Time Sheet Registration", {
 		if (frm.is_new()) {
 			frm.set_value("prepared_by", frappe.session.user);
 		}
-		
-		// Format time fields to HH:mm format
-		format_time_fields(frm);
+		// Recalculate all row hours and totals
+		recalculate_all_hours(frm);
+		calculate_total_working_hour(frm);
+	},
+	
+	onload(frm) {
+		// Recalculate on load to ensure values are correct
+		recalculate_all_hours(frm);
+		calculate_total_working_hour(frm);
 	},
 
 	plate_number(frm) {
@@ -36,177 +42,170 @@ frappe.ui.form.on("Machinery Time Sheet Registration", {
 				}
 			);
 		}
-	},
+	}
+});
 
-	morning_start(frm) {
-		format_time_field(frm, "morning_start");
+// Operation Time child table
+frappe.ui.form.on("Operation Time", {
+	start_time(frm, cdt, cdn) {
+		calculate_row_hours(frm, cdt, cdn);
 		calculate_total_working_hour(frm);
 	},
-
-	morning_end(frm) {
-		format_time_field(frm, "morning_end");
+	end_time(frm, cdt, cdn) {
+		calculate_row_hours(frm, cdt, cdn);
 		calculate_total_working_hour(frm);
 	},
-
-	afternoon_start(frm) {
-		format_time_field(frm, "afternoon_start");
-		calculate_total_working_hour(frm);
+	operation_time_add(frm, cdt, cdn) {
+		// Calculate when row is added
+		setTimeout(() => {
+			calculate_total_working_hour(frm);
+		}, 100);
 	},
-
-	afternoon_end(frm) {
-		format_time_field(frm, "afternoon_end");
+	operation_time_remove(frm) {
 		calculate_total_working_hour(frm);
 	}
 });
 
-function format_time_fields(frm) {
-	// Format all time fields to HH:mm AM/PM format
-	const time_fields = ["morning_start", "morning_end", "afternoon_start", "afternoon_end"];
-	time_fields.forEach(field => {
-		format_time_field(frm, field);
-	});
-}
+// Idle Time child table
+frappe.ui.form.on("Idle Time", {
+	start_time(frm, cdt, cdn) {
+		calculate_row_hours(frm, cdt, cdn);
+		calculate_total_working_hour(frm);
+	},
+	end_time(frm, cdt, cdn) {
+		calculate_row_hours(frm, cdt, cdn);
+		calculate_total_working_hour(frm);
+	},
+	idle_time_add(frm, cdt, cdn) {
+		// Calculate when row is added
+		setTimeout(() => {
+			calculate_total_working_hour(frm);
+		}, 100);
+	},
+	idle_time_remove(frm) {
+		calculate_total_working_hour(frm);
+	}
+});
 
-function format_time_field(frm, fieldname) {
-	if (frm.doc[fieldname]) {
-		let time_value = frm.doc[fieldname];
-		if (typeof time_value === 'string' && time_value.trim()) {
-			// Try to format to HH:mm AM/PM (always default to PM unless AM is specified)
-			let formatted = format_to_ampm(time_value);
-			if (formatted && formatted !== time_value.toUpperCase()) {
-				frm.set_value(fieldname, formatted);
+// Down Time child table
+frappe.ui.form.on("Down Time", {
+	start_time(frm, cdt, cdn) {
+		calculate_row_hours(frm, cdt, cdn);
+		calculate_total_working_hour(frm);
+	},
+	end_time(frm, cdt, cdn) {
+		calculate_row_hours(frm, cdt, cdn);
+		calculate_total_working_hour(frm);
+	},
+	down_time_add(frm, cdt, cdn) {
+		// Calculate when row is added
+		setTimeout(() => {
+			calculate_total_working_hour(frm);
+		}, 100);
+	},
+	down_time_remove(frm) {
+		calculate_total_working_hour(frm);
+	}
+});
+
+function calculate_row_hours(frm, cdt, cdn) {
+	let row = locals[cdt][cdn];
+	if (row.start_time && row.end_time) {
+		// Handle both Time object and string format
+		let start_str = row.start_time;
+		let end_str = row.end_time;
+		
+		// Convert to string if it's a time object
+		if (typeof start_str !== 'string') {
+			start_str = moment(row.start_time).format("HH:mm:ss");
+		}
+		if (typeof end_str !== 'string') {
+			end_str = moment(row.end_time).format("HH:mm:ss");
+		}
+		
+		let start = moment(start_str, "HH:mm:ss");
+		let end = moment(end_str, "HH:mm:ss");
+		
+		if (start.isValid() && end.isValid()) {
+			// If end time is before start time, assume it's next day
+			if (end.isBefore(start)) {
+				end.add(1, 'day');
 			}
-		}
-	}
-}
-
-function format_to_ampm(time_str) {
-	// Convert various time formats to HH:mm AM/PM
-	// Always default to PM unless AM is explicitly specified
-	time_str = time_str.trim().toUpperCase();
-	
-	// If AM is explicitly specified, use AM
-	if (time_str.includes('AM')) {
-		let match = time_str.match(/^([0]?[1-9]|1[0-2]):([0-5][0-9])\s*AM$/);
-		if (match) {
-			let hour = parseInt(match[1]);
-			let minute = parseInt(match[2]);
-			return String(hour).padStart(2, '0') + ':' + String(minute).padStart(2, '0') + ' AM';
-		}
-	}
-	
-	// If PM is explicitly specified, use PM
-	if (time_str.includes('PM')) {
-		let match = time_str.match(/^([0]?[1-9]|1[0-2]):([0-5][0-9])\s*PM$/);
-		if (match) {
-			let hour = parseInt(match[1]);
-			let minute = parseInt(match[2]);
-			return String(hour).padStart(2, '0') + ':' + String(minute).padStart(2, '0') + ' PM';
-		}
-	}
-	
-	// If in 24-hour format, convert to 12-hour
-	let match_24 = time_str.match(/^([0-1]?[0-9]|2[0-3]):([0-5][0-9])/);
-	if (match_24) {
-		let hour24 = parseInt(match_24[1]);
-		let minute = parseInt(match_24[2]);
-		let hour12, ampm;
-		
-		if (hour24 === 0) {
-			hour12 = 12;
-			ampm = 'AM';
-		} else if (hour24 === 12) {
-			hour12 = 12;
-			ampm = 'PM';
-		} else if (hour24 < 12) {
-			hour12 = hour24;
-			ampm = 'AM';
+			
+			let hours = end.diff(start, 'hours', true);
+			frappe.model.set_value(cdt, cdn, "hours", flt(hours, 2));
 		} else {
-			hour12 = hour24 - 12;
-			ampm = 'PM';
+			frappe.model.set_value(cdt, cdn, "hours", 0);
 		}
-		
-		return String(hour12).padStart(2, '0') + ':' + String(minute).padStart(2, '0') + ' ' + ampm;
+	} else {
+		frappe.model.set_value(cdt, cdn, "hours", 0);
 	}
-	
-	// If in HH:mm format without AM/PM, always default to PM
-	let match_12 = time_str.match(/^([0]?[1-9]|1[0-2]):([0-5][0-9])$/);
-	if (match_12) {
-		let hour = parseInt(match_12[1]);
-		let minute = parseInt(match_12[2]);
-		return String(hour).padStart(2, '0') + ':' + String(minute).padStart(2, '0') + ' PM';
-	}
-	
-	return null;
 }
 
-// Validation is now only done on save (server-side)
-// Client-side only formats the time without showing errors
+function recalculate_all_hours(frm) {
+	// Recalculate hours for all operation time rows
+	if (frm.doc.operation_time && frm.doc.operation_time.length > 0) {
+		frm.doc.operation_time.forEach(function(row) {
+			if (row.start_time && row.end_time) {
+				calculate_row_hours(frm, "Operation Time", row.name);
+			}
+		});
+	}
+	
+	// Recalculate hours for all idle time rows
+	if (frm.doc.idle_time && frm.doc.idle_time.length > 0) {
+		frm.doc.idle_time.forEach(function(row) {
+			if (row.start_time && row.end_time) {
+				calculate_row_hours(frm, "Idle Time", row.name);
+			}
+		});
+	}
+	
+	// Recalculate hours for all down time rows
+	if (frm.doc.down_time && frm.doc.down_time.length > 0) {
+		frm.doc.down_time.forEach(function(row) {
+			if (row.start_time && row.end_time) {
+				calculate_row_hours(frm, "Down Time", row.name);
+			}
+		});
+	}
+}
 
 function calculate_total_working_hour(frm) {
-	let total_hours = 0;
+	let total_operation_hours = 0;
+	let total_idle_hours = 0;
+	let total_down_hours = 0;
 	
-	// Calculate morning hours
-	if (frm.doc.morning_start && frm.doc.morning_end) {
-		let morning_hours = calculate_time_difference(frm.doc.morning_start, frm.doc.morning_end);
-		if (morning_hours > 0) {
-			total_hours += morning_hours;
-		}
+	// Calculate total operation hours
+	if (frm.doc.operation_time && frm.doc.operation_time.length > 0) {
+		frm.doc.operation_time.forEach(function(row) {
+			if (row.hours) {
+				total_operation_hours += flt(row.hours);
+			}
+		});
 	}
 	
-	// Calculate afternoon hours
-	if (frm.doc.afternoon_start && frm.doc.afternoon_end) {
-		let afternoon_hours = calculate_time_difference(frm.doc.afternoon_start, frm.doc.afternoon_end);
-		if (afternoon_hours > 0) {
-			total_hours += afternoon_hours;
-		}
+	// Calculate total idle hours
+	if (frm.doc.idle_time && frm.doc.idle_time.length > 0) {
+		frm.doc.idle_time.forEach(function(row) {
+			if (row.hours) {
+				total_idle_hours += flt(row.hours);
+			}
+		});
 	}
 	
-	frm.set_value("total_working_hour", flt(total_hours, 2));
+	// Calculate total down hours
+	if (frm.doc.down_time && frm.doc.down_time.length > 0) {
+		frm.doc.down_time.forEach(function(row) {
+			if (row.hours) {
+				total_down_hours += flt(row.hours);
+			}
+		});
+	}
+	
+	// Set individual totals
+	frm.set_value("total_operation_hours", flt(total_operation_hours, 2));
+	frm.set_value("total_idle_hours", flt(total_idle_hours, 2));
+	frm.set_value("total_down_hours", flt(total_down_hours, 2));
+	
 }
-
-function calculate_time_difference(start_time_str, end_time_str) {
-	// Convert AM/PM format to 24-hour format for calculation
-	let start_24 = convert_ampm_to_24hour(start_time_str);
-	let end_24 = convert_ampm_to_24hour(end_time_str);
-	
-	if (!start_24 || !end_24) return 0;
-	
-	// Parse times
-	let start_moment = moment(start_24, "HH:mm", true);
-	let end_moment = moment(end_24, "HH:mm", true);
-	
-	if (!start_moment.isValid() || !end_moment.isValid()) return 0;
-	
-	// If end time is before start time, assume it's next day (e.g., night shift)
-	if (end_moment.isBefore(start_moment)) {
-		end_moment.add(1, 'day');
-	}
-	
-	return end_moment.diff(start_moment, 'hours', true);
-}
-
-function convert_ampm_to_24hour(time_str) {
-	// Convert HH:mm AM/PM to HH:mm (24-hour format)
-	let match = time_str.trim().toUpperCase().match(/^([0]?[1-9]|1[0-2]):([0-5][0-9])\s*(AM|PM)$/);
-	if (!match) return null;
-	
-	let hour = parseInt(match[1]);
-	let minute = parseInt(match[2]);
-	let ampm = match[3];
-	
-	// Convert to 24-hour format
-	if (ampm === 'AM') {
-		if (hour === 12) {
-			hour = 0; // 12:xx AM becomes 00:xx
-		}
-	} else { // PM
-		if (hour !== 12) {
-			hour += 12; // 1-11 PM becomes 13-23
-		}
-		// 12:xx PM stays 12:xx
-	}
-	
-	return String(hour).padStart(2, '0') + ':' + String(minute).padStart(2, '0');
-}
-

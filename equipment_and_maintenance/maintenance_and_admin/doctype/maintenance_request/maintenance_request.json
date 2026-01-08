@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:MMR-{YYYY}-{####}",
  "creation": "2025-12-26 10:57:39.375046",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -58,8 +59,9 @@
   },
   {
    "fieldname": "plate_no",
-   "fieldtype": "Data",
-   "label": "Plate No"
+   "fieldtype": "Link",
+   "label": "Plate No",
+   "options": "Equipment Master"
   },
   {
    "fieldname": "klc_no",
@@ -152,10 +154,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-26 14:05:57.954191",
+ "modified": "2026-01-05 11:41:20.815237",
  "modified_by": "Administrator",
  "module": "Maintenance and Admin",
  "name": "Maintenance Request",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

@@ -4,6 +4,168 @@
 frappe.ui.form.on("Maintenance Work Order", {
 	refresh(frm) {
 		setup_queries(frm);
+		
+		// Add buttons for Material Request, Cannibalization Request, and Disposal Request
+		frm.add_custom_button(
+			__("Material Request"),
+			function() {
+				frm.trigger("make_material_request");
+			},
+			__("Create")
+		);
+		
+		frm.add_custom_button(
+			__("Cannibalization Request"),
+			function() {
+				frm.trigger("make_cannibalization_request");
+			},
+			__("Create")
+		);
+		
+		frm.add_custom_button(
+			__("Disposal Request"),
+			function() {
+				frm.trigger("make_disposal_request");
+			},
+			__("Create")
+		);
+	},
+	
+	make_material_request: function(frm) {
+		// Check if there are spare parts to add
+		if (!frm.doc.spare_cost_items || frm.doc.spare_cost_items.length === 0) {
+			frappe.msgprint(__("No spare parts found in this Maintenance Work Order. Please add spare parts first."));
+			return;
+		}
+		
+		// Create new Material Request document
+		let mr_doc = frappe.model.get_new_doc("Material Request");
+		
+		// Set header fields
+		mr_doc.transaction_date = frappe.datetime.get_today();
+		mr_doc.material_request_type = "Purchase";
+		
+		// Add ALL items from spare parts table
+		frm.doc.spare_cost_items.forEach(function(spare_part) {
+			let item_row = frappe.model.add_child(mr_doc, "Material Request Item", "items");
+			
+			// Set item_code if available
+			if (spare_part.item_code) {
+				item_row.item_code = spare_part.item_code;
+			}
+			
+			// Set quantity (default to 1 if not specified)
+			item_row.qty = spare_part.qty || 1;
+			
+			// Set UOM if available
+			if (spare_part.unit) {
+				item_row.uom = spare_part.unit;
+			}
+			
+			// Set description from parts_description (will be fetched from item if item_code is set)
+			if (spare_part.parts_description) {
+				item_row.description = spare_part.parts_description;
+			}
+			
+			// Set schedule date
+			item_row.schedule_date = frappe.datetime.add_days(frappe.datetime.get_today(), 7);
+		});
+		
+		// Open the form - item details will be fetched automatically when form loads
+		frappe.set_route("Form", "Material Request", mr_doc.name);
+	},
+
+	make_cannibalization_request: function(frm) {
+		// Check if plate_no is available
+		if (!frm.doc.plate_no) {
+			frappe.msgprint(__("Plate No is required in Maintenance Work Order to create Cannibalization Request."));
+			return;
+		}
+		
+		// Check if there are spare parts to add
+		if (!frm.doc.spare_cost_items || frm.doc.spare_cost_items.length === 0) {
+			frappe.msgprint(__("No spare parts found in this Maintenance Work Order. Please add spare parts first."));
+			return;
+		}
+		
+		// Look up Equipment Master by plate_number
+		frappe.db.get_value("Equipment Master", {"plate_number": frm.doc.plate_no}, "name", (r) => {
+			let equipment_master_name = null;
+			
+			if (r && r.name) {
+				equipment_master_name = r.name;
+			} else {
+				// If not found by plate_number, try using plate_no as the name directly
+				equipment_master_name = frm.doc.plate_no;
+			}
+			
+			// Create new Cannibalization Form document
+			let cf_doc = frappe.model.get_new_doc("Cannibalization Form");
+			
+			// Map plate number from Maintenance Work Order (Equipment Master name)
+			cf_doc.cannibalized_from_plate_no = equipment_master_name;
+			
+			// Add ALL items from spare parts to cannibalized_parts table
+			frm.doc.spare_cost_items.forEach(function(spare_part) {
+				let part_row = frappe.model.add_child(cf_doc, "Cannibalized Part Item", "cannibalized_parts");
+				
+				// Map item_code to description (Item link)
+				if (spare_part.item_code) {
+					part_row.description = spare_part.item_code;
+				}
+				
+				// Map part_no to part_number
+				if (spare_part.part_no) {
+					part_row.part_number = spare_part.part_no;
+				}
+				
+				// Map unit
+				if (spare_part.unit) {
+					part_row.unit = spare_part.unit;
+				}
+				
+				// Map qty (default to 1 if not specified)
+				part_row.qty = spare_part.qty || 1;
+				
+				// Map parts_description to remark if available
+				if (spare_part.parts_description) {
+					part_row.remark = spare_part.parts_description;
+				}
+			});
+			
+			// Open the form - plate_no will trigger fetch of model, type, and project
+			frappe.set_route("Form", "Cannibalization Form", cf_doc.name);
+		});
+	},
+
+	make_disposal_request: function(frm) {
+		// Check if plate_no is available
+		if (!frm.doc.plate_no) {
+			frappe.msgprint(__("Plate No is required in Maintenance Work Order to create Disposal Request."));
+			return;
+		}
+		
+		// Look up Equipment Master by plate_number
+		frappe.db.get_value("Equipment Master", {"plate_number": frm.doc.plate_no}, "name", (r) => {
+			let equipment_master_name = null;
+			
+			if (r && r.name) {
+				equipment_master_name = r.name;
+			} else {
+				// If not found by plate_number, try using plate_no as the name directly
+				equipment_master_name = frm.doc.plate_no;
+			}
+			
+			// Create new Equipment Disposal Request document
+			let edr_doc = frappe.model.get_new_doc("Equipment Disposal Request");
+			
+			// Map plate number from Maintenance Work Order
+			edr_doc.plate_no = equipment_master_name;
+			edr_doc.date = frappe.datetime.get_today();
+			
+			// Open the form - plate_no will trigger fetch of type, model, and other details
+			frappe.set_route("Form", "Equipment Disposal Request", edr_doc.name);
+		});
 	},
 	
 	overhead_percentage(frm) {
