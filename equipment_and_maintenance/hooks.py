@@ -267,6 +267,7 @@ fixtures = [
 			"link_doctype": ["in", [
 				"Equipment Master",
 				"Asset Sub Category",
+				"Asset Category",
 				"Preventive Maintenance Task Interval",
 				"Preventive Maintenance Schedule Item",
 				"Preventive Maintenance Template",
