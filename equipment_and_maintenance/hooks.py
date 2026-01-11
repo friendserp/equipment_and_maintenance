@@ -248,7 +248,8 @@ fixtures = [
 		"filters": {
 			"dt": ["in", [
 				"Asset Category",
-				"Material Request Item",
+				"Stock Entry Detail",
+				"Stock Entry"
 			]]
 		}
 	},
