@@ -263,6 +263,9 @@ fixtures = [
 		"dt": "Workflow State",
 	},
 	{
+		"dt": "Workflow Action Master",
+	},
+	{
 		"dt": "DocType Link",
 		"filters": {
 			"link_doctype": ["in", [
