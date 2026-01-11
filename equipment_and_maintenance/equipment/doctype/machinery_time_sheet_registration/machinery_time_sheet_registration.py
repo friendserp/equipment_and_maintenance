@@ -15,6 +15,9 @@ class MachineryTimeSheetRegistration(Document):
 			self.prepared_by = frappe.session.user
 	
 	def validate(self):
+		# Auto-populate workflow fields
+		self.auto_populate_workflow_fields()
+		
 		# Always recalculate hours for operation time
 		if self.operation_time:
 			for row in self.operation_time:
@@ -85,3 +88,15 @@ class MachineryTimeSheetRegistration(Document):
 		
 		# Total working hour = Operation hours - Idle hours - Down hours
 		self.total_working_hour = flt(total_operation - total_idle - total_down, 2)
+	
+	def auto_populate_workflow_fields(self):
+		"""Auto-populate user fields when workflow state changes"""
+		if not self.workflow_state:
+			return
+		
+		if self.workflow_state == "Checked":
+			if not self.checked_by:
+				self.checked_by = frappe.session.user
+		elif self.workflow_state == "Approved":
+			if not self.approved_by:
+				self.approved_by = frappe.session.user

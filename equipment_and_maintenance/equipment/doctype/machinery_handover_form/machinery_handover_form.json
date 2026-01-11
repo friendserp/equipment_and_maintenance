@@ -41,20 +41,25 @@
   },
   {
    "fieldname": "custodian_name",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Receiver Name",
+   "options": "Employee",
    "reqd": 1
   },
   {
+   "fetch_from": "custodian_name.branch",
    "fieldname": "location",
-   "fieldtype": "Data",
-   "label": "Location"
+   "fieldtype": "Link",
+   "label": "Location",
+   "options": "Branch"
   },
   {
+   "fetch_from": "custodian_name.designation",
    "fieldname": "position",
-   "fieldtype": "Data",
-   "label": "Position"
+   "fieldtype": "Link",
+   "label": "Position",
+   "options": "Designation"
   },
   {
    "fetch_from": "plate_number.equipment_category",
@@ -149,8 +154,9 @@
   },
   {
    "fieldname": "received_by",
-   "fieldtype": "Data",
-   "label": "Received by"
+   "fieldtype": "Link",
+   "label": "Received by",
+   "options": "User"
   },
   {
    "fieldname": "received_date",
@@ -164,8 +170,9 @@
   },
   {
    "fieldname": "handed_over_by",
-   "fieldtype": "Data",
-   "label": "Handed over by"
+   "fieldtype": "Link",
+   "label": "Handed over by",
+   "options": "User"
   },
   {
    "fieldname": "handed_date",
@@ -180,7 +187,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-27 14:25:50.802378",
+ "modified": "2026-01-10 18:22:19.124871",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Machinery Handover Form",

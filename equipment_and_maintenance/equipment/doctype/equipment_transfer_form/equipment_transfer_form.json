@@ -8,16 +8,18 @@
  "field_order": [
   "section_break_1",
   "date",
-  "fuel_status",
   "column_break_1",
-  "from_project",
-  "receiving_project",
+  "fuel_status",
   "section_break_2",
+  "current_equipment_details_column",
   "equipment_plate_no",
+  "from_project",
+  "current_operator",
   "equipment_type",
-  "column_break_2",
-  "operator_driver_name",
   "km_reading",
+  "column_break_2",
+  "receiving_project",
+  "operator_driver_name",
   "section_break_3",
   "equipment_transported_by",
   "transporter_plate_no",
@@ -32,7 +34,8 @@
   "transfer_ordered_by_signature",
   "column_break_4",
   "approved_by",
-  "approved_by_signature"
+  "approved_by_signature",
+  "amended_from"
  ],
  "fields": [
   {
@@ -76,8 +79,7 @@
   },
   {
    "fieldname": "section_break_2",
-   "fieldtype": "Section Break",
-   "label": "Equipment Details"
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "equipment_plate_no",
@@ -96,12 +98,14 @@
   },
   {
    "fieldname": "column_break_2",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "label": "Receiving Details"
   },
   {
    "fieldname": "operator_driver_name",
-   "fieldtype": "Data",
-   "label": "Operator/Driver Name"
+   "fieldtype": "Link",
+   "label": "Operator/Driver Name",
+   "options": "Employee"
   },
   {
    "fieldname": "km_reading",
@@ -121,8 +125,9 @@
   },
   {
    "fieldname": "transporter_plate_no",
-   "fieldtype": "Data",
-   "label": "Transporter Plate No"
+   "fieldtype": "Link",
+   "label": "Transporter Plate No",
+   "options": "Equipment Master"
   },
   {
    "fieldname": "column_break_3",
@@ -136,9 +141,8 @@
   },
   {
    "fieldname": "departure_time",
-   "fieldtype": "Data",
-   "label": "Departure Time",
-   "description": "Format: HH:mm AM/PM (e.g., 05:56 AM)"
+   "fieldtype": "Time",
+   "label": "Departure Time"
   },
   {
    "fieldname": "km_difference_to_destination",
@@ -185,11 +189,33 @@
    "fieldname": "approved_by_signature",
    "fieldtype": "Signature",
    "label": "Signature"
+  },
+  {
+   "fieldname": "current_equipment_details_column",
+   "fieldtype": "Column Break",
+   "label": "Current Equipment Details"
+  },
+  {
+   "fieldname": "current_operator",
+   "fieldtype": "Link",
+   "label": "Current Operator",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Equipment Transfer Form",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2025-01-01 00:00:00",
+ "modified": "2026-01-10 19:09:21.790164",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Equipment Transfer Form",
@@ -226,4 +252,3 @@
  "sort_order": "DESC",
  "states": []
 }
-

@@ -14,45 +14,120 @@ class EquipmentTransferForm(Document):
 			self.transfer_ordered_by = frappe.session.user
 	
 	def validate(self):
-		# Validate departure time format if provided
-		if self.departure_time:
-			self.validate_time_format()
+		# Auto-populate workflow fields
+		self.auto_populate_workflow_fields()
+		
+
+		
 	
-	def validate_time_format(self):
-		"""Validate that departure time is in HH:mm AM/PM format"""
-		time_str = self.departure_time.strip().upper()
+	def auto_populate_workflow_fields(self):
+		"""Auto-populate user fields when workflow state changes"""
+		if not self.workflow_state:
+			return
 		
-		# If AM is explicitly specified, use AM; otherwise default to PM
-		if 'AM' in time_str:
-			time_match = re.match(r'^([0]?[1-9]|1[0-2]):([0-5][0-9])\s*AM$', time_str)
-			if time_match:
-				hour = int(time_match.group(1))
-				minute = int(time_match.group(2))
-				time_str = "{:02d}:{:02d} AM".format(hour, minute)
-				self.departure_time = time_str
-		elif 'PM' in time_str:
-			time_match = re.match(r'^([0]?[1-9]|1[0-2]):([0-5][0-9])\s*PM$', time_str)
-			if time_match:
-				hour = int(time_match.group(1))
-				minute = int(time_match.group(2))
-				time_str = "{:02d}:{:02d} PM".format(hour, minute)
-				self.departure_time = time_str
-		else:
-			# No AM/PM specified, default to PM
-			time_match = re.match(r'^([0]?[1-9]|1[0-2]):([0-5][0-9])$', time_str)
-			if time_match:
-				hour = int(time_match.group(1))
-				minute = int(time_match.group(2))
-				time_str = "{:02d}:{:02d} PM".format(hour, minute)
-				self.departure_time = time_str
+		if self.workflow_state == "Approved":
+			if not self.approved_by:
+				self.approved_by = frappe.session.user
+	
+	def before_submit(self):
+		"""Ensure from_project and current_operator are set from Equipment Master before submitting"""
+		if not self.equipment_plate_no:
+			return
 		
-		# Validate final format
-		time_pattern = r'^([0]?[1-9]|1[0-2]):([0-5][0-9])\s*(AM|PM)$'
-		if not re.match(time_pattern, time_str):
-			frappe.throw(
-				_("Departure Time must be in format HH:mm AM/PM (e.g., 05:56 AM or 12:30 PM). Current value: {0}").format(
-					frappe.bold(time_str)
+		# Get current Equipment Master values and ensure they're stored in from_project and current_operator
+		equipment = frappe.get_doc("Equipment Master", self.equipment_plate_no)
+		
+		# Store current values if not already set (these represent the "previous" values before transfer)
+		if not self.from_project and equipment.location:
+			self.from_project = equipment.location
+		
+		if not self.current_operator and equipment.operators_name:
+			self.current_operator = equipment.operators_name
+	
+	def on_submit(self):
+		"""Update Equipment Master when transfer is submitted"""
+		if not self.equipment_plate_no:
+			return
+		
+		# Get current Equipment Master
+		equipment = frappe.get_doc("Equipment Master", self.equipment_plate_no)
+		
+		# Update project (always update)
+		if self.receiving_project:
+			equipment.location = self.receiving_project
+		
+		# Update operator if different from current operator in Equipment Master
+		current_operator = equipment.operators_name
+		operator_updated = False
+		if self.operator_driver_name and self.operator_driver_name != current_operator:
+			equipment.operators_name = self.operator_driver_name
+			operator_updated = True
+		
+		# Save Equipment Master
+		equipment.save(ignore_permissions=True)
+		
+		# Show appropriate message
+		if operator_updated:
+			frappe.msgprint(
+				_("Equipment Master updated: Project set to {0}, Operator updated to {1}").format(
+					frappe.bold(self.receiving_project),
+					frappe.bold(self.operator_driver_name)
 				),
-				title=_("Invalid Time Format")
+				indicator="green",
+				alert=True
+			)
+		else:
+			frappe.msgprint(
+				_("Equipment Master updated: Project set to {0}").format(
+					frappe.bold(self.receiving_project)
+				),
+				indicator="green",
+				alert=True
+			)
+	
+	def before_cancel(self):
+		"""Set workflow state to Cancelled before cancelling"""
+		self.workflow_state = "Cancelled"
+	
+	def on_cancel(self):
+		"""Revert Equipment Master changes when transfer is cancelled"""
+		if not self.equipment_plate_no:
+			return
+		
+		# Revert to previous values (stored in from_project and current_operator)
+		equipment = frappe.get_doc("Equipment Master", self.equipment_plate_no)
+		
+		if self.from_project:
+			equipment.location = self.from_project
+		
+		if self.current_operator:
+			equipment.operators_name = self.current_operator
+		
+		# Save Equipment Master
+		equipment.save(ignore_permissions=True)
+		frappe.msgprint(
+			_("Equipment Master reverted to previous values"),
+			indicator="blue",
+			alert=True
+		)
+	
+	def on_trash(self):
+		"""Revert Equipment Master changes when transfer is deleted"""
+		# Only revert if document was submitted (has previous values stored in from_project and current_operator)
+		if self.docstatus == 1 and self.equipment_plate_no:
+			equipment = frappe.get_doc("Equipment Master", self.equipment_plate_no)
+			
+			if self.from_project:
+				equipment.location = self.from_project
+			
+			if self.current_operator:
+				equipment.operators_name = self.current_operator
+			
+			# Save Equipment Master
+			equipment.save(ignore_permissions=True)
+			frappe.msgprint(
+				_("Equipment Master reverted to previous values"),
+				indicator="blue",
+				alert=True
 			)
 

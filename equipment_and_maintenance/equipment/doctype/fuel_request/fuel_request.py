@@ -18,6 +18,9 @@ class FuelRequest(Document):
 			self.date_issued = self.date
 	
 	def validate(self):
+		# Auto-populate workflow fields
+		self.auto_populate_workflow_fields()
+		
 		# Calculate fuel efficiency (Km/Ltr) if we have previous data
 		if (self.previous_fuel_consumption_liter and 
 			self.previous_km_hr_reading and 
@@ -30,6 +33,18 @@ class FuelRequest(Document):
 		# Calculate current fuel cost in birr
 		if self.current_fuel_requested_liter and self.current_price_per_liter:
 			self.current_fuel_requested_birr = self.current_fuel_requested_liter * self.current_price_per_liter
+	
+	def auto_populate_workflow_fields(self):
+		"""Auto-populate user fields when workflow state changes"""
+		if not self.workflow_state:
+			return
+		
+		if self.workflow_state == "Checked":
+			if not self.checked_by:
+				self.checked_by = frappe.session.user
+		elif self.workflow_state == "Approved":
+			if not self.approved_by:
+				self.approved_by = frappe.session.user
 
 
 @frappe.whitelist()

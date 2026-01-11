@@ -47,20 +47,24 @@
   "approved_by_signature",
   "section_break_approvals",
   "equip_dept_column",
+  "equip_dept_approved_by",
   "equip_dept_date",
   "equip_dept_approved",
   "equip_dept_rejected",
   "column_break_dgm",
+  "dgm_approved_by",
   "dgm_date",
   "dgm_approved",
   "dgm_rejected",
   "column_break_survey",
+  "survey_committee_approved_by",
   "survey_committee_date",
   "survey_committee_approved",
   "survey_committee_rejected",
   "section_break_gm",
   "general_manager_comment",
   "column_break_gm_decision",
+  "general_manager_approved_by",
   "general_manager_approved",
   "general_manager_rejected"
  ],
@@ -277,21 +281,30 @@
    "label": "Disposal Approval"
   },
   {
+   "fieldname": "equip_dept_approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "equip_dept_date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "read_only": 1
+  },
+  {
    "default": "0",
    "fieldname": "equip_dept_approved",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Equip. Dept Approved"
-  },
-  {
-   "depends_on": "equip_dept_approved",
-   "fieldname": "equip_dept_date",
-   "fieldtype": "Date",
-   "label": "Date"
   },
   {
    "default": "0",
    "fieldname": "equip_dept_rejected",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Equip. Dept Rejected"
   },
   {
@@ -300,21 +313,30 @@
    "label": "DGM"
   },
   {
+   "fieldname": "dgm_approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "dgm_date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "read_only": 1
+  },
+  {
    "default": "0",
    "fieldname": "dgm_approved",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "DGM Approved"
-  },
-  {
-   "depends_on": "dgm_approved",
-   "fieldname": "dgm_date",
-   "fieldtype": "Date",
-   "label": "Date"
   },
   {
    "default": "0",
    "fieldname": "dgm_rejected",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "DGM Rejected"
   },
   {
@@ -323,21 +345,30 @@
    "label": "Survey Committee"
   },
   {
+   "fieldname": "survey_committee_approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "survey_committee_date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "read_only": 1
+  },
+  {
    "default": "0",
    "fieldname": "survey_committee_approved",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Survey Committee Approved"
-  },
-  {
-   "depends_on": "survey_committee_approved",
-   "fieldname": "survey_committee_date",
-   "fieldtype": "Date",
-   "label": "Date"
   },
   {
    "default": "0",
    "fieldname": "survey_committee_rejected",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Survey Committee Rejected"
   },
   {
@@ -355,15 +386,24 @@
    "fieldtype": "Column Break"
   },
   {
+   "fieldname": "general_manager_approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
    "default": "0",
    "fieldname": "general_manager_approved",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "General Manager Disposal Approved"
   },
   {
    "default": "0",
    "fieldname": "general_manager_rejected",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "General Manager Disposal Rejected"
   },
   {
@@ -402,6 +442,7 @@
    "write": 1
   }
  ],
+ "is_submittable": 1,
  "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",

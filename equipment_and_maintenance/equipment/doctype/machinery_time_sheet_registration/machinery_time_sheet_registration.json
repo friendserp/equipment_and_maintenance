@@ -7,8 +7,8 @@
  "engine": "InnoDB",
  "field_order": [
   "section_break_1",
-  "project",
   "plate_number",
+  "project",
   "machine_type",
   "operators_name",
   "section_break_2",
@@ -24,10 +24,10 @@
   "down_tab",
   "down_time",
   "section_break_3",
+  "fuels_lubricant_used",
   "operators_signature",
   "time_keeper",
   "column_break_2",
-  "fuels_lubricant_used",
   "performed_work",
   "section_break_4",
   "prepared_by",
@@ -46,6 +46,7 @@
    "label": "Basic Information"
   },
   {
+   "fetch_from": "plate_number.location",
    "fieldname": "project",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -54,10 +55,12 @@
    "reqd": 1
   },
   {
+   "fetch_from": "plate_number.equipment_sub_category",
    "fieldname": "machine_type",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Machine Type",
+   "options": "Asset Sub Category",
    "reqd": 1
   },
   {
@@ -69,10 +72,12 @@
    "reqd": 1
   },
   {
+   "fetch_from": "plate_number.operators_name",
    "fieldname": "operators_name",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Operator's Name",
+   "options": "Employee",
    "reqd": 1
   },
   {
@@ -224,7 +229,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-08 15:06:02.201174",
+ "modified": "2026-01-10 18:40:17.250487",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Machinery Time Sheet Registration",

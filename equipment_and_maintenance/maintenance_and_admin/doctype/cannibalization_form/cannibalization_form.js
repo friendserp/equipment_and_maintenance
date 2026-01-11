@@ -65,6 +65,19 @@ frappe.ui.form.on("Cannibalization Form", {
 			};
 		});
 		
+		// Auto-set request_by_name if not set (on creation)
+		if (frm.is_new() && !frm.doc.request_by_name) {
+			frappe.db.get_value("User", frappe.session.user, "full_name").then(r => {
+				if (r && r.full_name) {
+					frm.set_value("request_by_name", r.full_name);
+					frm.set_value("request_by_date", frappe.datetime.get_today());
+				}
+			});
+		}
+		
+		// Handle workflow state changes for auto-populating user fields
+		frm.trigger("handle_workflow_state");
+		
 		// Add button to create Maintenance Request
 		if (!frm.is_new()) {
 			frm.add_custom_button(
@@ -75,6 +88,51 @@ frappe.ui.form.on("Cannibalization Form", {
 				__("Create")
 			);
 		}
+	},
+	
+	before_workflow_action(frm) {
+		// Populate user fields BEFORE workflow action is applied
+		// Return a promise to ensure values are set before workflow proceeds
+		return new Promise((resolve) => {
+			const action = frm.selected_workflow_action;
+			
+			if (!action) {
+				resolve();
+				return;
+			}
+			
+			frappe.workflow.get_transitions(frm.doc).then((transitions) => {
+				const transition = transitions.find(t => t.action === action);
+				if (transition) {
+					const next_state = transition.next_state;
+					
+					frappe.db.get_value("User", frappe.session.user, "full_name").then(r => {
+						if (r && r.full_name) {
+							if (action === "Maintenance Approve" && next_state === "Maintenance Approved") {
+								if (!frm.doc.maintenance_dept_name) {
+									frm.set_value("maintenance_dept_name", r.full_name);
+									frm.set_value("maintenance_dept_date", frappe.datetime.get_today());
+								}
+							} else if (action === "Admin Approve" && next_state === "Admin Approved") {
+								if (!frm.doc.admin_dept_name) {
+									frm.set_value("admin_dept_name", r.full_name);
+									frm.set_value("admin_dept_date", frappe.datetime.get_today());
+								}
+							} else if (action === "GM Approve" && next_state === "GM Approved") {
+								if (!frm.doc.gm_name) {
+									frm.set_value("gm_name", r.full_name);
+									frm.set_value("gm_date", frappe.datetime.get_today());
+								}
+							}
+						}
+						// Wait a bit to ensure values are set before resolving
+						setTimeout(() => resolve(), 100);
+					}).catch(() => resolve());
+				} else {
+					resolve();
+				}
+			}).catch(() => resolve());
+		});
 	},
 	
 	make_maintenance_request: function(frm) {

@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-09 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "battery_position",
+  "battery_voltage",
+  "battery_amper",
+  "current_km_hour_reading",
+  "fitted_hr_reading",
+  "actual_coverage",
+  "standard_life_time",
+  "deviation",
+  "reason_for_less_consumption"
+ ],
+ "fields": [
+  {
+   "fieldname": "battery_position",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Battery Position",
+   "options": "Left\nRight"
+  },
+  {
+   "fieldname": "battery_voltage",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Battery Voltage"
+  },
+  {
+   "fieldname": "battery_amper",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Battery Amper"
+  },
+  {
+   "fieldname": "current_km_hour_reading",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Current Km/Hour Reading"
+  },
+  {
+   "fieldname": "fitted_hr_reading",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Fitted (Hr) Reading"
+  },
+  {
+   "fieldname": "actual_coverage",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Actual Coverage",
+   "read_only": 1
+  },
+  {
+   "fieldname": "standard_life_time",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Standard Life Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "deviation",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Deviation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reason_for_less_consumption",
+   "fieldtype": "Small Text",
+   "label": "Reason for Less Consumption"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-09 13:42:41.523945",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Battery Analysis Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "ASC",
+ "states": []
+}

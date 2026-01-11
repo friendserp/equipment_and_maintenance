@@ -9,13 +9,13 @@
   "date",
   "from",
   "to",
-  "type_of_equipment",
   "column_break_repf",
   "plate_no",
+  "type_of_equipment",
+  "project",
+  "driver_name",
   "klc_no",
   "engine_hour__km_reading",
-  "driver_name",
-  "project",
   "section_break_snti",
   "request_items",
   "section_break_tapv",
@@ -48,10 +48,11 @@
    "label": "To"
   },
   {
+   "fetch_from": "plate_no.equipment_sub_category",
    "fieldname": "type_of_equipment",
    "fieldtype": "Link",
    "label": "Type of Equipment",
-   "options": "Asset Category"
+   "options": "Asset Sub Category"
   },
   {
    "fieldname": "column_break_repf",
@@ -74,11 +75,14 @@
    "label": "Engine Hour / Km Reading"
   },
   {
+   "fetch_from": "plate_no.operators_name",
    "fieldname": "driver_name",
-   "fieldtype": "Data",
-   "label": "Driver Name"
+   "fieldtype": "Link",
+   "label": "Driver Name",
+   "options": "Employee"
   },
   {
+   "fetch_from": "plate_no.location",
    "fieldname": "project",
    "fieldtype": "Link",
    "label": "Project",
@@ -154,7 +158,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-05 11:41:20.815237",
+ "modified": "2026-01-10 21:27:24.129416",
  "modified_by": "Administrator",
  "module": "Maintenance and Admin",
  "name": "Maintenance Request",

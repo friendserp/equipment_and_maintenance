@@ -7,6 +7,65 @@ frappe.ui.form.on("Equipment Disposal Request", {
 		if (!frm.doc.date) {
 			frm.set_value("date", frappe.datetime.get_today());
 		}
+		
+		// Auto-set prepared_by if not set (on creation)
+		if (frm.is_new() && !frm.doc.prepared_by) {
+			frm.set_value("prepared_by", frappe.session.user);
+		}
+		
+		// Handle workflow state changes for auto-populating user fields
+		frm.trigger("handle_workflow_state");
+	},
+	
+	before_workflow_action(frm) {
+		// Populate user and date fields BEFORE workflow action is applied
+		// Return a promise to ensure values are set before workflow proceeds
+		return new Promise((resolve) => {
+			const action = frm.selected_workflow_action;
+			
+			if (!action) {
+				resolve();
+				return;
+			}
+			
+			frappe.workflow.get_transitions(frm.doc).then((transitions) => {
+				const transition = transitions.find(t => t.action === action);
+				if (transition) {
+					const next_state = transition.next_state;
+					const user = frappe.session.user;
+					const today = frappe.datetime.get_today();
+					
+					if (action === "Equipment Dept Approve" && next_state === "Equipment Dept Approved") {
+						if (!frm.doc.equip_dept_approved_by) {
+							frm.set_value("equip_dept_approved_by", user);
+							frm.set_value("equip_dept_date", today);
+						}
+					} else if (action === "DGM Approve" && next_state === "DGM Approved") {
+						if (!frm.doc.dgm_approved_by) {
+							frm.set_value("dgm_approved_by", user);
+							frm.set_value("dgm_date", today);
+						}
+					} else if (action === "Survey Committee Approve" && next_state === "Survey Committee Approved") {
+						if (!frm.doc.survey_committee_approved_by) {
+							frm.set_value("survey_committee_approved_by", user);
+							frm.set_value("survey_committee_date", today);
+						}
+					} else if (action === "General Manager Approve" && next_state === "General Manager Approved") {
+						if (!frm.doc.general_manager_approved_by) {
+							frm.set_value("general_manager_approved_by", user);
+						}
+						if (!frm.doc.approved_by) {
+							frm.set_value("approved_by", user);
+						}
+					}
+					
+					// Wait a bit to ensure values are set before resolving
+					setTimeout(() => resolve(), 100);
+				} else {
+					resolve();
+				}
+			}).catch(() => resolve());
+		});
 	},
 
 	plate_no(frm) {
@@ -158,59 +217,6 @@ frappe.ui.form.on("Equipment Disposal Request", {
 		}
 	},
 
-	// Make approval checkboxes mutually exclusive within each section
-	equip_dept_approved(frm) {
-		if (frm.doc.equip_dept_approved) {
-			frm.set_value("equip_dept_rejected", 0);
-			if (!frm.doc.equip_dept_date) {
-				frm.set_value("equip_dept_date", frappe.datetime.get_today());
-			}
-		}
-	},
-	equip_dept_rejected(frm) {
-		if (frm.doc.equip_dept_rejected) {
-			frm.set_value("equip_dept_approved", 0);
-			frm.set_value("equip_dept_date", "");
-		}
-	},
-	dgm_approved(frm) {
-		if (frm.doc.dgm_approved) {
-			frm.set_value("dgm_rejected", 0);
-			if (!frm.doc.dgm_date) {
-				frm.set_value("dgm_date", frappe.datetime.get_today());
-			}
-		}
-	},
-	dgm_rejected(frm) {
-		if (frm.doc.dgm_rejected) {
-			frm.set_value("dgm_approved", 0);
-			frm.set_value("dgm_date", "");
-		}
-	},
-	survey_committee_approved(frm) {
-		if (frm.doc.survey_committee_approved) {
-			frm.set_value("survey_committee_rejected", 0);
-			if (!frm.doc.survey_committee_date) {
-				frm.set_value("survey_committee_date", frappe.datetime.get_today());
-			}
-		}
-	},
-	survey_committee_rejected(frm) {
-		if (frm.doc.survey_committee_rejected) {
-			frm.set_value("survey_committee_approved", 0);
-			frm.set_value("survey_committee_date", "");
-		}
-	},
-	general_manager_approved(frm) {
-		if (frm.doc.general_manager_approved) {
-			frm.set_value("general_manager_rejected", 0);
-		}
-	},
-	general_manager_rejected(frm) {
-		if (frm.doc.general_manager_rejected) {
-			frm.set_value("general_manager_approved", 0);
-		}
-	}
 });
 
 function clearOtherReasons(frm, currentReason) {

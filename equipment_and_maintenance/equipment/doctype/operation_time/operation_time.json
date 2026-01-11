@@ -46,7 +46,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-05 00:00:00",
+ "modified": "2026-01-10 18:39:46.494461",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Operation Time",
@@ -58,4 +58,3 @@
  "sort_order": "DESC",
  "states": []
 }
-

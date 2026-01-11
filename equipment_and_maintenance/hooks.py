@@ -86,7 +86,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "equipment_and_maintenance.install.before_install"
-# after_install = "equipment_and_maintenance.install.after_install"
+after_install = "equipment_and_maintenance.install.create_workflows.create_workflows"
 
 # Uninstallation
 # ------------

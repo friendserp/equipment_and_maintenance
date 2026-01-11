@@ -1,0 +1,89 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-09 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "battery_make",
+  "serial_no",
+  "battery_position",
+  "battery_voltage",
+  "battery_amper",
+  "quantity",
+  "fitted_hr_reading",
+  "fitted_date",
+  "unit_price"
+ ],
+ "fields": [
+  {
+   "fieldname": "battery_make",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Battery Make"
+  },
+  {
+   "fieldname": "battery_position",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Battery Position",
+   "options": "Left\nRight"
+  },
+  {
+   "fieldname": "battery_voltage",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Battery Voltage"
+  },
+  {
+   "fieldname": "battery_amper",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Battery Amper"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Quantity"
+  },
+  {
+   "columns": 1,
+   "fieldname": "serial_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Serial No"
+  },
+  {
+   "fieldname": "fitted_hr_reading",
+   "fieldtype": "Float",
+   "label": "Fitted (Hr) Reading"
+  },
+  {
+   "fieldname": "fitted_date",
+   "fieldtype": "Date",
+   "label": "Fitted Date"
+  },
+  {
+   "fieldname": "unit_price",
+   "fieldtype": "Currency",
+   "label": "Unit Price"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-09 13:38:18.380624",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Battery Old Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "ASC",
+ "states": []
+}

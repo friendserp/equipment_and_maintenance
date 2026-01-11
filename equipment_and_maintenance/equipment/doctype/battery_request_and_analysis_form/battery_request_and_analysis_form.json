@@ -1,0 +1,253 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:KIG-BR-{YYYY}-{####}",
+ "creation": "2026-01-08 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "request_date",
+  "column_break_1",
+  "status",
+  "equipment_section",
+  "plate_no",
+  "equipment_type",
+  "make",
+  "model",
+  "serial_no",
+  "column_break_2",
+  "material_requisition_no",
+  "project",
+  "requested_tab",
+  "requested_items",
+  "old_tab",
+  "old_battery_items",
+  "analysis_tab",
+  "analysis_items",
+  "approval_section",
+  "prepared_by",
+  "prepared_by_signature",
+  "prepared_by_date",
+  "column_break_3",
+  "checked_by",
+  "checked_by_signature",
+  "checked_by_date",
+  "column_break_4",
+  "approved_by",
+  "approved_by_signature",
+  "approved_by_date",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "request_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Request Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nSubmitted\nApproved",
+   "read_only": 1
+  },
+  {
+   "fieldname": "equipment_section",
+   "fieldtype": "Section Break",
+   "label": "Equipment Information"
+  },
+  {
+   "fetch_from": "plate_no.equipment_category",
+   "fieldname": "equipment_type",
+   "fieldtype": "Link",
+   "label": "Equipment Type",
+   "options": "Asset Category"
+  },
+  {
+   "fetch_from": "plate_no.make",
+   "fieldname": "make",
+   "fieldtype": "Data",
+   "label": "Make"
+  },
+  {
+   "fetch_from": "plate_no.model",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
+  },
+  {
+   "fetch_from": "plate_no.serial_number",
+   "fieldname": "serial_no",
+   "fieldtype": "Data",
+   "label": "Serial No"
+  },
+  {
+   "fieldname": "plate_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Plate No",
+   "options": "Equipment Master",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "plate_no.location",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project (Location)",
+   "options": "Project"
+  },
+  {
+   "fieldname": "material_requisition_no",
+   "fieldtype": "Link",
+   "label": "Material Requisition No",
+   "options": "Material Request",
+   "reqd": 1
+  },
+  {
+   "fieldname": "requested_tab",
+   "fieldtype": "Tab Break",
+   "label": "Requested"
+  },
+  {
+   "fieldname": "requested_items",
+   "fieldtype": "Table",
+   "label": "Requested Items",
+   "options": "Battery Request Item"
+  },
+  {
+   "fieldname": "old_tab",
+   "fieldtype": "Tab Break",
+   "label": "Old"
+  },
+  {
+   "fieldname": "old_battery_items",
+   "fieldtype": "Table",
+   "label": "Old Battery Items",
+   "options": "Battery Old Item"
+  },
+  {
+   "fieldname": "analysis_tab",
+   "fieldtype": "Tab Break",
+   "label": "Analysis"
+  },
+  {
+   "fieldname": "analysis_items",
+   "fieldtype": "Table",
+   "label": "Analysis Items",
+   "options": "Battery Analysis Item"
+  },
+  {
+   "fieldname": "approval_section",
+   "fieldtype": "Section Break",
+   "label": "Approval"
+  },
+  {
+   "fieldname": "prepared_by",
+   "fieldtype": "Link",
+   "label": "Prepared by",
+   "options": "User"
+  },
+  {
+   "fieldname": "prepared_by_signature",
+   "fieldtype": "Signature",
+   "label": "Prepared by Signature"
+  },
+  {
+   "fieldname": "prepared_by_date",
+   "fieldtype": "Date",
+   "label": "Prepared by Date"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "checked_by",
+   "fieldtype": "Link",
+   "label": "Checked by",
+   "options": "User"
+  },
+  {
+   "fieldname": "checked_by_signature",
+   "fieldtype": "Signature",
+   "label": "Checked by Signature"
+  },
+  {
+   "fieldname": "checked_by_date",
+   "fieldtype": "Date",
+   "label": "Checked by Date"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved by",
+   "options": "User"
+  },
+  {
+   "fieldname": "approved_by_signature",
+   "fieldtype": "Signature",
+   "label": "Approved by Signature"
+  },
+  {
+   "fieldname": "approved_by_date",
+   "fieldtype": "Date",
+   "label": "Approved by Date"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Battery Request and Analysis Form",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-01-09 12:25:16.711315",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Battery Request and Analysis Form",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

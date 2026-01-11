@@ -1,0 +1,137 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-09 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "reference_no",
+  "item_no",
+  "tyre_brand",
+  "serial_no",
+  "tyre_position",
+  "tyre_size",
+  "tyre_type",
+  "quantity",
+  "fitted_km_reading",
+  "fitted_date",
+  "unit_price",
+  "issue_section",
+  "issue_project",
+  "issue_siv_no",
+  "issue_date",
+  "issue_by_operator"
+ ],
+ "fields": [
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "item_no",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Item No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tyre_brand",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tyre Brand"
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Serial No"
+  },
+  {
+   "fieldname": "tyre_position",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tyre Position",
+   "options": "Front Left\nFront Right\nRear Left\nRear Right\nSpare\nOther"
+  },
+  {
+   "fieldname": "tyre_size",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tyre Size"
+  },
+  {
+   "fieldname": "tyre_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tyre Type",
+   "options": "Radial\nBias\nTubeless\nTube Type"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "fitted_km_reading",
+   "fieldtype": "Float",
+   "label": "Fitted (Km) Reading"
+  },
+  {
+   "fieldname": "fitted_date",
+   "fieldtype": "Date",
+   "label": "Fitted Date"
+  },
+  {
+   "fieldname": "unit_price",
+   "fieldtype": "Currency",
+   "label": "Unit Price"
+  },
+  {
+   "fieldname": "issue_section",
+   "fieldtype": "Section Break",
+   "label": "Tyre Issue"
+  },
+  {
+   "fieldname": "issue_project",
+   "fieldtype": "Link",
+   "label": "Project (Location)",
+   "options": "Project"
+  },
+  {
+   "fieldname": "issue_siv_no",
+   "fieldtype": "Data",
+   "label": "SIV No"
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issued Date"
+  },
+  {
+   "fieldname": "issue_by_operator",
+   "fieldtype": "Data",
+   "label": "Issued by Operator/Driver Name"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-09 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Tyre Recording New Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "ASC",
+ "states": []
+}
+

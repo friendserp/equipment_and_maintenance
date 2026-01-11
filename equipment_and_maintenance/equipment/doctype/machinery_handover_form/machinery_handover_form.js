@@ -12,6 +12,73 @@ frappe.ui.form.on("Machinery Handover Form", {
 		if (!frm.doc.attachments || frm.doc.attachments.length === 0) {
 			populate_default_attachments(frm);
 		}
+	},
+	
+	refresh(frm) {
+		// Auto-set custodian_name if not set (on creation)
+		if (frm.is_new() && !frm.doc.custodian_name) {
+			frm.set_value("custodian_name", frappe.session.user);
+		}
+		
+		// Populate default body parts if empty
+		if (!frm.doc.body_parts || frm.doc.body_parts.length === 0) {
+			populate_default_body_parts(frm);
+		}
+		
+		// Populate default attachments if empty
+		if (!frm.doc.attachments || frm.doc.attachments.length === 0) {
+			populate_default_attachments(frm);
+		}
+	},
+	
+	before_workflow_action(frm) {
+		// Populate user fields BEFORE workflow action is applied
+		// Return a promise to ensure values are set before workflow proceeds
+		return new Promise((resolve) => {
+			const action = frm.selected_workflow_action;
+			
+			if (!action) {
+				resolve();
+				return;
+			}
+			
+			frappe.workflow.get_transitions(frm.doc).then((transitions) => {
+				const transition = transitions.find(t => t.action === action);
+				if (transition) {
+					const next_state = transition.next_state;
+					
+					if (action === "Receive" && next_state === "Received") {
+						if (!frm.doc.received_by) {
+							frappe.db.get_value("User", frappe.session.user, "full_name").then(r => {
+								if (r && r.full_name) {
+									frm.set_value("received_by", frappe.session.user);
+									frm.set_value("received_date", frappe.datetime.get_today());
+								}
+								setTimeout(() => resolve(), 100);
+							}).catch(() => resolve());
+						} else {
+							resolve();
+						}
+					} else if (action === "Hand Over" && next_state === "Handed Over") {
+						if (!frm.doc.handed_over_by) {
+							frappe.db.get_value("User", frappe.session.user, "full_name").then(r => {
+								if (r && r.full_name) {
+									frm.set_value("handed_over_by", frappe.session.user);
+									frm.set_value("handed_date", frappe.datetime.get_today());
+								}
+								setTimeout(() => resolve(), 100);
+							}).catch(() => resolve());
+						} else {
+							resolve();
+						}
+					} else {
+						resolve();
+					}
+				} else {
+					resolve();
+				}
+			}).catch(() => resolve());
+		});
 	}
 });
 

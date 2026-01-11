@@ -12,6 +12,41 @@ frappe.ui.form.on("Machinery Time Sheet Registration", {
 		calculate_total_working_hour(frm);
 	},
 	
+	before_workflow_action(frm) {
+		// Populate user fields BEFORE workflow action is applied
+		// Return a promise to ensure values are set before workflow proceeds
+		return new Promise((resolve) => {
+			const action = frm.selected_workflow_action;
+			
+			if (!action) {
+				resolve();
+				return;
+			}
+			
+			frappe.workflow.get_transitions(frm.doc).then((transitions) => {
+				const transition = transitions.find(t => t.action === action);
+				if (transition) {
+					const next_state = transition.next_state;
+					
+					if (action === "Check" && next_state === "Checked") {
+						if (!frm.doc.checked_by) {
+							frm.set_value("checked_by", frappe.session.user);
+						}
+					} else if (action === "Approve" && next_state === "Approved") {
+						if (!frm.doc.approved_by) {
+							frm.set_value("approved_by", frappe.session.user);
+						}
+					}
+					
+					// Wait a bit to ensure values are set before resolving
+					setTimeout(() => resolve(), 100);
+				} else {
+					resolve();
+				}
+			}).catch(() => resolve());
+		});
+	},
+	
 	onload(frm) {
 		// Recalculate on load to ensure values are correct
 		recalculate_all_hours(frm);

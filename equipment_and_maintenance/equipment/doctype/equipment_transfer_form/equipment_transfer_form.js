@@ -8,10 +8,6 @@ frappe.ui.form.on("Equipment Transfer Form", {
 			frm.set_value("transfer_ordered_by", frappe.session.user);
 		}
 		
-		// Format departure time if present
-		if (frm.doc.departure_time) {
-			format_time_field(frm, "departure_time");
-		}
 	},
 
 	equipment_plate_no(frm) {
@@ -30,9 +26,9 @@ frappe.ui.form.on("Equipment Transfer Form", {
 								}
 							);
 						}
-						// Auto-fill operator/driver name
+						// Auto-fill current operator
 						if (r.operators_name) {
-							frm.set_value("operator_driver_name", r.operators_name);
+							frm.set_value("current_operator", r.operators_name);
 						}
 						// Auto-fill from_project based on current location
 						if (r.location) {
@@ -44,85 +40,43 @@ frappe.ui.form.on("Equipment Transfer Form", {
 		} else {
 			// Clear fields if equipment is cleared
 			frm.set_value("equipment_type", "");
+			frm.set_value("current_operator", "");
 			frm.set_value("operator_driver_name", "");
+			frm.set_value("from_project", "");
 		}
 	},
 
-	departure_time(frm) {
-		format_time_field(frm, "departure_time");
+
+	
+	before_workflow_action(frm) {
+		// Populate user fields BEFORE workflow action is applied
+		// Return a promise to ensure values are set before workflow proceeds
+		return new Promise((resolve) => {
+			const action = frm.selected_workflow_action;
+			
+			if (!action) {
+				resolve();
+				return;
+			}
+			
+			frappe.workflow.get_transitions(frm.doc).then((transitions) => {
+				const transition = transitions.find(t => t.action === action);
+				if (transition) {
+					const next_state = transition.next_state;
+					
+					if (action === "Approve" && next_state === "Approved") {
+						if (!frm.doc.approved_by) {
+							frm.set_value("approved_by", frappe.session.user);
+						}
+					}
+					
+					// Wait a bit to ensure values are set before resolving
+					setTimeout(() => resolve(), 100);
+				} else {
+					resolve();
+				}
+			}).catch(() => resolve());
+		});
 	}
 });
-
-function format_time_field(frm, fieldname) {
-	if (frm.doc[fieldname]) {
-		let time_value = frm.doc[fieldname];
-		if (typeof time_value === 'string' && time_value.trim()) {
-			// Try to format to HH:mm AM/PM (always default to PM unless AM is specified)
-			let formatted = format_to_ampm(time_value);
-			if (formatted && formatted !== time_value.toUpperCase()) {
-				frm.set_value(fieldname, formatted);
-			}
-		}
-	}
-}
-
-function format_to_ampm(time_str) {
-	// Convert various time formats to HH:mm AM/PM
-	// Always default to PM unless AM is explicitly specified
-	time_str = time_str.trim().toUpperCase();
-	
-	// If AM is explicitly specified, use AM
-	if (time_str.includes('AM')) {
-		let match = time_str.match(/^([0]?[1-9]|1[0-2]):([0-5][0-9])\s*AM$/);
-		if (match) {
-			let hour = parseInt(match[1]);
-			let minute = parseInt(match[2]);
-			return String(hour).padStart(2, '0') + ':' + String(minute).padStart(2, '0') + ' AM';
-		}
-	}
-	
-	// If PM is explicitly specified, use PM
-	if (time_str.includes('PM')) {
-		let match = time_str.match(/^([0]?[1-9]|1[0-2]):([0-5][0-9])\s*PM$/);
-		if (match) {
-			let hour = parseInt(match[1]);
-			let minute = parseInt(match[2]);
-			return String(hour).padStart(2, '0') + ':' + String(minute).padStart(2, '0') + ' PM';
-		}
-	}
-	
-	// If in 24-hour format, convert to 12-hour
-	let match_24 = time_str.match(/^([0-1]?[0-9]|2[0-3]):([0-5][0-9])/);
-	if (match_24) {
-		let hour24 = parseInt(match_24[1]);
-		let minute = parseInt(match_24[2]);
-		let hour12, ampm;
-		
-		if (hour24 === 0) {
-			hour12 = 12;
-			ampm = 'AM';
-		} else if (hour24 === 12) {
-			hour12 = 12;
-			ampm = 'PM';
-		} else if (hour24 < 12) {
-			hour12 = hour24;
-			ampm = 'AM';
-		} else {
-			hour12 = hour24 - 12;
-			ampm = 'PM';
-		}
-		
-		return String(hour12).padStart(2, '0') + ':' + String(minute).padStart(2, '0') + ' ' + ampm;
-	}
-	
-	// If in HH:mm format without AM/PM, always default to PM
-	let match_12 = time_str.match(/^([0]?[1-9]|1[0-2]):([0-5][0-9])$/);
-	if (match_12) {
-		let hour = parseInt(match_12[1]);
-		let minute = parseInt(match_12[2]);
-		return String(hour).padStart(2, '0') + ':' + String(minute).padStart(2, '0') + ' PM';
-	}
-	
-	return null;
-}
 

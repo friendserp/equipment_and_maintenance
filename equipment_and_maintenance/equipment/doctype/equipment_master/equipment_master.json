@@ -150,6 +150,14 @@
  "index_web_pages_for_search": 1,
  "links": [
   {
+   "link_doctype": "Machinery Time Sheet Registration",
+   "link_fieldname": "plate_number"
+  },
+  {
+   "link_doctype": "Equipment Transfer Form",
+   "link_fieldname": "equipment_plate_no"
+  },
+  {
    "is_child_table": 1,
    "link_doctype": "Rental Agreement Items",
    "link_fieldname": "created_equipment_id",
@@ -167,9 +175,21 @@
   {
    "link_doctype": "Fuel Request",
    "link_fieldname": "plate_number"
+  },
+  {
+   "link_doctype": "Battery Request and Analysis Form",
+   "link_fieldname": "equipment_type"
+  },
+  {
+   "link_doctype": "Battery Issue and Return Report Form",
+   "link_fieldname": "equipment_type"
+  },
+  {
+   "link_doctype": "Battery Recording Database Form",
+   "link_fieldname": "equipment_type"
   }
  ],
- "modified": "2026-01-01 12:57:01.032375",
+ "modified": "2026-01-10 18:57:50.506313",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Equipment Master",
@@ -191,6 +211,7 @@
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
+ "show_title_field_in_link": 1,
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],

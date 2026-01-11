@@ -3,8 +3,8 @@
 
 frappe.ui.form.on("Fuel Request", {
 	refresh(frm) {
-		// Auto-set requested_by if not set
-		if (!frm.doc.requested_by) {
+		// Auto-set requested_by if not set (on creation)
+		if (frm.is_new() && !frm.doc.requested_by) {
 			frm.set_value("requested_by", frappe.session.user);
 		}
 		
@@ -75,6 +75,41 @@ frappe.ui.form.on("Fuel Request", {
 	
 	current_fuel_requested_liter(frm) {
 		calculate_current_fuel_cost(frm);
+	},
+	
+	before_workflow_action(frm) {
+		// Populate user fields BEFORE workflow action is applied
+		// Return a promise to ensure values are set before workflow proceeds
+		return new Promise((resolve) => {
+			const action = frm.selected_workflow_action;
+			
+			if (!action) {
+				resolve();
+				return;
+			}
+			
+			frappe.workflow.get_transitions(frm.doc).then((transitions) => {
+				const transition = transitions.find(t => t.action === action);
+				if (transition) {
+					const next_state = transition.next_state;
+					
+					if (action === "Check" && next_state === "Checked") {
+						if (!frm.doc.checked_by) {
+							frm.set_value("checked_by", frappe.session.user);
+						}
+					} else if (action === "Approve" && next_state === "Approved") {
+						if (!frm.doc.approved_by) {
+							frm.set_value("approved_by", frappe.session.user);
+						}
+					}
+					
+					// Wait a bit to ensure values are set before resolving
+					setTimeout(() => resolve(), 100);
+				} else {
+					resolve();
+				}
+			}).catch(() => resolve());
+		});
 	}
 });
 

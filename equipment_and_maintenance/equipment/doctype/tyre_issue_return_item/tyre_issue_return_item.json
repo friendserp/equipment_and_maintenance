@@ -1,0 +1,220 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-08 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_no",
+  "old_tyre_section",
+  "old_tyre_brand",
+  "old_tyre_position",
+  "old_serial_no",
+  "old_tyre_size",
+  "old_tyre_type",
+  "old_fitted_km_reading",
+  "old_fitted_date",
+  "old_unit_price",
+  "new_tyre_section",
+  "new_tyre_brand",
+  "new_tyre_position",
+  "new_serial_no",
+  "new_tyre_size",
+  "new_tyre_type",
+  "new_fitted_km_reading",
+  "new_fitted_date",
+  "new_unit_price",
+  "analysis_section",
+  "actual_coverage",
+  "standard_life_time",
+  "deviation",
+  "reason_for_less_consumption",
+  "operator_driver_name",
+  "operator_driver_signature",
+  "remark"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_no",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Item No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "old_tyre_section",
+   "fieldtype": "Section Break",
+   "label": "Old Tyre Status"
+  },
+  {
+   "fieldname": "old_tyre_brand",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tyre Brand"
+  },
+  {
+   "fieldname": "old_tyre_position",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tyre Position",
+   "options": "Front Left\nFront Right\nRear Left\nRear Right\nSpare\nOther"
+  },
+  {
+   "fieldname": "old_serial_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Serial No"
+  },
+  {
+   "fieldname": "old_tyre_size",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tyre Size"
+  },
+  {
+   "fieldname": "old_tyre_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tyre Type",
+   "options": "Radial\nBias\nTubeless\nTube Type"
+  },
+  {
+   "fieldname": "old_fitted_km_reading",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Fitted (Km) Reading"
+  },
+  {
+   "fieldname": "old_fitted_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fitted Date"
+  },
+  {
+   "fieldname": "old_unit_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Unit Price"
+  },
+  {
+   "fieldname": "new_tyre_section",
+   "fieldtype": "Section Break",
+   "label": "New Tyre Status"
+  },
+  {
+   "fieldname": "new_tyre_brand",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tyre Brand"
+  },
+  {
+   "fieldname": "new_tyre_position",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tyre Position",
+   "options": "Front Left\nFront Right\nRear Left\nRear Right\nSpare\nOther"
+  },
+  {
+   "fieldname": "new_serial_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Serial No"
+  },
+  {
+   "fieldname": "new_tyre_size",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tyre Size"
+  },
+  {
+   "fieldname": "new_tyre_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tyre Type",
+   "options": "Radial\nBias\nTubeless\nTube Type"
+  },
+  {
+   "fieldname": "new_fitted_km_reading",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Fitted (Km) Reading"
+  },
+  {
+   "fieldname": "new_fitted_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fitted Date"
+  },
+  {
+   "fieldname": "new_unit_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Unit Price"
+  },
+  {
+   "fieldname": "analysis_section",
+   "fieldtype": "Section Break",
+   "label": "Analysis"
+  },
+  {
+   "fieldname": "actual_coverage",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Actual Coverage (b)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "standard_life_time",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Standard Life Time (a)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "deviation",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Deviation (c=b-a)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reason_for_less_consumption",
+   "fieldtype": "Small Text",
+   "label": "Reason for Less Consumption"
+  },
+  {
+   "fieldname": "operator_driver_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Operator/Driver Name"
+  },
+  {
+   "fieldname": "operator_driver_signature",
+   "fieldtype": "Signature",
+   "label": "Operator/Driver Signature"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Remark"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-08 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Tyre Issue Return Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "ASC",
+ "states": []
+}
+
