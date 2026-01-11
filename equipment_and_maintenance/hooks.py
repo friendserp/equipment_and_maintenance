@@ -245,6 +245,12 @@ scheduler_events = {
 fixtures = [
 	{
 		"dt": "Custom Field",
+		"filters": {
+			"dt": ["in", [
+				"Asset Category",
+				"Material Request Item",
+			]]
+		}
 	},
 	{
 		"dt": "Property Setter",
