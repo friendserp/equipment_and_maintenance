@@ -1,0 +1,173 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "question-sign",
+  "modified": "2025-12-26 01:04:49.268984",
+  "name": "Pending",
+  "style": "",
+  "workflow_state_name": "Pending"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "remove",
+  "modified": "2025-12-26 01:04:49.273271",
+  "name": "Rejected",
+  "style": "Danger",
+  "workflow_state_name": "Rejected"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "question-sign",
+  "modified": "2026-01-09 14:39:20.412588",
+  "name": "Draft",
+  "style": "Inverse",
+  "workflow_state_name": "Draft"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2026-01-09 14:39:20.644819",
+  "name": "Checked",
+  "style": "Info",
+  "workflow_state_name": "Checked"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "search",
+  "modified": "2026-01-09 14:39:20.646994",
+  "name": "Under Review",
+  "style": "Warning",
+  "workflow_state_name": "Under Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-circle",
+  "modified": "2026-01-09 14:39:20.648846",
+  "name": "Received",
+  "style": "Success",
+  "workflow_state_name": "Received"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2026-01-09 14:39:20.650576",
+  "name": "Maintenance Approved",
+  "style": "Info",
+  "workflow_state_name": "Maintenance Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "search",
+  "modified": "2026-01-09 14:39:20.652300",
+  "name": "Under Maintenance Review",
+  "style": "Warning",
+  "workflow_state_name": "Under Maintenance Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2026-01-09 14:39:20.653955",
+  "name": "Admin Approved",
+  "style": "Info",
+  "workflow_state_name": "Admin Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "search",
+  "modified": "2026-01-09 14:39:20.655606",
+  "name": "Under Admin Review",
+  "style": "Warning",
+  "workflow_state_name": "Under Admin Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok",
+  "modified": "2026-01-09 14:39:20.657292",
+  "name": "GM Approved",
+  "style": "Success",
+  "workflow_state_name": "GM Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-circle",
+  "modified": "2026-01-09 15:13:19.667512",
+  "name": "Collected",
+  "style": "Success",
+  "workflow_state_name": "Collected"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-circle",
+  "modified": "2026-01-10 18:25:14.269158",
+  "name": "Handed Over",
+  "style": "Success",
+  "workflow_state_name": "Handed Over"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-01-10 19:13:13.178378",
+  "name": "Cancelled",
+  "style": "",
+  "workflow_state_name": "Cancelled"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2026-01-10 21:05:13.040957",
+  "name": "Equipment Dept Approved",
+  "style": "Info",
+  "workflow_state_name": "Equipment Dept Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2026-01-10 21:05:13.330552",
+  "name": "Survey Committee Approved",
+  "style": "Info",
+  "workflow_state_name": "Survey Committee Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok",
+  "modified": "2026-01-10 21:05:13.333754",
+  "name": "General Manager Approved",
+  "style": "Success",
+  "workflow_state_name": "General Manager Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2026-01-10 21:05:13.328502",
+  "name": "DGM Approved",
+  "style": "Info",
+  "workflow_state_name": "DGM Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2025-12-26 01:04:49.271884",
+  "name": "Approved",
+  "style": "Success",
+  "workflow_state_name": "Approved"
+ }
+]

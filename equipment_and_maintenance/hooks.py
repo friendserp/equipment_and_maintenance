@@ -250,6 +250,12 @@ fixtures = [
 		"dt": "Property Setter",
 	},
 	{
+		"dt": "Workflow",
+	},
+	{
+		"dt": "Workflow State",
+	},
+	{
 		"dt": "DocType Link",
 		"filters": {
 			"link_doctype": ["in", [
