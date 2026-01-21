@@ -7,96 +7,85 @@
  "engine": "InnoDB",
  "field_order": [
   "battery_recording_database",
+  "item_code",
+  "item_name",
   "battery_make",
   "serial_no",
   "battery_position",
   "battery_voltage",
   "battery_amper",
-  "quantity",
-  "fitted_hr_reading",
   "fitted_date",
-  "unit_price"
+  "fitted_hr_reading"
  ],
  "fields": [
   {
    "fieldname": "battery_recording_database",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Battery Recording Database",
    "options": "Battery Recording Database",
    "read_only": 1
   },
   {
-   "columns": 1,
-   "fetch_from": "battery_recording_database.battery_make",
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
    "fieldname": "battery_make",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Make",
+   "label": "Battery Make",
    "read_only": 1
   },
   {
-   "columns": 1,
-   "fetch_from": "battery_recording_database.battery_position",
-   "fieldname": "battery_position",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Position",
-   "options": "Left\nRight",
-   "read_only": 1
-  },
-  {
-   "columns": 1,
-   "fetch_from": "battery_recording_database.battery_voltage",
-   "fieldname": "battery_voltage",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Voltage",
-   "read_only": 1
-  },
-  {
-   "columns": 1,
-   "fetch_from": "battery_recording_database.battery_amper",
-   "fieldname": "battery_amper",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Amper",
-   "read_only": 1
-  },
-  {
-   "columns": 1,
-   "fieldname": "quantity",
-   "fieldtype": "Int",
-   "in_list_view": 1,
-   "label": "Quantity",
-   "read_only": 1
-  },
-  {
-   "columns": 1,
-   "fetch_from": "battery_recording_database.battery_serial_no",
    "fieldname": "serial_no",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Serial No",
    "read_only": 1
   },
   {
-   "fieldname": "fitted_hr_reading",
+   "fieldname": "battery_position",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Battery Position",
+   "options": "Left\nRight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "battery_voltage",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Fitted (Hr) Reading",
+   "label": "Battery Voltage",
+   "read_only": 1
+  },
+  {
+   "fieldname": "battery_amper",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Battery Amper",
    "read_only": 1
   },
   {
    "fieldname": "fitted_date",
    "fieldtype": "Date",
-   "in_list_view": 1,
    "label": "Fitted Date",
    "read_only": 1
   },
   {
-   "fieldname": "unit_price",
-   "fieldtype": "Currency",
-   "label": "Unit Price",
+   "fieldname": "fitted_hr_reading",
+   "fieldtype": "Float",
+   "label": "Fitted (Hr) Reading",
    "read_only": 1
   }
  ],
@@ -104,10 +93,10 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-21 15:56:45.511773",
+ "modified": "2026-01-09 00:00:00",
  "modified_by": "Administrator",
  "module": "Equipment",
- "name": "Battery Old Item",
+ "name": "Battery Existing Item",
  "owner": "Administrator",
  "permissions": [],
  "row_format": "Dynamic",

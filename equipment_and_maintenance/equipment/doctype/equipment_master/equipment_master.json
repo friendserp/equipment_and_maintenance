@@ -6,8 +6,8 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "equipment_code",
   "make",
+  "equipment_code",
   "model",
   "equipment_category",
   "equipment_sub_category",
@@ -191,9 +191,21 @@
   {
    "link_doctype": "Battery Recording Database Form",
    "link_fieldname": "equipment_type"
+  },
+  {
+   "link_doctype": "Preventive Maintenance Plan",
+   "link_fieldname": "equipment"
+  },
+  {
+   "link_doctype": "Preventive Maintenance Done",
+   "link_fieldname": "equipment"
+  },
+  {
+   "link_doctype": "Preventive Maintenance History",
+   "link_fieldname": "equipment"
   }
  ],
- "modified": "2026-01-11 23:58:40.413572",
+ "modified": "2026-01-12 01:54:56.500442",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Equipment Master",

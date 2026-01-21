@@ -132,13 +132,16 @@ after_install = "equipment_and_maintenance.install.create_workflows.create_workf
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Material Request": {
+		"on_submit": "equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_request_on_mr_submit",
+		"on_cancel": "equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_request_on_mr_cancel",
+		"on_update_after_submit": "equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_recording_on_mr_issue"
+	},
+	"Stock Entry": {
+		"on_submit": "equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_recording_on_stock_entry"
+	}
+}
 
 # Scheduled Tasks
 # ---------------

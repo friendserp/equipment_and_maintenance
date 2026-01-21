@@ -12,9 +12,31 @@ frappe.ui.form.on("Battery Request and Analysis Form", {
 		// Handle workflow state changes for auto-populating user fields
 		frm.trigger("handle_workflow_state");
 		
-		// Remove Material Request button - flow changed, MR is now selected first
-		// Keep only Battery Issue and Return Report button
-		if (!frm.is_new() && frm.doc.requested_items && frm.doc.requested_items.length > 0) {
+		// Add Material Request button for submitted requests
+		if (frm.doc.docstatus === 1) {
+			if (frm.doc.material_requisition_no) {
+				// Show link to existing Material Request
+				frm.add_custom_button(
+					__("Material Request"),
+					function() {
+						frappe.set_route("Form", "Material Request", frm.doc.material_requisition_no);
+					},
+					__("View")
+				);
+			} else {
+				// Open new Material Request with pre-filled data
+				frm.add_custom_button(
+					__("Material Request"),
+					function() {
+						frm.trigger("open_material_request");
+					},
+					__("Create")
+				);
+			}
+		}
+		
+		// Add Battery Issue and Return Report button only if Material Request is created
+		if (frm.doc.docstatus === 1 && frm.doc.material_requisition_no && !frm.is_new()) {
 			frm.add_custom_button(
 				__("Battery Issue and Return Report"),
 				function() {
@@ -24,10 +46,53 @@ frappe.ui.form.on("Battery Request and Analysis Form", {
 			);
 		}
 		
-		// Add dashboard link to Battery Recording Database Form
-		if (!frm.is_new()) {
-			frm.trigger("add_battery_database_link");
+	},
+	
+	open_material_request(frm) {
+		if (frm.doc.docstatus !== 1) {
+			frappe.msgprint(__("Battery Request must be submitted before creating Material Request."));
+			return;
 		}
+		
+		if (!frm.doc.requested_items || frm.doc.requested_items.length === 0) {
+			frappe.msgprint(__("No requested items found."));
+			return;
+		}
+		
+		// Store Battery Request name in sessionStorage for linking
+		sessionStorage.setItem('battery_request_for_mr', frm.doc.name);
+		
+		// Load both Material Request and Material Request Item doctypes
+		frappe.model.with_doctype("Material Request", function() {
+			frappe.model.with_doctype("Material Request Item", function() {
+				let new_mr = frappe.model.get_new_doc("Material Request");
+				
+				// Set header fields
+				new_mr.material_request_type = "Material Issue";
+				new_mr.transaction_date = frappe.datetime.get_today();
+				new_mr.schedule_date = frappe.datetime.add_days(frappe.datetime.get_today(), 7);
+				if (frm.doc.project) {
+					new_mr.custom_project = frm.doc.project;
+				}
+				
+				// Clear default items
+				new_mr.items = [];
+				
+				// Add battery items
+				frm.doc.requested_items.forEach(function(req_item) {
+					let mr_item = frappe.model.add_child(new_mr, "Material Request Item", "items");
+					mr_item.item_code = req_item.requested_item_no;
+					mr_item.qty = req_item.quantity || 1;
+					mr_item.project = frm.doc.project;
+					mr_item.uom = "pcs";
+					mr_item.conversion_factor = 1;
+					mr_item.description = `Battery - Voltage: ${req_item.requested_battery_voltage || ''}, Amper: ${req_item.requested_battery_amper || ''}, Position: ${req_item.requested_battery_position || ''}`;
+				});
+				
+				// Open the form
+				frappe.set_route("Form", "Material Request", new_mr.name);
+			});
+		});
 	},
 	
 	before_workflow_action(frm) {
@@ -65,54 +130,6 @@ frappe.ui.form.on("Battery Request and Analysis Form", {
 					resolve();
 				}
 			}).catch(() => resolve());
-		});
-	},
-	
-	add_battery_database_link(frm) {
-		// Fetch Battery Recording Database Form linked to this request
-		frappe.db.get_value("Battery Recording Database Form", {
-			"battery_request_form": frm.doc.name
-		}, "name").then(r => {
-			if (r && r.name) {
-				// Add link to dashboard
-				if (frm.dashboard && frm.dashboard.data) {
-					// Ensure transactions array exists
-					if (!frm.dashboard.data.transactions) {
-						frm.dashboard.data.transactions = [];
-					}
-					
-					// Check if Battery Management group exists
-					let battery_group = frm.dashboard.data.transactions.find(t => t.label === __("Battery Management"));
-					if (!battery_group) {
-						battery_group = {
-							"label": __("Battery Management"),
-							"items": []
-						};
-						frm.dashboard.data.transactions.push(battery_group);
-					}
-					
-					// Add Battery Recording Database Form if not already present
-					if (!battery_group.items.includes("Battery Recording Database Form")) {
-						battery_group.items.push("Battery Recording Database Form");
-					}
-					
-					// Refresh dashboard
-					if (frm.dashboard.render_links) {
-						frm.dashboard.render_links();
-					}
-				} else {
-					// If dashboard is not initialized, add a custom button as fallback
-					frm.add_custom_button(
-						__("Battery Recording Database"),
-						function() {
-							frappe.set_route("Form", "Battery Recording Database Form", r.name);
-						},
-						__("View")
-					);
-				}
-			}
-		}).catch(err => {
-			console.log("Error fetching Battery Recording Database Form:", err);
 		});
 	},
 	
@@ -188,13 +205,6 @@ frappe.ui.form.on("Battery Request and Analysis Form", {
 				console.log("Plate No:", frm.doc.plate_no);
 				console.log("Requested Items Count:", frm.doc.requested_items ? frm.doc.requested_items.length : 0);
 				
-				// Fetch old battery data if BOTH Material Request AND Plate No are selected
-				if (frm.doc.material_requisition_no && frm.doc.plate_no && frm.doc.requested_items && frm.doc.requested_items.length > 0) {
-					console.log("Both MR and Plate No are selected, fetching old battery data...");
-					fetch_and_populate_old_battery_data(frm);
-				} else {
-					console.log("Waiting for Plate No to be selected...");
-				}
 			})
 			.catch(err => {
 				frappe.msgprint(__("Error fetching Material Request: " + err.message));
@@ -230,353 +240,186 @@ frappe.ui.form.on("Battery Request and Analysis Form", {
 					}
 				}
 				
-				console.log("=== PLATE NO CHANGED ===");
-				console.log("Plate No:", frm.doc.plate_no);
-				console.log("Material Request:", frm.doc.material_requisition_no);
-				console.log("Requested Items Count:", frm.doc.requested_items ? frm.doc.requested_items.length : 0);
-				
-				// After equipment is set, fetch old battery data if BOTH Material Request AND requested items exist
-				if (frm.doc.material_requisition_no && frm.doc.requested_items && frm.doc.requested_items.length > 0) {
-					console.log("Both MR and Plate No are selected, fetching old battery data...");
-					// Fetch Battery Recording Database Form once and populate all items
-					fetch_and_populate_old_battery_data(frm);
+				// Load existing batteries from Battery Recording Database into old_battery_items
+				frm.trigger("load_existing_batteries");
+			});
 				} else {
-					if (!frm.doc.material_requisition_no) {
-						console.log("Material Request not selected yet");
-					}
-					if (!frm.doc.requested_items || frm.doc.requested_items.length === 0) {
-						console.log("No requested items found");
-					}
-				}
+			// Clear old batteries and analysis if equipment is cleared
+			frm.clear_table("old_battery_items");
+			frm.clear_table("analysis_items");
+			frm.refresh_field("old_battery_items");
+			frm.refresh_field("analysis_items");
+		}
+	},
+	
+	current_km_hr(frm) {
+		// Recalculate analysis when current_km_hr changes
+		if (frm.doc.current_km_hr && frm.doc.old_battery_items && frm.doc.old_battery_items.length > 0) {
+			frm.save().then(() => {
+				frm.reload_doc();
 			});
 		}
 	},
 	
-	make_issue_return_report(frm) {
-		if (!frm.doc.requested_items || frm.doc.requested_items.length === 0) {
-			frappe.msgprint(__("No requested items found. Please add requested items first."));
-			return;
-		}
+	load_existing_batteries(frm) {
+		if (!frm.doc.plate_no) return;
 		
-		if (!frm.doc.old_battery_items || frm.doc.old_battery_items.length === 0) {
-			frappe.msgprint(__("No old battery items found. Please ensure plate number is selected and old battery data is loaded."));
-			return;
-		}
-		
-		let bir_doc = frappe.model.get_new_doc("Battery Issue and Return Report Form");
-		bir_doc.effective_date = frappe.datetime.get_today();
-		bir_doc.issue_no = 1; // Default issue number
-		
-		// Copy equipment information
-		bir_doc.equipment_type = frm.doc.equipment_type;
-		bir_doc.make = frm.doc.make;
-		bir_doc.model = frm.doc.model;
-		bir_doc.serial_no = frm.doc.serial_no;
-		bir_doc.plate_no = frm.doc.plate_no;
-		bir_doc.project = frm.doc.project;
-		
-		// Copy old battery details and analysis data
-		// Match requested items with old battery items by position
-		frm.doc.requested_items.forEach(function(requested_item) {
-			let bir_item = frappe.model.add_child(bir_doc, "Battery Issue Return Item", "battery_items");
-			
-			// Find matching old battery item by position
-			let matching_old_item = null;
-			if (requested_item.requested_battery_position && frm.doc.old_battery_items) {
-				matching_old_item = frm.doc.old_battery_items.find(old_item => 
-					old_item.battery_position === requested_item.requested_battery_position
-				);
-			}
-			
-			// If no match, use first old battery item
-			if (!matching_old_item && frm.doc.old_battery_items && frm.doc.old_battery_items.length > 0) {
-				matching_old_item = frm.doc.old_battery_items[0];
-			}
-			
-			if (matching_old_item) {
-				// Old battery details
-				bir_item.old_battery_make = matching_old_item.battery_make;
-				bir_item.old_battery_position = matching_old_item.battery_position;
-				bir_item.old_serial_no = matching_old_item.serial_no;
-				bir_item.old_battery_voltage = matching_old_item.battery_voltage;
-				bir_item.old_battery_amper = matching_old_item.battery_amper;
-				bir_item.old_fitted_hr_reading = matching_old_item.fitted_hr_reading;
-				bir_item.old_fitted_date = matching_old_item.fitted_date;
-				bir_item.old_unit_price = matching_old_item.unit_price;
-			}
-			
-			// Find matching analysis item
-			let matching_analysis_item = null;
-			if (requested_item.requested_battery_position && frm.doc.analysis_items) {
-				matching_analysis_item = frm.doc.analysis_items.find(analysis_item => 
-					analysis_item.battery_position === requested_item.requested_battery_position
-				);
-			}
-			
-			if (matching_analysis_item) {
-				// Analysis data
-				bir_item.actual_coverage = matching_analysis_item.actual_coverage;
-				bir_item.standard_life_time = matching_analysis_item.standard_life_time;
-				bir_item.deviation = matching_analysis_item.deviation;
-				bir_item.reason_for_less_consumption = matching_analysis_item.reason_for_less_consumption;
+		// Fetch the last Issue document for this equipment
+		frappe.call({
+			method: "frappe.client.get_list",
+			args: {
+				doctype: "Battery Issue and Return Report Form",
+				filters: {
+					"plate_no": frm.doc.plate_no,
+					"type": "Issue",
+					"docstatus": 1
+				},
+				fields: ["name", "effective_date"],
+				order_by: "effective_date DESC, creation DESC",
+				limit: 1
+			},
+			callback: function(issue_res) {
+				if (issue_res.message && issue_res.message.length > 0) {
+					const last_issue_name = issue_res.message[0].name;
+					
+					// Fetch the full Issue document to get battery items
+					frappe.call({
+						method: "frappe.client.get",
+						args: {
+							doctype: "Battery Issue and Return Report Form",
+							name: last_issue_name
+						},
+						callback: function(issue_doc_res) {
+							if (issue_doc_res.message && issue_doc_res.message.battery_items) {
+								const battery_items = issue_doc_res.message.battery_items;
+								
+								// Clear old battery items table
+								frm.clear_table("old_battery_items");
+								
+								if (battery_items && battery_items.length > 0) {
+									// Track added battery_recording_database to avoid duplicates
+									let added_batteries = new Set();
+									
+									// Populate old_battery_items table with batteries from last Issue
+									// serial_no in Battery Issue Return Item is a Link to Battery Recording Database
+									battery_items.forEach(function(battery_item) {
+										if (battery_item.serial_no && !added_batteries.has(battery_item.serial_no)) {
+											added_batteries.add(battery_item.serial_no);
+											
+											let old_item = frm.add_child("old_battery_items");
+											// serial_no is the Battery Recording Database name
+											old_item.battery_recording_database = battery_item.serial_no;
+											// Other fields will be fetched via fetch_from in Battery Old Item
+											old_item.battery_position = battery_item.battery_position || '';
+											old_item.battery_voltage = battery_item.battery_voltage || '';
+											old_item.battery_amper = battery_item.battery_amper || '';
+											old_item.fitted_date = battery_item.fitted_date || '';
+											old_item.fitted_hr_reading = battery_item.fitted_hr_reading || '';
+											old_item.quantity = 1;
+										}
+									});
+									
+									frm.refresh_field("old_battery_items");
+									
+									// Trigger analysis calculation after loading old batteries
+									if (frm.doc.old_battery_items && frm.doc.old_battery_items.length > 0) {
+										// Save and reload to trigger Python calculation
+										frm.save().then(function() {
+											frm.reload_doc();
+										});
+									}
+								} else {
+									frm.refresh_field("old_battery_items");
+								}
+							} else {
+								frm.clear_table("old_battery_items");
+								frm.refresh_field("old_battery_items");
+							}
+						}
+					});
+				} else {
+					// No previous Issue found, clear old batteries
+					frm.clear_table("old_battery_items");
+					frm.refresh_field("old_battery_items");
+				}
 			}
 		});
+	},
+	
+	old_battery_items(frm) {
+		// When old batteries are selected, calculate analysis
+		if (frm.doc.old_battery_items && frm.doc.old_battery_items.length > 0) {
+			// Trigger save to recalculate analysis items in Python
+			frm.save().then(() => {
+				frm.reload_doc();
+			});
+		} else {
+			// Clear analysis if old batteries are cleared
+			frm.clear_table("analysis_items");
+			frm.refresh_field("analysis_items");
+		}
+	},
+	
+	calculate_analysis_from_database_batteries(frm) {
+		// Trigger validation to recalculate analysis items
+		frm.save().then(() => {
+			frm.reload_doc();
+		});
+	},
+	
+	make_issue_return_report(frm) {
+		if (!frm.doc.material_requisition_no) {
+			frappe.msgprint(__("Please create Material Request first before creating Issue and Return document."));
+			return;
+		}
 		
-		// Link back to Battery Request Form
-		bir_doc.battery_request_form = frm.doc.name;
-		
-		frappe.set_route("Form", "Battery Issue and Return Report Form", bir_doc.name);
+		// Load both parent and child doctypes before creating
+		frappe.model.with_doctype("Battery Issue and Return Report Form", function() {
+			frappe.model.with_doctype("Battery Issue Return Item", function() {
+				let bir_doc = frappe.model.get_new_doc("Battery Issue and Return Report Form");
+				bir_doc.type = "Issue";
+				bir_doc.effective_date = frappe.datetime.get_today();
+				bir_doc.battery_request_form = frm.doc.name;
+				bir_doc.material_request = frm.doc.material_requisition_no;
+				
+				// Copy equipment information
+				bir_doc.equipment_type = frm.doc.equipment_type;
+				bir_doc.make = frm.doc.make;
+				bir_doc.model = frm.doc.model;
+				bir_doc.serial_no = frm.doc.serial_no;
+				bir_doc.plate_no = frm.doc.plate_no;
+				bir_doc.project = frm.doc.project;
+				
+				// Open the form - user will use "Get Items From" button to populate items
+				frappe.set_route("Form", "Battery Issue and Return Report Form", bir_doc.name);
+			});
+		});
 	}
 });
 
-// Function to fetch old battery data from Battery Recording Database Form for all items
-function fetch_and_populate_old_battery_data(frm) {
-	console.log("=== fetch_and_populate_old_battery_data START ===");
-	console.log("Plate No:", frm.doc.plate_no);
-	console.log("Material Request:", frm.doc.material_requisition_no);
-	console.log("Requested Items Count:", frm.doc.requested_items ? frm.doc.requested_items.length : 0);
-	
-	// Fetch existing battery data from Battery Recording Database Form
-	if (!frm.doc.plate_no) {
-		console.log("ERROR: No plate_no found");
-		return;
-	}
-	
-	if (!frm.doc.requested_items || frm.doc.requested_items.length === 0) {
-		console.log("ERROR: No requested_items found");
-		return;
-	}
-	
-	console.log("Searching for Battery Recording Database Form with plate_no:", frm.doc.plate_no);
-	
-	// Use frappe.db.get_list (client-side API) to fetch the latest Battery Recording Database Form
-	// Fetch regardless of submission status (both draft and submitted)
-	frappe.db.get_list("Battery Recording Database Form", {
-		filters: {
-			"plate_no": frm.doc.plate_no
-		},
-		fields: ["name", "docstatus"],
-		order_by: "creation desc",
-		limit: 1
-	}).then(records => {
-		console.log("Found Battery Recording Database Forms:", records);
-		if (records && records.length > 0) {
-			console.log("Fetching Battery Recording Database Form:", records[0].name, "Status:", records[0].docstatus);
-			// Fetch the latest Battery Recording Database Form
-			return frappe.db.get_doc("Battery Recording Database Form", records[0].name);
-		}
-		console.log("No Battery Recording Database Form found for plate_no:", frm.doc.plate_no);
-		return null;
-	}).then(brd_doc => {
-		if (brd_doc) {
-			console.log("Battery Recording Database Form loaded:", brd_doc.name);
-			console.log("New battery items in database:", brd_doc.new_battery_items ? brd_doc.new_battery_items.length : 0);
-			console.log("Analysis items in database:", brd_doc.analysis_items ? brd_doc.analysis_items.length : 0);
-			
-			// Fetch NEW batteries from database (they become OLD for the next request)
-			if (brd_doc.new_battery_items && brd_doc.new_battery_items.length > 0) {
-				console.log("Consolidating and populating old battery data from NEW batteries in database...");
-				// Consolidate new batteries by (Voltage, Amper, Position) and populate old_battery_items
-				consolidate_and_populate_old_batteries(frm, brd_doc);
-			} else {
-				console.log("No new battery items found in database");
-			}
-			
-			// Populate analysis items from database
-			if (brd_doc.analysis_items && brd_doc.analysis_items.length > 0) {
-				console.log("Populating analysis items from database...");
-				populate_analysis_items(frm, brd_doc);
-			} else {
-				console.log("No analysis items found in database");
-			}
-			
-			frm.refresh_field("old_battery_items");
-			frm.refresh_field("analysis_items");
-			console.log("=== fetch_and_populate_old_battery_data END (SUCCESS) ===");
-		} else {
-			console.log("ERROR: Battery Recording Database Form document is null");
-		}
-	}).catch(err => {
-		console.error("ERROR in fetch_and_populate_old_battery_data:", err);
-		console.log("=== fetch_and_populate_old_battery_data END (ERROR) ===");
-	});
-}
 
-// Function to consolidate old batteries by (Voltage, Amper, Position) and populate old_battery_items
-// Fetches NEW batteries from database (they become OLD for the next request)
-function consolidate_and_populate_old_batteries(frm, brd_doc) {
-	// Clear existing old battery items
-	frm.clear_table("old_battery_items");
-	
-	// Group batteries by (voltage, amper, position)
-	let battery_groups = {};
-	
-	// Use new_battery_items from database (these are the current batteries that become old)
-	if (!brd_doc.new_battery_items || brd_doc.new_battery_items.length === 0) {
-		console.log("No new_battery_items found in database");
-		return;
-	}
-	
-	brd_doc.new_battery_items.forEach(function(db_item) {
-		let voltage = db_item.battery_voltage || 0;
-		let amper = db_item.battery_amper || 0;
-		let position = db_item.battery_position || "";
+// Handle Battery Recording Database filter in Battery Request Item
+frappe.ui.form.on("Battery Request Item", {
+	battery_recording_database(frm, cdt, cdn) {
+		let row = locals[cdt][cdn];
+		if (!row.battery_recording_database) return;
 		
-		// Create a unique key for grouping
-		let group_key = `${voltage}_${amper}_${position}`;
-		
-		if (!battery_groups[group_key]) {
-			battery_groups[group_key] = {
-				battery_make: db_item.battery_make,
-				battery_position: position,
-				battery_voltage: voltage,
-				battery_amper: amper,
-				quantity: 0,
-				serial_no: db_item.serial_no, // Keep first serial number
-				fitted_hr_reading: db_item.fitted_hr_reading,
-				fitted_date: db_item.fitted_date,
-				unit_price: db_item.unit_price
+		// Set query to filter Battery Recording Database by equipment
+		frm.set_query("battery_recording_database", "requested_items", function(doc, cdt, cdn) {
+			let filters = {
+				"battery_status": "Available"
 			};
-		}
-		
-		// Increment quantity for this group (add quantity from database item)
-		battery_groups[group_key].quantity += (db_item.quantity || 1);
-	});
-	
-	// Populate old_battery_items table with consolidated data
-	Object.keys(battery_groups).forEach(function(group_key) {
-		let group = battery_groups[group_key];
-		let old_item = frm.add_child("old_battery_items");
-		
-		old_item.battery_make = group.battery_make;
-		old_item.battery_position = group.battery_position;
-		old_item.battery_voltage = group.battery_voltage;
-		old_item.battery_amper = group.battery_amper;
-		old_item.quantity = group.quantity;
-		old_item.serial_no = group.serial_no;
-		old_item.fitted_hr_reading = group.fitted_hr_reading;
-		old_item.fitted_date = group.fitted_date;
-		old_item.unit_price = group.unit_price;
-		
-		console.log("Added consolidated old battery:", {
-			position: old_item.battery_position,
-			voltage: old_item.battery_voltage,
-			amper: old_item.battery_amper,
-			quantity: old_item.quantity
-		});
-	});
-}
-
-// Function to populate analysis items from database
-function populate_analysis_items(frm, brd_doc) {
-	// Clear existing analysis items
-	frm.clear_table("analysis_items");
-	
-	// Use analysis_items from database
-	if (!brd_doc.analysis_items || brd_doc.analysis_items.length === 0) {
-		console.log("No analysis_items found in database");
-		return;
-	}
-	
-	// Group analysis by (voltage, amper, position) similar to old batteries
-	let analysis_groups = {};
-	
-	brd_doc.analysis_items.forEach(function(db_item) {
-		let voltage = db_item.battery_voltage || 0;
-		let amper = db_item.battery_amper || 0;
-		let position = db_item.battery_position || "";
-		
-		let group_key = `${voltage}_${amper}_${position}`;
-		
-		if (!analysis_groups[group_key]) {
-			analysis_groups[group_key] = {
-				battery_position: position,
-				battery_voltage: voltage,
-				battery_amper: amper,
-				fitted_hr_reading: db_item.old_fitted_hr_reading || db_item.new_fitted_hr_reading,
-				actual_coverage: db_item.actual_coverage,
-				standard_life_time: db_item.standard_life_time,
-				deviation: db_item.deviation,
-				reason_for_less_consumption: db_item.reason_for_less_consumption
+			if (doc.plate_no) {
+				// Allow batteries that are available OR fitted to this equipment
+				// This will be handled by the query function
+			}
+			return {
+				filters: filters,
+				query: "equipment_and_maintenance.equipment.doctype.battery_request_item.battery_request_item.filter_available_batteries"
 			};
-		}
-	});
-	
-	// Populate analysis_items table
-	Object.keys(analysis_groups).forEach(function(group_key) {
-		let group = analysis_groups[group_key];
-		let analysis_item = frm.add_child("analysis_items");
-		
-		analysis_item.battery_position = group.battery_position;
-		analysis_item.battery_voltage = group.battery_voltage;
-		analysis_item.battery_amper = group.battery_amper;
-		analysis_item.fitted_hr_reading = group.fitted_hr_reading;
-		analysis_item.actual_coverage = group.actual_coverage;
-		analysis_item.standard_life_time = group.standard_life_time;
-		analysis_item.deviation = group.deviation;
-		analysis_item.reason_for_less_consumption = group.reason_for_less_consumption;
-		
-		console.log("Added analysis item:", {
-			position: analysis_item.battery_position,
-			voltage: analysis_item.battery_voltage,
-			amper: analysis_item.battery_amper
 		});
-	});
-}
-
-// Function to fetch old battery data for a single item (kept for backward compatibility)
-function fetch_old_battery_data(frm, battery_item) {
-	if (!frm.doc.plate_no) return;
-	
-	frappe.db.get_list("Battery Recording Database Form", {
-		filters: {
-			"plate_no": frm.doc.plate_no
-		},
-		fields: ["name"],
-		order_by: "creation desc",
-		limit: 1
-	}).then(records => {
-		if (records && records.length > 0) {
-			return frappe.db.get_doc("Battery Recording Database Form", records[0].name);
-		}
-		return null;
-	}).then(brd_doc => {
-		if (brd_doc) {
-			populate_old_battery_data(frm, battery_item, brd_doc);
-			frm.refresh_field("battery_items");
-		}
-	}).catch(err => {
-		console.log("Could not fetch old battery data:", err);
-	});
-}
-
-// Function to fetch old battery data for a single item (kept for backward compatibility but not used)
-function fetch_old_battery_data(frm, battery_item) {
-	if (!frm.doc.plate_no) return;
-	
-	frappe.db.get_list("Battery Recording Database Form", {
-		filters: {
-			"plate_no": frm.doc.plate_no
-		},
-		fields: ["name"],
-		order_by: "creation desc",
-		limit: 1
-	}).then(records => {
-		if (records && records.length > 0) {
-			return frappe.db.get_doc("Battery Recording Database Form", records[0].name);
-		}
-		return null;
-	}).then(brd_doc => {
-		if (brd_doc) {
-			consolidate_and_populate_old_batteries(frm, brd_doc);
-			populate_analysis_items(frm, brd_doc);
-			frm.refresh_field("old_battery_items");
-			frm.refresh_field("analysis_items");
-		}
-	}).catch(err => {
-		console.log("Could not fetch old battery data:", err);
-	});
-}
+	}
+});
 
 // Handle child table calculations for Analysis Items
 frappe.ui.form.on("Battery Analysis Item", {
@@ -612,3 +455,5 @@ function calculate_battery_analysis(frm, cdt, cdn) {
 		frappe.model.set_value(cdt, cdn, "deviation", 0);
 	}
 }
+
+

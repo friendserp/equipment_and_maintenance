@@ -1,0 +1,284 @@
+<style>
+	.print-format {
+		font-family: Arial, sans-serif;
+		font-size: 10pt;
+	}
+	
+	.header-section {
+		margin-bottom: 20px;
+		text-align: center;
+		border-bottom: 2px solid #000;
+		padding-bottom: 10px;
+	}
+	
+	.company-name {
+		font-size: 14pt;
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+	
+	.report-title {
+		font-size: 12pt;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	
+	.header-info {
+		display: table;
+		width: 100%;
+		font-size: 9pt;
+		margin-top: 10px;
+	}
+	
+	.header-info-left {
+		display: table-cell;
+		width: 50%;
+		text-align: left;
+		vertical-align: top;
+	}
+	
+	.header-info-right {
+		display: table-cell;
+		width: 50%;
+		text-align: right;
+		vertical-align: top;
+	}
+	
+	.header-info-row {
+		margin-bottom: 3px;
+	}
+	
+	.header-info-label {
+		font-weight: bold;
+		display: inline-block;
+		width: 120px;
+	}
+	
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 15px;
+		font-size: 9pt;
+	}
+	
+	th {
+		background-color: #d9d9d9;
+		border: 1px solid #000;
+		padding: 5px;
+		text-align: center;
+		font-weight: bold;
+		font-size: 8pt;
+	}
+	
+	td {
+		border: 1px solid #000;
+		padding: 4px;
+		text-align: left;
+	}
+	
+	td.center {
+		text-align: center;
+	}
+	
+	.section-header {
+		background-color: #bfbfbf;
+		font-weight: bold;
+		text-align: center;
+	}
+	
+	.no-col {
+		width: 30px;
+		text-align: center;
+	}
+	
+	.equipment-type-col {
+		width: 100px;
+	}
+	
+	.make-col {
+		width: 80px;
+	}
+	
+	.model-col {
+		width: 80px;
+	}
+	
+	.plate-col {
+		width: 120px;
+	}
+	
+	.planned-col {
+		width: 70px;
+		text-align: center;
+	}
+	
+	.performed-col {
+		width: 70px;
+		text-align: center;
+	}
+	
+	.date-col {
+		width: 80px;
+		text-align: center;
+	}
+	
+	.schedule-col {
+		width: 50px;
+		text-align: center;
+	}
+	
+	.current-col {
+		width: 80px;
+		text-align: center;
+	}
+	
+	.next-col {
+		width: 70px;
+		text-align: center;
+	}
+	
+	.week-col {
+		width: 30px;
+		text-align: center;
+	}
+	
+	.remark-col {
+		width: 150px;
+	}
+	
+	.footer {
+		margin-top: 20px;
+		font-size: 8pt;
+		text-align: center;
+	}
+</style>
+
+<div class="print-format">
+	<div class="header-section">
+		<div class="company-name">MCG CONSTRUCTION PLC</div>
+		<div class="report-title">Monthly PM Schedule and Action Date Reporting Form</div>
+		
+		<div class="header-info">
+			<div class="header-info-left">
+				<div class="header-info-row">
+					<span class="header-info-label">Department:</span>
+					<span>{%= filters.department || "Equipment & Plant & Admin & Maintenance" %}</span>
+				</div>
+				<div class="header-info-row">
+					<span class="header-info-label">Project:</span>
+					<span>{%= filters.project || "AASMSMC (MEGA)" %}</span>
+				</div>
+				<div class="header-info-row">
+					<span class="header-info-label">Reporting Period:</span>
+					<span>{%= filters.planning_month || "" %} {%= filters.planning_year || "" %}</span>
+				</div>
+			</div>
+			<div class="header-info-right">
+				<div class="header-info-row">
+					<span class="header-info-label">Document No.:</span>
+					<span>MCGEAMD 01</span>
+				</div>
+				<div class="header-info-row">
+					<span class="header-info-label">Effective Date:</span>
+					<span>15/12/2014</span>
+				</div>
+				<div class="header-info-row">
+					<span class="header-info-label">Issue No.:</span>
+					<span>1</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<table>
+		<thead>
+			<tr>
+				<th class="no-col">No.</th>
+				<th class="equipment-type-col">Equipment Type</th>
+				<th class="make-col">Make</th>
+				<th class="model-col">Model</th>
+				<th class="plate-col">Serial/Plate No.</th>
+				<th colspan="2" class="planned-col">Planned Schedule:</th>
+				<th colspan="3" class="performed-col">Service PM Performed:</th>
+				<th class="schedule-col">Does the PM performed as per the schedule?</th>
+				<th class="current-col">Current Hour/Km Reading</th>
+				<th colspan="5" class="next-col">Next Month Schedule:</th>
+				<th class="remark-col">Remark</th>
+			</tr>
+			<tr>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th class="planned-col">Hour/Km</th>
+				<th class="planned-col">Service Type</th>
+				<th class="performed-col">Hour/Km</th>
+				<th class="performed-col">Service Type</th>
+				<th class="date-col">Due Date</th>
+				<th class="schedule-col"></th>
+				<th class="current-col"></th>
+				<th class="next-col">Scheduled Service (Hour/Km)</th>
+				<th class="next-col">Type</th>
+				<th class="week-col">PT</th>
+				<th class="week-col">1st</th>
+				<th class="week-col">2nd</th>
+				<th class="week-col">3rd</th>
+				<th class="week-col">4th</th>
+				<th class="remark-col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in data %}
+				<tr>
+					<td class="center no-col">{%= row._index + 1 %}</td>
+					<td class="equipment-type-col">{%= row.equipment_type || "" %}</td>
+					<td class="make-col">{%= row.make || "" %}</td>
+					<td class="model-col">{%= row.model || "" %}</td>
+					<td class="plate-col">{%= row.plate_number || "" %}</td>
+					<td class="center planned-col">{%= row.planned_hours_km || "" %}</td>
+					<td class="center planned-col">{%= row.planned_service_type || "" %}</td>
+					<td class="center performed-col">{%= row.performed_hours_km || "" %}</td>
+					<td class="center performed-col">{%= row.performed_service_type || "" %}</td>
+					<td class="center date-col">{%= row.performed_date || "" %}</td>
+					<td class="center schedule-col">{%= row.pm_performed_as_per_schedule || "" %}</td>
+					<td class="center current-col">{%= row.current_hours_km || "" %}</td>
+					<td class="center next-col">{%= row.scheduled_hours_km || "" %}</td>
+					<td class="center next-col">{%= row.scheduled_service_type || "" %}</td>
+					<td class="center week-col"></td>
+					<td class="center week-col">{%= row.week_1 || "" %}</td>
+					<td class="center week-col">{%= row.week_2 || "" %}</td>
+					<td class="center week-col">{%= row.week_3 || "" %}</td>
+					<td class="center week-col">{%= row.week_4 || "" %}</td>
+					<td class="remark-col">{%= row.remark || "" %}</td>
+				</tr>
+			{% endfor %}
+			
+			{% if (!data || data.length === 0) { %}
+				<tr>
+					<td colspan="19" class="center" style="padding: 20px;">No data available</td>
+				</tr>
+			{% } %}
+		</tbody>
+	</table>
+	
+	<div class="footer">
+		<div style="margin-top: 30px;">
+			<div style="display: inline-block; width: 30%; text-align: left;">
+				<div style="border-top: 1px solid #000; padding-top: 5px; margin-top: 40px;">
+					Prepared By: ___________________
+				</div>
+			</div>
+			<div style="display: inline-block; width: 30%; text-align: center;">
+				<div style="border-top: 1px solid #000; padding-top: 5px; margin-top: 40px;">
+					Reviewed By: ___________________
+				</div>
+			</div>
+			<div style="display: inline-block; width: 30%; text-align: right;">
+				<div style="border-top: 1px solid #000; padding-top: 5px; margin-top: 40px;">
+					Approved By: ___________________
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

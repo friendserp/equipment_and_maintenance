@@ -5,26 +5,24 @@
  "creation": "2026-01-08 00:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": [
+  "field_order": [
+  "type",
   "effective_date",
-  "issue_no",
   "column_break_1",
-  "status",
-  "siv_no",
   "battery_return_voucher",
+  "current_km_hr",
+  "status",
   "equipment_section",
+  "plate_no",
   "equipment_type",
   "make",
   "model",
   "serial_no",
-  "plate_no",
   "column_break_2",
   "project",
   "battery_request_form",
   "battery_items_section",
   "battery_items",
-  "documents_section",
-  "note",
   "approval_section",
   "prepared_by",
   "prepared_by_signature",
@@ -37,9 +35,19 @@
   "approved_by",
   "approved_by_signature",
   "approved_by_date",
-  "amended_from"
+  "amended_from",
+  "material_request"
  ],
  "fields": [
+  {
+   "default": "Issue",
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "Issue\nReturn",
+   "reqd": 1
+  },
   {
    "default": "Today",
    "fieldname": "effective_date",
@@ -49,34 +57,19 @@
    "reqd": 1
   },
   {
-   "fieldname": "issue_no",
-   "fieldtype": "Int",
-   "label": "Issue No",
-   "default": 1
-  },
-  {
    "fieldname": "column_break_1",
    "fieldtype": "Column Break"
-  },
-  {
-   "allow_on_submit": 1,
-   "default": "Draft",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Status",
-   "options": "Draft\nSubmitted\nApproved",
-   "read_only": 1
-  },
-  {
-   "fieldname": "siv_no",
-   "fieldtype": "Data",
-   "label": "SIV No"
   },
   {
    "fieldname": "battery_return_voucher",
    "fieldtype": "Data",
    "label": "Battery Return Voucher"
+  },
+  {
+   "fieldname": "current_km_hr",
+   "fieldtype": "Float",
+   "label": "Current KM/HR",
+   "depends_on": "eval:doc.type == 'Return'"
   },
   {
    "fieldname": "equipment_section",
@@ -100,6 +93,7 @@
    "label": "Model"
   },
   {
+   "fetch_from": "plate_no.serial_number",
    "fieldname": "serial_no",
    "fieldtype": "Data",
    "label": "Serial No"
@@ -130,6 +124,12 @@
    "options": "Battery Request and Analysis Form"
   },
   {
+   "fieldname": "material_request",
+   "fieldtype": "Link",
+   "label": "Material Request",
+   "options": "Material Request"
+  },
+  {
    "fieldname": "battery_items_section",
    "fieldtype": "Section Break",
    "label": "Battery Items"
@@ -139,17 +139,6 @@
    "fieldtype": "Table",
    "label": "Battery Items",
    "options": "Battery Issue Return Item"
-  },
-  {
-   "fieldname": "documents_section",
-   "fieldtype": "Section Break",
-   "label": "Documents to be Scanned and Attached"
-  },
-  {
-   "fieldname": "note",
-   "fieldtype": "Small Text",
-   "label": "Note",
-   "default": "1. Battery issue voucher/SIV\n2. Battery return voucher\n3. Battery Issue and Return Analysis Form"
   },
   {
    "fieldname": "approval_section",
@@ -221,12 +210,18 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Status"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-08 00:00:00",
+ "modified": "2026-01-21 14:50:24.778693",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Battery Issue and Return Report Form",
@@ -251,4 +246,3 @@
  "sort_order": "DESC",
  "states": []
 }
-

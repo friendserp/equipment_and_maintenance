@@ -1,0 +1,204 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:BAT-{####}",
+ "creation": "2026-01-09 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "item_name",
+  "battery_make",
+  "battery_position",
+  "battery_serial_no",
+  "battery_voltage",
+  "battery_amper",
+  "column_break_gotv",
+  "equipment_fitted_to",
+  "section_break_1",
+  "battery_status",
+  "current_equipment",
+  "current_plate_no",
+  "fitted_date",
+  "fitted_hours_km",
+  "transaction_section",
+  "last_battery_request",
+  "last_battery_return",
+  "last_material_request",
+  "last_stock_entry",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "battery_make",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Battery Make",
+   "reqd": 1
+  },
+  {
+   "fieldname": "battery_position",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Battery Fitted Position",
+   "options": "Left\nRight",
+   "reqd": 1
+  },
+  {
+   "fieldname": "battery_serial_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Serial No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "battery_voltage",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Battery Voltage"
+  },
+  {
+   "fieldname": "battery_amper",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Battery Amper"
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break",
+   "label": "Equipment Assignment (Updated on Issue)"
+  },
+  {
+   "default": "Available",
+   "fieldname": "battery_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Battery Status",
+   "options": "Available\nFitted\nReturned\nDamaged\nDisposed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "current_equipment",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Current Equipment",
+   "options": "Equipment Master",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "current_equipment.plate_number",
+   "fieldname": "current_plate_no",
+   "fieldtype": "Data",
+   "label": "Current Plate No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fitted_date",
+   "fieldtype": "Date",
+   "label": "Fitted Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fitted_hours_km",
+   "fieldtype": "Float",
+   "label": "Fitted Hours/Km",
+   "read_only": 1
+  },
+  {
+   "fieldname": "transaction_section",
+   "fieldtype": "Section Break",
+   "label": "Transaction Links"
+  },
+  {
+   "fieldname": "last_battery_request",
+   "fieldtype": "Link",
+   "label": "Last Battery Request",
+   "options": "Battery Request and Analysis Form",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_battery_return",
+   "fieldtype": "Link",
+   "label": "Last Battery Return",
+   "options": "Battery Issue and Return Report Form",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_material_request",
+   "fieldtype": "Link",
+   "label": "Last Material Request",
+   "options": "Material Request"
+  },
+  {
+   "fieldname": "last_stock_entry",
+   "fieldtype": "Link",
+   "label": "Last Stock Entry",
+   "options": "Stock Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Battery Recording Database",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_gotv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "last_battery_request.plate_no",
+   "fieldname": "equipment_fitted_to",
+   "fieldtype": "Link",
+   "label": "Equipment Fitted To",
+   "options": "Equipment Master"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-21 14:07:01.014378",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Battery Recording Database",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "item_code, battery_voltage, battery_position, battery_amper",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

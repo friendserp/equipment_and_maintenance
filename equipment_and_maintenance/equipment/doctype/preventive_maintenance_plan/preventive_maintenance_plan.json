@@ -1,0 +1,277 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:PMP-{YYYY}-{MM}-{####}",
+ "creation": "2026-01-09 16:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "equipment",
+  "plate_number",
+  "equipment_code",
+  "make",
+  "model",
+  "equipment_category",
+  "equipment_sub_category",
+  "column_break_1",
+  "date",
+  "planning_month",
+  "planning_year",
+  "department",
+  "project",
+  "section_break_1",
+  "last_maintenance_column",
+  "last_pm_date",
+  "last_pm_hours_km",
+  "last_pm_service_type",
+  "column_break_2",
+  "current_hours_km",
+  "planned_week",
+  "planned_service_type",
+  "planned_hours_km",
+  "column_break_3",
+  "is_maintenance_done",
+  "section_break_2",
+  "remark",
+  "history_tab",
+  "pm_history",
+  "section_break_4",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "equipment",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Equipment",
+   "options": "Equipment Master",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "equipment.plate_number",
+   "fieldname": "plate_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Plate Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "equipment.equipment_code",
+   "fieldname": "equipment_code",
+   "fieldtype": "Data",
+   "label": "Equipment Code",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "equipment.make",
+   "fieldname": "make",
+   "fieldtype": "Data",
+   "label": "Make",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "equipment.model",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Model",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "equipment.equipment_category",
+   "fieldname": "equipment_category",
+   "fieldtype": "Link",
+   "label": "Equipment Category",
+   "options": "Asset Category",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "equipment.equipment_sub_category",
+   "fieldname": "equipment_sub_category",
+   "fieldtype": "Link",
+   "label": "Equipment Sub Category",
+   "options": "Asset Sub Category",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "planning_month",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Planning Month",
+   "options": "January\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember",
+   "reqd": 1
+  },
+  {
+   "fieldname": "planning_year",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Planning Year",
+   "reqd": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break",
+   "label": "PM Details"
+  },
+  {
+   "fieldname": "current_hours_km",
+   "fieldtype": "Float",
+   "label": "Current Hours/Km Reading",
+   "reqd": 1
+  },
+  {
+   "fieldname": "last_pm_date",
+   "fieldtype": "Date",
+   "label": "Last PM Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_pm_hours_km",
+   "fieldtype": "Float",
+   "label": "Last PM Hours/Km",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_pm_service_type",
+   "fieldtype": "Data",
+   "label": "Last PM Service Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break",
+   "label": "Current Planning"
+  },
+  {
+   "fieldname": "planned_week",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Planned Week",
+   "options": "Week 1\nWeek 2\nWeek 3\nWeek 4",
+   "reqd": 1
+  },
+  {
+   "fieldname": "planned_service_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Planned Service Type",
+   "options": "A\nB\nC\nD\nT1\nT2\nT3\nT4\nWeekly\nMonthly\nQuarterly",
+   "reqd": 1
+  },
+  {
+   "fieldname": "planned_hours_km",
+   "fieldtype": "Float",
+   "label": "Planned Hours/Km",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break",
+   "label": "Current Plan Status"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "No",
+   "fieldname": "is_maintenance_done",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Is Maintenance Done",
+   "options": "Yes\nNo",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remark"
+  },
+  {
+   "fieldname": "history_tab",
+   "fieldtype": "Tab Break",
+   "label": "History"
+  },
+  {
+   "fieldname": "pm_history",
+   "fieldtype": "Table",
+   "label": "PM History",
+   "options": "Preventive Maintenance Plan History"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Preventive Maintenance Plan",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "last_maintenance_column",
+   "fieldtype": "Column Break",
+   "label": "Last Maintenance"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-01-20 12:53:39.657140",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Preventive Maintenance Plan",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "plate_number"
+}

@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "requested_item_no",
+  "item_name",
   "requested_battery_voltage",
   "requested_battery_amper",
   "requested_battery_position",
@@ -19,45 +20,59 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Item Code",
-   "options": "Item"
+   "link_filters": "[[\"Item\",\"item_group\",\"=\",\"Spare Parts\"],[\"Item\",\"custom_subcategory\",\"=\",\"General Purpose\"],[\"Item\",\"item_name\",\"like\",\"%Battery%\"]]",
+   "options": "Item",
+   "reqd": 1
   },
   {
    "fieldname": "requested_battery_voltage",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Battery Voltage"
+   "label": "Battery Voltage",
+   "reqd": 1
   },
   {
    "fieldname": "requested_battery_amper",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Battery Amper"
+   "label": "Battery Amper",
+   "reqd": 1
   },
   {
    "fieldname": "requested_battery_position",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Battery Position",
-   "options": "Left\nRight"
+   "options": "Left\nRight",
+   "reqd": 1
   },
   {
+   "columns": 1,
+   "default": "1",
    "fieldname": "quantity",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Quantity"
+   "label": "Quantity",
+   "reqd": 1
   },
   {
    "fieldname": "remark",
    "fieldtype": "Small Text",
-   "in_list_view": 1,
    "label": "Remark"
+  },
+  {
+   "fetch_from": "requested_item_no.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-09 00:00:00",
+ "modified": "2026-01-21 10:49:27.486336",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Battery Request Item",

@@ -5,7 +5,7 @@
  "creation": "2026-01-08 00:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
- "field_order": [
+  "field_order": [
   "request_date",
   "column_break_1",
   "status",
@@ -18,12 +18,13 @@
   "column_break_2",
   "material_requisition_no",
   "project",
-  "requested_tab",
-  "requested_items",
-  "old_tab",
+  "current_km_hr",
+  "old_batteries_section",
   "old_battery_items",
-  "analysis_tab",
+  "analysis_section",
   "analysis_items",
+  "requested_section",
+  "requested_items",
   "approval_section",
   "prepared_by",
   "prepared_by_signature",
@@ -115,41 +116,48 @@
    "fieldname": "material_requisition_no",
    "fieldtype": "Link",
    "label": "Material Requisition No",
-   "options": "Material Request",
+   "options": "Material Request"
+  },
+  {
+   "fieldname": "current_km_hr",
+   "fieldtype": "Float",
+   "label": "Current KM/HR",
    "reqd": 1
   },
   {
-   "fieldname": "requested_tab",
-   "fieldtype": "Tab Break",
-   "label": "Requested"
-  },
-  {
-   "fieldname": "requested_items",
-   "fieldtype": "Table",
-   "label": "Requested Items",
-   "options": "Battery Request Item"
-  },
-  {
-   "fieldname": "old_tab",
-   "fieldtype": "Tab Break",
-   "label": "Old"
+   "fieldname": "old_batteries_section",
+   "fieldtype": "Section Break",
+   "label": "Existing Batteries (To be Replaced)"
   },
   {
    "fieldname": "old_battery_items",
    "fieldtype": "Table",
    "label": "Old Battery Items",
-   "options": "Battery Old Item"
+   "options": "Battery Old Item",
+   "read_only": 1
   },
   {
-   "fieldname": "analysis_tab",
-   "fieldtype": "Tab Break",
+   "fieldname": "analysis_section",
+   "fieldtype": "Section Break",
    "label": "Analysis"
   },
   {
    "fieldname": "analysis_items",
    "fieldtype": "Table",
    "label": "Analysis Items",
-   "options": "Battery Analysis Item"
+   "options": "Battery Analysis Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "requested_section",
+   "fieldtype": "Section Break",
+   "label": "Requested Batteries"
+  },
+  {
+   "fieldname": "requested_items",
+   "fieldtype": "Table",
+   "label": "Requested Items",
+   "options": "Battery Request Item"
   },
   {
    "fieldname": "approval_section",

@@ -1,0 +1,81 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-20 16:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "pm_done",
+  "actual_date",
+  "service_type",
+  "actual_hours_km",
+  "pm_performed_as_per_schedule",
+  "performed_by",
+  "remark"
+ ],
+ "fields": [
+  {
+   "fieldname": "pm_done",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "PM Done",
+   "options": "Preventive Maintenance Done",
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "service_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Service Type",
+   "options": "A\nB\nC\nD\nT1\nT2\nT3\nT4\nWeekly\nMonthly\nQuarterly",
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_hours_km",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Hours/Km",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pm_performed_as_per_schedule",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "As per Schedule?",
+   "options": "Yes\nNo",
+   "read_only": 1
+  },
+  {
+   "fieldname": "performed_by",
+   "fieldtype": "Link",
+   "label": "Performed By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remark",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2026-01-20 16:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Preventive Maintenance Plan History",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "actual_date",
+ "sort_order": "DESC",
+ "states": []
+}

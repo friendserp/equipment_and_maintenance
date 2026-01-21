@@ -1,0 +1,220 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:PMH-{YYYY}-{####}",
+ "creation": "2026-01-09 16:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "equipment",
+  "plate_number",
+  "equipment_code",
+  "make",
+  "model",
+  "column_break_1",
+  "pm_date",
+  "service_type",
+  "status",
+  "section_break_1",
+  "hours_km_before",
+  "hours_km_after",
+  "performed_by",
+  "column_break_2",
+  "pm_performed_as_per_schedule",
+  "section_break_2",
+  "plan",
+  "planning_month",
+  "planning_year",
+  "planned_week",
+  "planned_service_type",
+  "planned_hours_km",
+  "column_break_3",
+  "pm_done",
+  "section_break_3",
+  "remark"
+ ],
+ "fields": [
+  {
+   "fieldname": "equipment",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Equipment",
+   "options": "Equipment Master",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "equipment.plate_number",
+   "fieldname": "plate_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Plate Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "equipment.equipment_code",
+   "fieldname": "equipment_code",
+   "fieldtype": "Data",
+   "label": "Equipment Code",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "equipment.make",
+   "fieldname": "make",
+   "fieldtype": "Data",
+   "label": "Make",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "equipment.model",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Model",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pm_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "PM Date"
+  },
+  {
+   "fieldname": "service_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Service Type",
+   "options": "A\nB\nC\nD\nT1\nT2\nT3\nT4\nWeekly\nMonthly\nQuarterly"
+  },
+  {
+   "default": "Planned",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Planned\nCompleted\nCancelled\nSkipped"
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break",
+   "label": "PM Details"
+  },
+  {
+   "fieldname": "hours_km_before",
+   "fieldtype": "Float",
+   "label": "Hours/Km Before"
+  },
+  {
+   "fieldname": "hours_km_after",
+   "fieldtype": "Float",
+   "label": "Hours/Km After"
+  },
+  {
+   "fieldname": "performed_by",
+   "fieldtype": "Link",
+   "label": "Performed By",
+   "options": "User"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pm_performed_as_per_schedule",
+   "fieldtype": "Select",
+   "label": "PM Performed as per Schedule?",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break",
+   "label": "Planning Reference"
+  },
+  {
+   "fieldname": "plan",
+   "fieldtype": "Link",
+   "label": "Preventive Maintenance Plan",
+   "options": "Preventive Maintenance Plan"
+  },
+  {
+   "fieldname": "planning_month",
+   "fieldtype": "Select",
+   "label": "Planning Month",
+   "options": "January\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember"
+  },
+  {
+   "fieldname": "planning_year",
+   "fieldtype": "Int",
+   "label": "Planning Year"
+  },
+  {
+   "fieldname": "planned_week",
+   "fieldtype": "Select",
+   "label": "Planned Week",
+   "options": "Week 1\nWeek 2\nWeek 3\nWeek 4"
+  },
+  {
+   "fieldname": "planned_service_type",
+   "fieldtype": "Select",
+   "label": "Planned Service Type",
+   "options": "A\nB\nC\nD\nT1\nT2\nT3\nT4\nWeekly\nMonthly\nQuarterly"
+  },
+  {
+   "fieldname": "planned_hours_km",
+   "fieldtype": "Float",
+   "label": "Planned Hours/Km"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pm_done",
+   "fieldtype": "Link",
+   "label": "Preventive Maintenance Done",
+   "options": "Preventive Maintenance Done"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remark"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-20 12:39:21.575847",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Preventive Maintenance History",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "pm_date",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "plate_number"
+}

@@ -1,0 +1,218 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:PMD-{YYYY}-{####}",
+ "creation": "2026-01-09 16:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "equipment",
+  "plate_number",
+  "equipment_code",
+  "make",
+  "model",
+  "column_break_1",
+  "actual_date",
+  "actual_hours_km",
+  "service_type",
+  "section_break_1",
+  "plan",
+  "planned_week",
+  "planned_service_type",
+  "planned_hours_km",
+  "column_break_2",
+  "pm_performed_as_per_schedule",
+  "performed_by",
+  "section_break_2",
+  "parts_used",
+  "section_break_3",
+  "completion_notes",
+  "remark",
+  "section_break_4",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "equipment",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Equipment",
+   "options": "Equipment Master",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "equipment.plate_number",
+   "fieldname": "plate_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Plate Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "equipment.equipment_code",
+   "fieldname": "equipment_code",
+   "fieldtype": "Data",
+   "label": "Equipment Code",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "equipment.make",
+   "fieldname": "make",
+   "fieldtype": "Data",
+   "label": "Make",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "equipment.model",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Model",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "actual_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Actual Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "actual_hours_km",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Actual Hours/Km Reading",
+   "reqd": 1
+  },
+  {
+   "fieldname": "service_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Service Type",
+   "options": "A\nB\nC\nD\nT1\nT2\nT3\nT4\nWeekly\nMonthly\nQuarterly",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break",
+   "label": "Planning Reference"
+  },
+  {
+   "fieldname": "plan",
+   "fieldtype": "Link",
+   "label": "Preventive Maintenance Plan",
+   "options": "Preventive Maintenance Plan"
+  },
+  {
+   "fieldname": "planned_week",
+   "fieldtype": "Select",
+   "label": "Planned Week",
+   "options": "Week 1\nWeek 2\nWeek 3\nWeek 4",
+   "read_only": 1
+  },
+  {
+   "fieldname": "planned_service_type",
+   "fieldtype": "Select",
+   "label": "Planned Service Type",
+   "options": "A\nB\nC\nD\nT1\nT2\nT3\nT4\nWeekly\nMonthly\nQuarterly",
+   "read_only": 1
+  },
+  {
+   "fieldname": "planned_hours_km",
+   "fieldtype": "Float",
+   "label": "Planned Hours/Km",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pm_performed_as_per_schedule",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "PM Performed as per Schedule?",
+   "options": "Yes\nNo",
+   "reqd": 1
+  },
+  {
+   "fieldname": "performed_by",
+   "fieldtype": "Link",
+   "label": "Performed By",
+   "options": "User"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break",
+   "label": "Parts Used"
+  },
+  {
+   "fieldname": "parts_used",
+   "fieldtype": "Table",
+   "label": "Parts Used",
+   "options": "Preventive Maintenance Done Item"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "completion_notes",
+   "fieldtype": "Small Text",
+   "label": "Completion Notes"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remark"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Preventive Maintenance Done",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-01-20 12:55:35.342073",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Preventive Maintenance Done",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "actual_date",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "plate_number"
+}

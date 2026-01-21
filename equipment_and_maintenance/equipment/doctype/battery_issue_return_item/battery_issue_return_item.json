@@ -6,25 +6,17 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "item_no",
-  "old_battery_section",
-  "old_battery_make",
-  "old_battery_position",
-  "old_serial_no",
-  "old_battery_voltage",
-  "old_battery_amper",
-  "old_fitted_hr_reading",
-  "old_fitted_date",
-  "old_unit_price",
-  "new_battery_section",
-  "new_battery_make",
-  "new_battery_position",
-  "new_serial_no",
-  "new_battery_voltage",
-  "new_battery_amper",
-  "new_fitted_hr_reading",
-  "new_fitted_date",
-  "new_unit_price",
+  "item_code",
+  "battery_recording_database",
+  "serial_no",
+  "battery_section",
+  "battery_make",
+  "battery_position",
+  "battery_voltage",
+  "battery_amper",
+  "fitted_hr_reading",
+  "fitted_date",
+  "unit_price",
   "analysis_section",
   "actual_coverage",
   "standard_life_time",
@@ -36,116 +28,59 @@
  ],
  "fields": [
   {
-   "fieldname": "item_no",
-   "fieldtype": "Int",
+   "fieldname": "battery_section",
+   "fieldtype": "Section Break",
+   "label": "Battery Details"
+  },
+  {
+   "fetch_from": "serial_no.battery_make",
+   "fieldname": "battery_make",
+   "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Item No",
+   "label": "Battery Make",
    "read_only": 1
   },
   {
-   "fieldname": "old_battery_section",
-   "fieldtype": "Section Break",
-   "label": "Old Battery Status"
-  },
-  {
-   "fieldname": "old_battery_make",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Battery Make"
-  },
-  {
-   "fieldname": "old_battery_position",
+   "fieldname": "battery_position",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Battery Position",
    "options": "Left\nRight"
   },
   {
-   "fieldname": "old_serial_no",
-   "fieldtype": "Data",
+   "fetch_from": "battery_recording_database.battery_serial_no",
+   "fieldname": "serial_no",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Serial No"
+   "label": "Battery Serial No",
+   "options": "Battery Recording Database"
   },
   {
-   "fieldname": "old_battery_voltage",
+   "fieldname": "battery_voltage",
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Battery Voltage"
   },
   {
-   "fieldname": "old_battery_amper",
+   "fieldname": "battery_amper",
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Battery Amper"
   },
   {
-   "fieldname": "old_fitted_hr_reading",
+   "fieldname": "fitted_hr_reading",
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Fitted (Hr) Reading"
   },
   {
-   "fieldname": "old_fitted_date",
+   "fieldname": "fitted_date",
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Fitted Date"
   },
   {
-   "fieldname": "old_unit_price",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Unit Price"
-  },
-  {
-   "fieldname": "new_battery_section",
-   "fieldtype": "Section Break",
-   "label": "New Battery Status"
-  },
-  {
-   "fieldname": "new_battery_make",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Battery Make"
-  },
-  {
-   "fieldname": "new_battery_position",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Battery Position",
-   "options": "Left\nRight"
-  },
-  {
-   "fieldname": "new_serial_no",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Serial No"
-  },
-  {
-   "fieldname": "new_battery_voltage",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Battery Voltage"
-  },
-  {
-   "fieldname": "new_battery_amper",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Battery Amper"
-  },
-  {
-   "fieldname": "new_fitted_hr_reading",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Fitted (Hr) Reading"
-  },
-  {
-   "fieldname": "new_fitted_date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Fitted Date"
-  },
-  {
-   "fieldname": "new_unit_price",
+   "fieldname": "unit_price",
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Unit Price"
@@ -197,13 +132,26 @@
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Remark"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "fieldname": "battery_recording_database",
+   "fieldtype": "Link",
+   "label": "Battery Recording Database",
+   "options": "Battery Recording Database"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-08 00:00:00",
+ "modified": "2026-01-21 14:03:54.523068",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Battery Issue Return Item",
@@ -215,4 +163,3 @@
  "sort_order": "ASC",
  "states": []
 }
-
