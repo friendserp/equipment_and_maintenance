@@ -88,13 +88,15 @@ app_license = "mit"
 # before_install = "equipment_and_maintenance.install.before_install"
 after_install = [
 	"equipment_and_maintenance.install.create_workflows.create_workflows",
-	"equipment_and_maintenance.dashboard_fixtures.create_number_cards"
+	"equipment_and_maintenance.dashboard_fixtures.create_number_cards",
+	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks"
 ]
 
 # After Migration
 # ------------
 after_migrate = [
-	"equipment_and_maintenance.dashboard_fixtures.create_number_cards"
+	"equipment_and_maintenance.dashboard_fixtures.create_number_cards",
+	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks"
 ]
 
 # Uninstallation
