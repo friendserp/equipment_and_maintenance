@@ -51,19 +51,37 @@ def create_main_workspace():
 		"sequence_id": 10.0,
 		"content": json.dumps([
 			{"id": "header_main", "type": "header", "data": {"text": "<span class=\"h3\"><b>Equipment & Maintenance Dashboard</b></span>", "col": 12}},
-			{"id": "custom_block_stats", "type": "custom_block", "data": {"custom_block_name": "Quick Stats", "col": 12}},
+			{"id": "chart_maintenance_trend", "type": "chart", "data": {"chart_name": "Maintenance Requests Trend", "col": 6}},
+			{"id": "chart_work_orders", "type": "chart", "data": {"chart_name": "Work Orders Status", "col": 6}},
 			{"id": "spacer1", "type": "spacer", "data": {"col": 12}},
+			{"id": "custom_block_stats", "type": "custom_block", "data": {"custom_block_name": "Quick Stats", "col": 12}},
+			{"id": "spacer2", "type": "spacer", "data": {"col": 12}},
 			{"id": "number_card_total_equipment", "type": "number_card", "data": {"number_card_name": "Total Equipment", "col": 4}},
 			{"id": "number_card_pending_requests", "type": "number_card", "data": {"number_card_name": "Pending Maintenance Requests", "col": 4}},
 			{"id": "number_card_open_work_orders", "type": "number_card", "data": {"number_card_name": "Open Work Orders", "col": 4}},
-			{"id": "spacer2", "type": "spacer", "data": {"col": 12}},
+			{"id": "spacer3", "type": "spacer", "data": {"col": 12}},
+			{"id": "header_dashboard", "type": "header", "data": {"text": "<span class=\"h4\"><b>Dashboards</b></span>", "col": 12}},
+			{"id": "shortcut_dashboard_main", "type": "shortcut", "data": {"shortcut_name": "Equipment and Maintenance Dashboard", "col": 4}},
+			{"id": "shortcut_dashboard_equipment", "type": "shortcut", "data": {"shortcut_name": "Equipment Dashboard", "col": 4}},
+			{"id": "shortcut_dashboard_maintenance", "type": "shortcut", "data": {"shortcut_name": "Maintenance Dashboard", "col": 4}},
+			{"id": "spacer4", "type": "spacer", "data": {"col": 12}},
 			{"id": "header_modules", "type": "header", "data": {"text": "<span class=\"h4\"><b>Modules</b></span>", "col": 12}},
 			{"id": "custom_block_equipment", "type": "custom_block", "data": {"custom_block_name": "Equipment Overview", "col": 6}},
 			{"id": "custom_block_maintenance", "type": "custom_block", "data": {"custom_block_name": "Maintenance Overview", "col": 6}},
-			{"id": "spacer3", "type": "spacer", "data": {"col": 12}},
+			{"id": "spacer5", "type": "spacer", "data": {"col": 12}},
 			{"id": "card_equipment", "type": "card", "data": {"card_name": "Equipment", "col": 6}},
 			{"id": "card_maintenance", "type": "card", "data": {"card_name": "Maintenance", "col": 6}}
 		]),
+		"charts": [
+			{
+				"chart_name": "Maintenance Requests Trend",
+				"label": "Maintenance Requests Trend"
+			},
+			{
+				"chart_name": "Work Orders Status",
+				"label": "Work Orders Status"
+			}
+		],
 		"number_cards": [
 			{
 				"label": "Total Equipment",
@@ -90,6 +108,26 @@ def create_main_workspace():
 			},
 			{
 				"custom_block_name": "Maintenance Overview"
+			}
+		],
+		"shortcuts": [
+			{
+				"label": "Equipment and Maintenance Dashboard",
+				"link_to": "Equipment and Maintenance",
+				"shortcut_name": "Equipment and Maintenance Dashboard",
+				"type": "Dashboard"
+			},
+			{
+				"label": "Equipment Dashboard",
+				"link_to": "Equipment",
+				"shortcut_name": "Equipment Dashboard",
+				"type": "Dashboard"
+			},
+			{
+				"label": "Maintenance Dashboard",
+				"link_to": "Maintenance",
+				"shortcut_name": "Maintenance Dashboard",
+				"type": "Dashboard"
 			}
 		],
 		"links": [
@@ -121,19 +159,40 @@ def create_equipment_workspace():
 		"sequence_id": 11.0,
 		"content": json.dumps([
 			{"id": "header_main", "type": "header", "data": {"text": "<span class=\"h3\"><b>Equipment Module</b></span>", "col": 12}},
-			{"id": "custom_block_equipment_overview", "type": "custom_block", "data": {"custom_block_name": "Equipment Overview", "col": 12}},
+			{"id": "chart_equipment_category", "type": "chart", "data": {"chart_name": "Equipment by Category", "col": 6}},
+			{"id": "chart_fuel_requests", "type": "chart", "data": {"chart_name": "Fuel Requests Trend", "col": 6}},
 			{"id": "spacer0", "type": "spacer", "data": {"col": 12}},
-			{"id": "number_card_total_equipment", "type": "number_card", "data": {"number_card_name": "Total Equipment", "col": 6}},
+			{"id": "custom_block_equipment_overview", "type": "custom_block", "data": {"custom_block_name": "Equipment Overview", "col": 12}},
 			{"id": "spacer1", "type": "spacer", "data": {"col": 12}},
+			{"id": "number_card_total_equipment", "type": "number_card", "data": {"number_card_name": "Total Equipment", "col": 6}},
+			{"id": "spacer2", "type": "spacer", "data": {"col": 12}},
+			{"id": "header_dashboard", "type": "header", "data": {"text": "<span class=\"h4\"><b>Dashboard</b></span>", "col": 12}},
+			{"id": "shortcut_dashboard_equipment", "type": "shortcut", "data": {"shortcut_name": "Equipment Dashboard", "col": 4}},
+			{"id": "spacer3", "type": "spacer", "data": {"col": 12}},
 			{"id": "header_shortcuts", "type": "header", "data": {"text": "<span class=\"h4\"><b>Quick Actions</b></span>", "col": 12}},
 			{"id": "shortcut_equipment_master", "type": "shortcut", "data": {"shortcut_name": "Equipment Master", "col": 3}},
 			{"id": "shortcut_fuel_request", "type": "shortcut", "data": {"shortcut_name": "Fuel Request", "col": 3}},
 			{"id": "shortcut_vehicle_movement", "type": "shortcut", "data": {"shortcut_name": "Vehicle Daily Movement", "col": 3}},
-			{"id": "spacer2", "type": "spacer", "data": {"col": 12}},
+			{"id": "shortcut_equipment_transfer", "type": "shortcut", "data": {"shortcut_name": "Equipment Transfer Form", "col": 3}},
+			{"id": "shortcut_equipment_disposal", "type": "shortcut", "data": {"shortcut_name": "Equipment Disposal Request", "col": 3}},
+			{"id": "shortcut_rental_agreement", "type": "shortcut", "data": {"shortcut_name": "Rental Agreement", "col": 3}},
+			{"id": "spacer4", "type": "spacer", "data": {"col": 12}},
+			{"id": "header_forms", "type": "header", "data": {"text": "<span class=\"h4\"><b>Forms & Reports</b></span>", "col": 12}},
 			{"id": "card_equipment_masters", "type": "card", "data": {"card_name": "Equipment Masters", "col": 6}},
 			{"id": "card_battery_tyre", "type": "card", "data": {"card_name": "Battery & Tyre", "col": 6}},
-			{"id": "card_equipment_forms", "type": "card", "data": {"card_name": "Equipment Forms", "col": 12}}
+			{"id": "card_equipment_forms", "type": "card", "data": {"card_name": "Equipment Forms", "col": 12}},
+			{"id": "card_followup_forms", "type": "card", "data": {"card_name": "Followup Forms", "col": 6}}
 		]),
+		"charts": [
+			{
+				"chart_name": "Equipment by Category",
+				"label": "Equipment by Category"
+			},
+			{
+				"chart_name": "Fuel Requests Trend",
+				"label": "Fuel Requests Trend"
+			}
+		],
 		"number_cards": [
 			{
 				"label": "Total Equipment",
@@ -159,6 +218,30 @@ def create_equipment_workspace():
 				"link_to": "Vehicle Daily Movement",
 				"shortcut_name": "Vehicle Daily Movement",
 				"type": "DocType"
+			},
+			{
+				"label": "Equipment Transfer Form",
+				"link_to": "Equipment Transfer Form",
+				"shortcut_name": "Equipment Transfer Form",
+				"type": "DocType"
+			},
+			{
+				"label": "Equipment Disposal Request",
+				"link_to": "Equipment Disposal Request",
+				"shortcut_name": "Equipment Disposal Request",
+				"type": "DocType"
+			},
+			{
+				"label": "Rental Agreement",
+				"link_to": "Rental Agreement",
+				"shortcut_name": "Rental Agreement",
+				"type": "DocType"
+			},
+			{
+				"label": "Equipment Dashboard",
+				"link_to": "Equipment",
+				"shortcut_name": "Equipment Dashboard",
+				"type": "Dashboard"
 			}
 		],
 		"links": [
@@ -255,6 +338,22 @@ def create_equipment_workspace():
 				"type": "Link"
 			},
 			{
+				"label": "Followup Forms",
+				"type": "Card Break"
+			},
+			{
+				"label": "Bollo Followup Form",
+				"link_to": "Bollo Followup Form",
+				"link_type": "DocType",
+				"type": "Link"
+			},
+			{
+				"label": "Insurance Followup Form",
+				"link_to": "Insurance Followup Form",
+				"link_type": "DocType",
+				"type": "Link"
+			},
+			{
 				"label": "Battery & Tyre",
 				"type": "Card Break"
 			},
@@ -325,21 +424,43 @@ def create_maintenance_workspace():
 		"sequence_id": 12.0,
 		"content": json.dumps([
 			{"id": "header_main", "type": "header", "data": {"text": "<span class=\"h3\"><b>Maintenance Module</b></span>", "col": 12}},
-			{"id": "custom_block_maintenance_overview", "type": "custom_block", "data": {"custom_block_name": "Maintenance Overview", "col": 12}},
+			{"id": "chart_maintenance_trend", "type": "chart", "data": {"chart_name": "Maintenance Requests Trend", "col": 12}},
+			{"id": "spacer_charts", "type": "spacer", "data": {"col": 12}},
+			{"id": "chart_work_orders", "type": "chart", "data": {"chart_name": "Work Orders Status", "col": 6}},
+			{"id": "chart_completed_jobs", "type": "chart", "data": {"chart_name": "Completed Maintenance Jobs Trend", "col": 6}},
 			{"id": "spacer0", "type": "spacer", "data": {"col": 12}},
+			{"id": "custom_block_maintenance_overview", "type": "custom_block", "data": {"custom_block_name": "Maintenance Overview", "col": 12}},
+			{"id": "spacer1", "type": "spacer", "data": {"col": 12}},
 			{"id": "number_card_pending_requests", "type": "number_card", "data": {"number_card_name": "Pending Maintenance Requests", "col": 4}},
 			{"id": "number_card_open_work_orders", "type": "number_card", "data": {"number_card_name": "Open Work Orders", "col": 4}},
 			{"id": "number_card_completed_jobs", "type": "number_card", "data": {"number_card_name": "Completed Maintenance Jobs", "col": 4}},
-			{"id": "spacer1", "type": "spacer", "data": {"col": 12}},
+			{"id": "spacer2", "type": "spacer", "data": {"col": 12}},
+			{"id": "header_dashboard", "type": "header", "data": {"text": "<span class=\"h4\"><b>Dashboard</b></span>", "col": 12}},
+			{"id": "shortcut_dashboard_maintenance", "type": "shortcut", "data": {"shortcut_name": "Maintenance Dashboard", "col": 4}},
+			{"id": "spacer3", "type": "spacer", "data": {"col": 12}},
 			{"id": "header_shortcuts", "type": "header", "data": {"text": "<span class=\"h4\"><b>Quick Actions</b></span>", "col": 12}},
 			{"id": "shortcut_maintenance_request", "type": "shortcut", "data": {"shortcut_name": "Maintenance Request", "col": 3}},
 			{"id": "shortcut_work_order", "type": "shortcut", "data": {"shortcut_name": "Maintenance Work Order", "col": 3}},
 			{"id": "shortcut_preventive_maintenance", "type": "shortcut", "data": {"shortcut_name": "Preventive Maintenance Schedule", "col": 3}},
-			{"id": "spacer2", "type": "spacer", "data": {"col": 12}},
+			{"id": "spacer4", "type": "spacer", "data": {"col": 12}},
 			{"id": "card_maintenance_masters", "type": "card", "data": {"card_name": "Maintenance Masters", "col": 6}},
 			{"id": "card_maintenance_forms", "type": "card", "data": {"card_name": "Maintenance Forms", "col": 6}},
 			{"id": "card_settings", "type": "card", "data": {"card_name": "Settings", "col": 6}}
 		]),
+		"charts": [
+			{
+				"chart_name": "Maintenance Requests Trend",
+				"label": "Maintenance Requests Trend"
+			},
+			{
+				"chart_name": "Work Orders Status",
+				"label": "Work Orders Status"
+			},
+			{
+				"chart_name": "Completed Maintenance Jobs Trend",
+				"label": "Completed Maintenance Jobs Trend"
+			}
+		],
 		"number_cards": [
 			{
 				"label": "Pending Maintenance Requests",
@@ -375,6 +496,12 @@ def create_maintenance_workspace():
 				"link_to": "Preventive Maintenance Schedule",
 				"shortcut_name": "Preventive Maintenance Schedule",
 				"type": "DocType"
+			},
+			{
+				"label": "Maintenance Dashboard",
+				"link_to": "Maintenance",
+				"shortcut_name": "Maintenance Dashboard",
+				"type": "Dashboard"
 			}
 		],
 		"links": [

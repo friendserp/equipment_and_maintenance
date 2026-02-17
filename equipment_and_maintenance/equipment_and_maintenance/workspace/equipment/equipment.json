@@ -1,8 +1,17 @@
 {
  "app": "equipment_and_maintenance",
- "charts": [],
- "content": "[{\"id\": \"header_main\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h3\\\"><b>Equipment Module</b></span>\", \"col\": 12}}, {\"id\": \"custom_block_equipment_overview\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Equipment Overview\", \"col\": 12}}, {\"id\": \"spacer0\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"number_card_total_equipment\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Equipment\", \"col\": 6}}, {\"id\": \"spacer1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header_shortcuts\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\", \"col\": 12}}, {\"id\": \"shortcut_equipment_master\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Equipment Master\", \"col\": 3}}, {\"id\": \"shortcut_fuel_request\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fuel Request\", \"col\": 3}}, {\"id\": \"shortcut_vehicle_movement\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Vehicle Daily Movement\", \"col\": 3}}, {\"id\": \"spacer2\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"card_equipment_masters\", \"type\": \"card\", \"data\": {\"card_name\": \"Equipment Masters\", \"col\": 6}}, {\"id\": \"card_battery_tyre\", \"type\": \"card\", \"data\": {\"card_name\": \"Battery & Tyre\", \"col\": 6}}, {\"id\": \"card_equipment_forms\", \"type\": \"card\", \"data\": {\"card_name\": \"Equipment Forms\", \"col\": 12}}]",
- "creation": "2026-02-17 11:08:17.518717",
+ "charts": [
+  {
+   "chart_name": "Equipment by Category",
+   "label": "Equipment by Category"
+  },
+  {
+   "chart_name": "Fuel Requests Trend",
+   "label": "Fuel Requests Trend"
+  }
+ ],
+ "content": "[{\"id\": \"header_main\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h3\\\"><b>Equipment Module</b></span>\", \"col\": 12}}, {\"id\": \"chart_equipment_category\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Equipment by Category\", \"col\": 6}}, {\"id\": \"chart_fuel_requests\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Fuel Requests Trend\", \"col\": 6}}, {\"id\": \"spacer0\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"custom_block_equipment_overview\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Equipment Overview\", \"col\": 12}}, {\"id\": \"spacer1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"number_card_total_equipment\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Equipment\", \"col\": 6}}, {\"id\": \"spacer2\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header_dashboard\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Dashboard</b></span>\", \"col\": 12}}, {\"id\": \"shortcut_dashboard_equipment\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Equipment Dashboard\", \"col\": 4}}, {\"id\": \"spacer3\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header_shortcuts\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\", \"col\": 12}}, {\"id\": \"shortcut_equipment_master\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Equipment Master\", \"col\": 3}}, {\"id\": \"shortcut_fuel_request\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Fuel Request\", \"col\": 3}}, {\"id\": \"shortcut_vehicle_movement\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Vehicle Daily Movement\", \"col\": 3}}, {\"id\": \"shortcut_equipment_transfer\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Equipment Transfer Form\", \"col\": 3}}, {\"id\": \"shortcut_equipment_disposal\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Equipment Disposal Request\", \"col\": 3}}, {\"id\": \"shortcut_rental_agreement\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Rental Agreement\", \"col\": 3}}, {\"id\": \"spacer4\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header_forms\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Forms & Reports</b></span>\", \"col\": 12}}, {\"id\": \"card_equipment_masters\", \"type\": \"card\", \"data\": {\"card_name\": \"Equipment Masters\", \"col\": 6}}, {\"id\": \"card_battery_tyre\", \"type\": \"card\", \"data\": {\"card_name\": \"Battery & Tyre\", \"col\": 6}}, {\"id\": \"card_equipment_forms\", \"type\": \"card\", \"data\": {\"card_name\": \"Equipment Forms\", \"col\": 12}}, {\"id\": \"card_followup_forms\", \"type\": \"card\", \"data\": {\"card_name\": \"Followup Forms\", \"col\": 6}}]",
+ "creation": "2026-02-17 12:43:01.513932",
  "custom_blocks": [
   {
    "custom_block_name": "Equipment Overview"
@@ -179,6 +188,35 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Followup Forms",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bollo Followup Form",
+   "link_count": 0,
+   "link_to": "Bollo Followup Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Insurance Followup Form",
+   "link_count": 0,
+   "link_to": "Insurance Followup Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Battery & Tyre",
    "link_count": 0,
    "link_type": "DocType",
@@ -256,7 +294,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-02-17 11:08:17.518717",
+ "modified": "2026-02-17 12:43:01.513932",
  "modified_by": "Administrator",
  "module": "Equipment And Maintenance",
  "name": "Equipment",
@@ -289,6 +327,30 @@
    "label": "Vehicle Daily Movement",
    "link_to": "Vehicle Daily Movement",
    "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Equipment Transfer Form",
+   "link_to": "Equipment Transfer Form",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Equipment Disposal Request",
+   "link_to": "Equipment Disposal Request",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Rental Agreement",
+   "link_to": "Rental Agreement",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Equipment Dashboard",
+   "link_to": "Equipment",
+   "type": "Dashboard"
   }
  ],
  "title": "Equipment",

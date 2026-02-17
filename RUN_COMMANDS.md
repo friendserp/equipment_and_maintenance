@@ -47,9 +47,45 @@ from equipment_and_maintenance.dashboard_fixtures import create_custom_blocks
 create_custom_blocks()
 ```
 
+## Running Dashboard Charts Creation
+
+### Option 1: Using bench execute (Recommended)
+```bash
+bench --site erp.kushladder.com execute equipment_and_maintenance.dashboard_fixtures.create_dashboard_charts
+```
+
+### Option 2: Using bench console
+```bash
+bench --site erp.kushladder.com console
+```
+
+Then in the console:
+```python
+from equipment_and_maintenance.dashboard_fixtures import create_dashboard_charts
+create_dashboard_charts()
+```
+
+## Running Dashboards Creation
+
+### Option 1: Using bench execute (Recommended)
+```bash
+bench --site erp.kushladder.com execute equipment_and_maintenance.dashboard_fixtures.create_dashboards
+```
+
+### Option 2: Using bench console
+```bash
+bench --site erp.kushladder.com console
+```
+
+Then in the console:
+```python
+from equipment_and_maintenance.dashboard_fixtures import create_dashboards
+create_dashboards()
+```
+
 ## Automatic Execution
 
-Both number cards and custom blocks are automatically created/updated:
+Number cards, custom blocks, dashboard charts, and dashboards are automatically created/updated:
 - After app installation (`after_install` hook)
 - After every migration (`after_migrate` hook)
 

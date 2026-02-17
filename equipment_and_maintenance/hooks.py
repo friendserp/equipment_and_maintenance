@@ -89,14 +89,19 @@ app_license = "mit"
 after_install = [
 	"equipment_and_maintenance.install.create_workflows.create_workflows",
 	"equipment_and_maintenance.dashboard_fixtures.create_number_cards",
-	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks"
+	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks",
+	"equipment_and_maintenance.dashboard_fixtures.create_dashboard_charts",
+	"equipment_and_maintenance.dashboard_fixtures.create_dashboards"
 ]
 
 # After Migration
 # ------------
 after_migrate = [
 	"equipment_and_maintenance.dashboard_fixtures.create_number_cards",
-	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks"
+	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks",
+	"equipment_and_maintenance.dashboard_fixtures.create_dashboard_charts",
+	"equipment_and_maintenance.dashboard_fixtures.create_dashboards",
+	"equipment_and_maintenance.install.recreate_workspaces.execute"
 ]
 
 # Uninstallation
@@ -269,16 +274,7 @@ scheduler_events = {
 # Fixtures to export using bench export-fixtures
 # Export custom fields, property setters, and links for this app
 fixtures = [
-	{
-		"dt": "Custom Field",
-		"filters": {
-			"dt": ["in", [
-				"Asset Category",
-				"Stock Entry Detail",
-				"Stock Entry"
-			]]
-		}
-	},
+
 	{
 		"dt": "Property Setter",
 	},
