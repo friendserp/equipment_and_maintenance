@@ -22,16 +22,18 @@ def execute():
 	# Create custom HTML blocks (imported from dashboard_fixtures)
 	create_custom_blocks()
 	
-	# Create Equipment workspace first (child workspace)
-	create_equipment_workspace()
-	
-	# Create Maintenance workspace second (child workspace)
-	create_maintenance_workspace()
-	
-	# Create main parent workspace last (references child workspaces)
+	# Create main parent workspace first (must exist before child workspaces reference it)
 	create_main_workspace()
-	
 	frappe.db.commit()
+	
+	# Create Equipment workspace (child workspace) - parent must exist first
+	create_equipment_workspace()
+	frappe.db.commit()
+	
+	# Create Maintenance workspace (child workspace) - parent must exist first
+	create_maintenance_workspace()
+	frappe.db.commit()
+	
 	frappe.clear_cache()
 	print("\n" + "="*60)
 	print("✓ All workspaces created successfully!")
@@ -157,6 +159,8 @@ def create_equipment_workspace():
 		"icon": "tool",
 		"public": 1,
 		"sequence_id": 11.0,
+		"is_hidden": 1,
+		"parent_page": "Equipment and Maintenance",
 		"content": json.dumps([
 			{"id": "header_main", "type": "header", "data": {"text": "<span class=\"h3\"><b>Equipment Module</b></span>", "col": 12}},
 			{"id": "chart_equipment_category", "type": "chart", "data": {"chart_name": "Equipment by Category", "col": 6}},
@@ -422,6 +426,8 @@ def create_maintenance_workspace():
 		"icon": "wrench",
 		"public": 1,
 		"sequence_id": 12.0,
+		"is_hidden": 1,
+		"parent_page": "Equipment and Maintenance",
 		"content": json.dumps([
 			{"id": "header_main", "type": "header", "data": {"text": "<span class=\"h3\"><b>Maintenance Module</b></span>", "col": 12}},
 			{"id": "chart_maintenance_trend", "type": "chart", "data": {"chart_name": "Maintenance Requests Trend", "col": 12}},
