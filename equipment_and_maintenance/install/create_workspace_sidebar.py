@@ -23,7 +23,8 @@ def execute():
 		json_path = os.path.join(sidebar_dir, sidebar_file)
 		
 		if not os.path.exists(json_path):
-			frappe.log_error(f"Workspace Sidebar JSON file not found: {json_path}", "Workspace Sidebar Creation")
+			# Use shorter error message to avoid CharacterLengthExceededError
+			print(f"⚠ Skipping {sidebar_file}: file not found")
 			continue
 		
 		# Read the JSON file
@@ -50,7 +51,6 @@ def execute():
 				
 				sidebar.save(ignore_permissions=True)
 				frappe.db.commit()
-				frappe.log_error(f"Updated Workspace Sidebar: {sidebar_name}", "Workspace Sidebar Update")
 				print(f"✓ Updated Workspace Sidebar: {sidebar_name}")
 			except Exception as e:
 				frappe.log_error(f"Error updating Workspace Sidebar {sidebar_name}: {str(e)}", "Workspace Sidebar Update Error")
@@ -74,7 +74,6 @@ def execute():
 				
 				sidebar.insert(ignore_permissions=True)
 				frappe.db.commit()
-				frappe.log_error(f"Created Workspace Sidebar: {sidebar_name}", "Workspace Sidebar Creation")
 				print(f"✓ Created Workspace Sidebar: {sidebar_name}")
 			except Exception as e:
 				frappe.log_error(f"Error creating Workspace Sidebar {sidebar_name}: {str(e)}", "Workspace Sidebar Creation Error")
