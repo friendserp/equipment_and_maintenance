@@ -16,6 +16,20 @@ frappe.ui.form.on("Material Request", {
 			// Clear session storage
 			sessionStorage.removeItem('battery_request_for_mr');
 		}
+		
+		// Link Tyre Request when Material Request is created from Tyre Request
+		if (frm.is_new() && sessionStorage.getItem('tyre_request_for_mr')) {
+			let tyre_request_name = sessionStorage.getItem('tyre_request_for_mr');
+			
+			// Store in custom field if it exists, otherwise store in form variable
+			if (frm.fields_dict.custom_tyre_request) {
+				frm.set_value("custom_tyre_request", tyre_request_name);
+			}
+			frm.tyre_request_name = tyre_request_name;
+			
+			// Clear session storage
+			sessionStorage.removeItem('tyre_request_for_mr');
+		}
 	},
 	
 	before_save(frm) {
@@ -24,6 +38,14 @@ frappe.ui.form.on("Material Request", {
 			// Try to set custom field if it exists
 			if (frm.fields_dict.custom_battery_request) {
 				frm.set_value("custom_battery_request", frm.battery_request_name);
+			}
+		}
+		
+		// Store Tyre Request name before save so hook can access it
+		if (frm.tyre_request_name && !frm.doc.custom_tyre_request) {
+			// Try to set custom field if it exists
+			if (frm.fields_dict.custom_tyre_request) {
+				frm.set_value("custom_tyre_request", frm.tyre_request_name);
 			}
 		}
 	}

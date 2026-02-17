@@ -23,38 +23,44 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Tyre Position",
-   "options": "Front Left\nFront Right\nRear Left\nRear Right\nSpare\nOther"
+   "options": "Front Left\nFront Right\nRear Left\nRear Right\nSpare\nOther",
+   "read_only": 1
   },
   {
    "fieldname": "tyre_size",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Tyre Size"
+   "label": "Tyre Size",
+   "read_only": 1
   },
   {
    "fieldname": "tyre_brand",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Tyre Brand"
+   "label": "Tyre Brand",
+   "read_only": 1
   },
   {
    "fieldname": "tyre_type",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Tyre Type",
-   "options": "Radial\nBias\nTubeless\nTube Type"
+   "options": "Radial\nBias\nTubeless\nTube Type",
+   "read_only": 1
   },
   {
    "fieldname": "current_km_reading",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Current Km Reading"
+   "label": "Current Km Reading",
+   "read_only": 1
   },
   {
    "fieldname": "fitted_km_reading",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Fitted (Km) Reading"
+   "label": "Fitted (Km) Reading",
+   "read_only": 1
   },
   {
    "fieldname": "actual_coverage",

@@ -86,7 +86,10 @@ app_license = "mit"
 # ------------
 
 # before_install = "equipment_and_maintenance.install.before_install"
-after_install = "equipment_and_maintenance.install.create_workflows.create_workflows"
+after_install = [
+	"equipment_and_maintenance.install.create_workflows.create_workflows",
+	"equipment_and_maintenance.dashboard_fixtures.create_number_cards"
+]
 
 # Uninstallation
 # ------------
@@ -134,12 +137,24 @@ after_install = "equipment_and_maintenance.install.create_workflows.create_workf
 
 doc_events = {
 	"Material Request": {
-		"on_submit": "equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_request_on_mr_submit",
-		"on_cancel": "equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_request_on_mr_cancel",
-		"on_update_after_submit": "equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_recording_on_mr_issue"
+		"on_submit": [
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_request_on_mr_submit",
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.update_tyre_request_on_mr_submit"
+		],
+		"on_cancel": [
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_request_on_mr_cancel",
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.update_tyre_request_on_mr_cancel"
+		],
+		"on_update_after_submit": [
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_recording_on_mr_issue",
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.update_tyre_recording_on_mr_issue"
+		]
 	},
 	"Stock Entry": {
-		"on_submit": "equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_recording_on_stock_entry"
+		"on_submit": [
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_recording_on_stock_entry",
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.update_tyre_recording_on_stock_entry"
+		]
 	}
 }
 

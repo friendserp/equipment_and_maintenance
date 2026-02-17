@@ -1,268 +1,69 @@
 {
  "app": "equipment_and_maintenance",
  "charts": [],
- "content": "[{\"id\":\"header1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Equipment Module</b></span>\",\"col\":12}},{\"id\":\"card1\",\"type\":\"card\",\"data\":{\"card_name\":\"Equipment Masters\",\"col\":6}},{\"id\":\"c1N8x_1LT-\",\"type\":\"card\",\"data\":{\"card_name\":\"Battery & Tyre\",\"col\":6}},{\"id\":\"card2\",\"type\":\"card\",\"data\":{\"card_name\":\"Equipment Forms\",\"col\":6}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Maintenance and Admin Module</b></span>\",\"col\":12}},{\"id\":\"card3\",\"type\":\"card\",\"data\":{\"card_name\":\"Maintenance Masters\",\"col\":6}},{\"id\":\"card4\",\"type\":\"card\",\"data\":{\"card_name\":\"Maintenance Forms\",\"col\":6}}]",
- "creation": "2025-12-27 16:00:00",
- "custom_blocks": [],
+ "content": "[{\"id\": \"header_main\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h3\\\"><b>Equipment & Maintenance Dashboard</b></span>\", \"col\": 12}}, {\"id\": \"custom_block_stats\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Quick Stats\", \"col\": 12}}, {\"id\": \"spacer1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"number_card_total_equipment\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Equipment\", \"col\": 4}}, {\"id\": \"number_card_pending_requests\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Maintenance Requests\", \"col\": 4}}, {\"id\": \"number_card_open_work_orders\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open Work Orders\", \"col\": 4}}, {\"id\": \"spacer2\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header_modules\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Modules</b></span>\", \"col\": 12}}, {\"id\": \"custom_block_equipment\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Equipment Overview\", \"col\": 6}}, {\"id\": \"custom_block_maintenance\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Maintenance Overview\", \"col\": 6}}, {\"id\": \"spacer3\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"card_equipment\", \"type\": \"card\", \"data\": {\"card_name\": \"Equipment\", \"col\": 6}}, {\"id\": \"card_maintenance\", \"type\": \"card\", \"data\": {\"card_name\": \"Maintenance\", \"col\": 6}}]",
+ "creation": "2026-02-17 11:08:17.607286",
+ "custom_blocks": [
+  {
+   "custom_block_name": "Quick Stats"
+  },
+  {
+   "custom_block_name": "Equipment Overview"
+  },
+  {
+   "custom_block_name": "Maintenance Overview"
+  }
+ ],
  "docstatus": 0,
  "doctype": "Workspace",
- "for_user": "",
  "hide_custom": 0,
  "icon": "settings",
  "idx": 0,
+ "indicator_color": "green",
  "is_hidden": 0,
  "label": "Equipment and Maintenance",
+ "link_type": "DocType",
  "links": [
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Equipment Forms",
+   "label": "Equipment",
    "link_count": 0,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Cost Control and Registration Form",
-   "link_count": 0,
-   "link_to": "Cost Control and Registration Form",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Fuel Request",
-   "link_count": 0,
-   "link_to": "Fuel Request",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Accident Report Form",
-   "link_count": 0,
-   "link_to": "Accident Report Form",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Machinery Handover Form",
-   "link_count": 0,
-   "link_to": "Machinery Handover Form",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Maintenance Masters",
-   "link_count": 0,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Maintenance Interval",
-   "link_count": 0,
-   "link_to": "Maintenance Interval",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Preventive Maintenance Task",
-   "link_count": 0,
-   "link_to": "Preventive Maintenance Task",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Preventive Maintenance Template",
-   "link_count": 0,
-   "link_to": "Preventive Maintenance Template",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Preventive Maintenance Schedule",
-   "link_count": 0,
-   "link_to": "Preventive Maintenance Schedule",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Maintenance Forms",
-   "link_count": 0,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Maintenance Request",
-   "link_count": 0,
-   "link_to": "Maintenance Request",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Maintenance Work Order",
-   "link_count": 0,
-   "link_to": "Maintenance Work Order",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Maintenance Job Completion",
-   "link_count": 0,
-   "link_to": "Maintenance Job Completion",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Preventive Maintenance Log",
-   "link_count": 0,
-   "link_to": "Preventive Maintenance Log",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Cannibalization Form",
-   "link_count": 0,
-   "link_to": "Cannibalization Form",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Equipment Masters",
-   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
   },
   {
-   "dependencies": "",
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Equipment Master",
+   "label": "Maintenance",
    "link_count": 0,
-   "link_to": "Equipment Master",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Equipment Category",
-   "link_count": 0,
-   "link_to": "Asset Sub Category",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Equipment Sub Category",
-   "link_count": 0,
-   "link_to": "Asset Category",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Battery & Tyre",
-   "link_count": 2,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Battery Recording Database",
-   "link_count": 0,
-   "link_to": "Battery Recording Database",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Tyre Recording Database Form",
-   "link_count": 0,
-   "link_to": "Tyre Recording Database Form",
-   "link_type": "DocType",
-   "onboard": 1,
-   "type": "Link"
   }
  ],
- "modified": "2026-01-21 15:24:44.545039",
+ "modified": "2026-02-17 11:08:17.607286",
  "modified_by": "Administrator",
  "module": "Equipment And Maintenance",
  "name": "Equipment and Maintenance",
- "number_cards": [],
+ "number_cards": [
+  {
+   "label": "Total Equipment",
+   "number_card_name": "Total Equipment"
+  },
+  {
+   "label": "Pending Maintenance Requests",
+   "number_card_name": "Pending Maintenance Requests"
+  },
+  {
+   "label": "Open Work Orders",
+   "number_card_name": "Open Work Orders"
+  }
+ ],
  "owner": "Administrator",
- "parent_page": "",
  "public": 1,
  "quick_lists": [],
- "restrict_to_domain": "",
  "roles": [],
  "sequence_id": 10.0,
  "shortcuts": [],

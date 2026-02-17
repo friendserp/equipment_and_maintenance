@@ -177,3 +177,167 @@ def update_battery_recording_on_mr_link(battery_request_name, material_request_n
 				"last_battery_request": battery_request_name,
 				"last_material_request": material_request_name
 			})
+
+def update_tyre_request_on_mr_submit(doc, method):
+	"""Update Tyre Request when Material Request is submitted"""
+	tyre_request_name = None
+	
+	# First check if already linked via material_requisition_no field
+	tyre_requests = frappe.db.get_all(
+		"Tyre Request and Analysis Form",
+		filters={"material_requisition_no": doc.name},
+		fields=["name"]
+	)
+	
+	if tyre_requests:
+		tyre_request_name = tyre_requests[0].name
+	else:
+		# Check if linked via custom field (if exists)
+		if hasattr(doc, 'custom_tyre_request') and doc.custom_tyre_request:
+			if frappe.db.exists("Tyre Request and Analysis Form", doc.custom_tyre_request):
+				tyre_request_name = doc.custom_tyre_request
+		else:
+			# Try to find Tyre Request that doesn't have a Material Request yet
+			if doc.items and len(doc.items) > 0:
+				# Get item codes from Material Request
+				item_codes = [item.item_code for item in doc.items if item.item_code]
+				
+				if item_codes:
+					# Find Tyre Requests with these items that don't have a Material Request
+					tyre_requests = frappe.db.sql("""
+						SELECT DISTINCT tr.name
+						FROM `tabTyre Request and Analysis Form` tr
+						INNER JOIN `tabTyre Request Item` tri ON tri.parent = tr.name
+						WHERE tri.requested_item_no IN %s
+						AND tr.docstatus = 1
+						AND (tr.material_requisition_no IS NULL OR tr.material_requisition_no = '')
+						ORDER BY tr.creation DESC
+						LIMIT 1
+					""", (item_codes,), as_dict=True)
+					
+					if tyre_requests:
+						tyre_request_name = tyre_requests[0].name
+	
+	if tyre_request_name:
+		# Update Tyre Request with Material Request link
+		frappe.db.set_value(
+			"Tyre Request and Analysis Form",
+			tyre_request_name,
+			"material_requisition_no",
+			doc.name
+		)
+		
+		# Update Tyre Recording Database records
+		tyre_request = frappe.get_doc("Tyre Request and Analysis Form", tyre_request_name)
+		for req_item in tyre_request.requested_items:
+			# Note: Tyre Request doesn't create database records on submit
+			# Database records are created when tyres are issued via Issue and Return form
+			pass
+
+def update_tyre_request_on_mr_cancel(doc, method):
+	"""Remove Tyre Request link when Material Request is cancelled"""
+	# Find Tyre Request linked to this Material Request
+	tyre_requests = frappe.db.get_all(
+		"Tyre Request and Analysis Form",
+		filters={"material_requisition_no": doc.name},
+		fields=["name"]
+	)
+	
+	for tyre_request in tyre_requests:
+		# Clear Material Request link
+		frappe.db.set_value(
+			"Tyre Request and Analysis Form",
+			tyre_request.name,
+			"material_requisition_no",
+			None
+		)
+
+def update_tyre_recording_on_mr_issue(doc, method):
+	"""Update Tyre Recording Database when Material Request status changes to Issued"""
+	# Only process if status is Issued
+	if doc.status != "Issued":
+		return
+	
+	# Check if this Material Request is linked to a Tyre Request
+	tyre_requests = frappe.db.get_all(
+		"Tyre Request and Analysis Form",
+		filters={"material_requisition_no": doc.name},
+		fields=["name"]
+	)
+	
+	if not tyre_requests:
+		return
+	
+	# Get Stock Entries created from this Material Request
+	stock_entries = frappe.db.get_all(
+		"Stock Entry",
+		filters={
+			"material_request": doc.name,
+			"docstatus": 1,
+			"purpose": ["in", ["Material Issue", "Material Transfer"]]
+		},
+		fields=["name"],
+		order_by="creation desc",
+		limit=1
+	)
+	
+	# Update Tyre Recording Database records
+	for tyre_request_name in tyre_requests:
+		tyre_request = frappe.get_doc("Tyre Request and Analysis Form", tyre_request_name.name)
+		
+		# Update Tyre Recording Database records if they exist
+		# Note: Database records are created when tyres are issued, not on request submit
+		for req_item in tyre_request.requested_items:
+			# Check if there are any Tyre Recording Database records for these items
+			tyre_dbs = frappe.db.get_all(
+				"Tyre Recording Database",
+				filters={"item_code": req_item.requested_item_no},
+				fields=["name"]
+			)
+			
+			for tyre_db in tyre_dbs:
+				update_data = {
+					"last_tyre_request": tyre_request.name,
+					"last_material_request": doc.name
+				}
+				if stock_entries:
+					update_data["last_stock_entry"] = stock_entries[0].name
+				
+				frappe.db.set_value("Tyre Recording Database", tyre_db.name, update_data)
+
+def update_tyre_recording_on_stock_entry(doc, method):
+	"""Update Tyre Recording Database when Stock Entry is submitted from Material Request"""
+	if not doc.material_request:
+		return
+	
+	if doc.purpose not in ["Material Issue", "Material Transfer"]:
+		return
+	
+	# Check if this Material Request is linked to a Tyre Request
+	tyre_requests = frappe.db.get_all(
+		"Tyre Request and Analysis Form",
+		filters={"material_requisition_no": doc.material_request},
+		fields=["name"]
+	)
+	
+	if not tyre_requests:
+		return
+	
+	# Update Tyre Recording Database records
+	for tyre_request_name in tyre_requests:
+		tyre_request = frappe.get_doc("Tyre Request and Analysis Form", tyre_request_name.name)
+		
+		# Update Tyre Recording Database records if they exist
+		for req_item in tyre_request.requested_items:
+			tyre_dbs = frappe.db.get_all(
+				"Tyre Recording Database",
+				filters={"item_code": req_item.requested_item_no},
+				fields=["name"]
+			)
+			
+			for tyre_db in tyre_dbs:
+				frappe.db.set_value("Tyre Recording Database", tyre_db.name, {
+					"last_tyre_request": tyre_request.name,
+					"last_material_request": doc.material_request,
+					"last_stock_entry": doc.name
+				})

@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "requested_item_no",
+  "item_name",
   "requested_tyre_size",
   "requested_tyre_brand",
   "requested_tyre_type",
@@ -20,39 +21,55 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Item Code",
-   "options": "Item"
+   "link_filters": "[[\"Item\",\"item_group\",\"=\",\"Spare Parts\"],[\"Item\",\"custom_subcategory\",\"=\",\"Tyre, Innertube and Accessories\"],[\"Item\",\"item_name\",\"like\",\"%Tyre%\"]]",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "requested_item_no.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name"
   },
   {
    "fieldname": "requested_tyre_size",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Tyre Size"
+   "label": "Tyre Size",
+   "reqd": 1
   },
   {
    "fieldname": "requested_tyre_brand",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Tyre Brand"
+   "label": "Tyre Brand",
+   "reqd": 1
   },
   {
    "fieldname": "requested_tyre_type",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Tyre Type",
-   "options": "Radial\nBias\nTubeless\nTube Type"
+   "options": "Radial\nBias\nTubeless\nTube Type",
+   "reqd": 1
   },
   {
    "fieldname": "requested_tyre_position",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Tyre Position",
-   "options": "Front Left\nFront Right\nRear Left\nRear Right\nSpare\nOther"
+   "options": "Front Left\nFront Right\nRear Left\nRear Right\nSpare\nOther",
+   "reqd": 1
   },
   {
+   "columns": 1,
+   "default": "1",
    "fieldname": "quantity",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Quantity"
+   "label": "Quantity",
+   "reqd": 1
   },
   {
    "fieldname": "remark",
@@ -65,7 +82,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-09 00:00:00",
+ "modified": "2026-01-21 17:04:00.783637",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Tyre Request Item",
@@ -77,4 +94,3 @@
  "sort_order": "ASC",
  "states": []
 }
-

@@ -13,8 +13,28 @@ class TyreRequestandAnalysisForm(Document):
 			self.prepared_by_date = frappe.utils.today()
 	
 	def validate(self):
+		self.remove_duplicate_old_tyres()
 		self.calculate_analysis_items()
 		self.auto_populate_workflow_fields()
+	
+	def remove_duplicate_old_tyres(self):
+		"""Remove duplicate serial_no entries from old_tyre_items"""
+		if not self.old_tyre_items:
+			return
+		
+		seen = set()
+		to_remove = []
+		
+		for idx, item in enumerate(self.old_tyre_items):
+			if item.serial_no:
+				if item.serial_no in seen:
+					to_remove.append(idx)
+				else:
+					seen.add(item.serial_no)
+		
+		# Remove duplicates in reverse order to maintain indices
+		for idx in reversed(to_remove):
+			self.remove(self.old_tyre_items[idx])
 	
 	def auto_populate_workflow_fields(self):
 		"""Auto-populate user fields when workflow state changes"""
@@ -33,152 +53,103 @@ class TyreRequestandAnalysisForm(Document):
 				self.approved_by_date = frappe.utils.today()
 	
 	def on_submit(self):
-		"""Create Tyre Recording Database Form when this document is submitted"""
-		self.create_tyre_recording_database()
+		# Do not create database records on submit
+		# Database records will be created when tyres are issued via Issue and Return form
+		pass
 	
 	def calculate_analysis_items(self):
-		"""Calculate actual coverage, deviation for each analysis item"""
-		if self.analysis_items:
-			for item in self.analysis_items:
-				# Calculate actual coverage (b) = Current Reading - Fitted Reading
-				if item.current_km_reading and item.fitted_km_reading:
-					item.actual_coverage = item.current_km_reading - item.fitted_km_reading
-				else:
-					item.actual_coverage = 0
-				
-				# Calculate deviation (c) = b - a
-				if item.actual_coverage and item.standard_life_time:
-					item.deviation = item.actual_coverage - item.standard_life_time
-				else:
-					item.deviation = 0
-	
-	def create_tyre_recording_database(self):
-		"""Create Tyre Recording Database Form with data from this form"""
-		if not self.requested_items or len(self.requested_items) == 0:
-			frappe.throw("Cannot create Tyre Recording Database Form without requested items.")
-		
-		# Check if Tyre Recording Database Form already exists for this equipment
-		existing_trd = frappe.db.get_value("Tyre Recording Database Form", {
-			"plate_no": self.plate_no,
-			"tyre_request_form": self.name
-		}, "name")
-		
-		if existing_trd:
-			frappe.msgprint(f"Tyre Recording Database Form {existing_trd} already exists for this request.")
+		"""Calculate actual coverage, deviation for each analysis item based on old tyre items"""
+		if not self.plate_no:
 			return
 		
-		# Create new Tyre Recording Database Form
-		trd_doc = frappe.get_doc({
-			"doctype": "Tyre Recording Database Form",
-			"effective_date": self.request_date or frappe.utils.nowdate(),
-			"issue_no": 1,  # Default issue number
-			"equipment_type": self.equipment_type,
-			"make": self.make,
-			"model": self.model,
-			"serial_no": self.serial_no,
-			"plate_no": self.plate_no,
-			"tyre_request_form": self.name,
-			"status": "Draft"
-		})
+		# Get current reading - use current_km_hr if set, otherwise get from equipment
+		if self.current_km_hr:
+			current_reading = self.current_km_hr
+		else:
+			current_reading = self.get_current_equipment_reading()
 		
-		# Populate old tyre items (consolidated from old_tyre_items in request form)
+		# Clear and rebuild analysis items from old tyre items
 		if self.old_tyre_items:
-			ref_counter = 1
-			current_ref = None
-			item_counter = 1
+			self.analysis_items = []
 			
 			for old_item in self.old_tyre_items:
-				trd_old_item = trd_doc.append("old_tyre_items", {})
+				# Get fitted reading from old tyre item
+				fitted_reading = old_item.fitted_km_reading
+				tyre_position = old_item.tyre_position
 				
-				# Set reference number based on position
-				position_key = old_item.tyre_position or "Default"
-				if current_ref != position_key:
-					current_ref = position_key
-					ref_counter = len([x for x in trd_doc.old_tyre_items if x.reference_no]) + 1
-					item_counter = 1
+				# Create analysis item
+				analysis_item = self.append("analysis_items", {})
+				analysis_item.tyre_position = tyre_position
+				analysis_item.tyre_size = old_item.tyre_size
+				analysis_item.tyre_brand = old_item.tyre_brand
+				analysis_item.tyre_type = old_item.tyre_type
+				analysis_item.fitted_km_reading = fitted_reading
+				analysis_item.current_km_reading = current_reading
 				
-				trd_old_item.reference_no = f"Ref-{ref_counter}"
-				trd_old_item.item_no = item_counter
-				item_counter += 1
+				# Calculate actual coverage (b) = Current Reading - Fitted Reading
+				if current_reading and fitted_reading:
+					analysis_item.actual_coverage = current_reading - fitted_reading
+				else:
+					analysis_item.actual_coverage = 0
 				
-				# Map old tyre data
-				trd_old_item.tyre_brand = old_item.tyre_brand
-				trd_old_item.tyre_position = old_item.tyre_position
-				trd_old_item.serial_no = old_item.serial_no
-				trd_old_item.tyre_size = old_item.tyre_size
-				trd_old_item.tyre_type = old_item.tyre_type
-				trd_old_item.quantity = old_item.quantity
-				trd_old_item.fitted_km_reading = old_item.fitted_km_reading
-				trd_old_item.fitted_date = old_item.fitted_date
-				trd_old_item.unit_price = old_item.unit_price
+				# Get standard life time from item if available
+				# Try to get item_code from Tyre Recording Database if linked
+				item_code = None
+				if old_item.serial_no:
+					item_code = frappe.db.get_value("Tyre Recording Database", old_item.serial_no, "item_code")
+				
+				if item_code:
+					standard_life_time = self.get_standard_life_time(item_code)
+					analysis_item.standard_life_time = standard_life_time
+					
+					# Calculate deviation (c) = b - a
+					if analysis_item.actual_coverage and standard_life_time:
+						analysis_item.deviation = analysis_item.actual_coverage - standard_life_time
+					else:
+						analysis_item.deviation = 0
+				else:
+					analysis_item.standard_life_time = 0
+					analysis_item.deviation = 0
+	
+	def get_current_equipment_reading(self):
+		"""Get current hours/km reading for the equipment"""
+		if not self.plate_no:
+			return 0
 		
-		# Populate new tyre items (from requested_items in request form)
-		if self.requested_items:
-			ref_counter = 1
-			current_ref = None
-			item_counter = 1
+		# Try to get from latest PM Done
+		latest_pm = frappe.db.get_all(
+			"Preventive Maintenance Done",
+			filters={"equipment": self.plate_no, "docstatus": 1},
+			fields=["actual_hours_km"],
+			order_by="actual_date DESC",
+			limit=1
+		)
+		
+		if latest_pm and latest_pm[0].get("actual_hours_km"):
+			return latest_pm[0].actual_hours_km
+		
+		return 0
+	
+	def get_standard_life_time(self, item_code):
+		"""Get standard life time for tyre item"""
+		if not item_code:
+			return 0
+		
+		# Try to get standard_life_time field (check if it exists first)
+		try:
+			# Check if field exists in Item meta
+			item_meta = frappe.get_meta("Item")
+			field_names = [f.fieldname for f in item_meta.fields]
 			
-			for req_item in self.requested_items:
-				trd_new_item = trd_doc.append("new_tyre_items", {})
-				
-				# Set reference number based on position
-				position_key = req_item.requested_tyre_position or "Default"
-				if current_ref != position_key:
-					current_ref = position_key
-					ref_counter = len([x for x in trd_doc.new_tyre_items if x.reference_no]) + 1
-					item_counter = 1
-				
-				trd_new_item.reference_no = f"Ref-{ref_counter}"
-				trd_new_item.item_no = item_counter
-				item_counter += 1
-				
-				# Map new tyre data (from requested tyre)
-				trd_new_item.tyre_position = req_item.requested_tyre_position
-				trd_new_item.tyre_size = req_item.requested_tyre_size
-				trd_new_item.tyre_brand = req_item.requested_tyre_brand
-				trd_new_item.tyre_type = req_item.requested_tyre_type
-				trd_new_item.quantity = req_item.quantity or 1
-		
-		# Populate analysis items (from analysis_items in request form)
-		if self.analysis_items:
-			ref_counter = 1
-			current_ref = None
-			item_counter = 1
-			
-			for analysis_item in self.analysis_items:
-				trd_analysis_item = trd_doc.append("analysis_items", {})
-				
-				# Set reference number based on position
-				position_key = analysis_item.tyre_position or "Default"
-				if current_ref != position_key:
-					current_ref = position_key
-					ref_counter = len([x for x in trd_doc.analysis_items if x.reference_no]) + 1
-					item_counter = 1
-				
-				trd_analysis_item.reference_no = f"Ref-{ref_counter}"
-				trd_analysis_item.item_no = item_counter
-				item_counter += 1
-				
-				# Map analysis data
-				trd_analysis_item.tyre_position = analysis_item.tyre_position
-				trd_analysis_item.tyre_size = analysis_item.tyre_size
-				trd_analysis_item.tyre_brand = analysis_item.tyre_brand
-				trd_analysis_item.tyre_type = analysis_item.tyre_type
-				trd_analysis_item.old_fitted_km_reading = analysis_item.fitted_km_reading
-				trd_analysis_item.standard_life_time = analysis_item.standard_life_time
-				trd_analysis_item.actual_coverage = analysis_item.actual_coverage
-				trd_analysis_item.deviation = analysis_item.deviation
-				trd_analysis_item.reason_for_less_consumption = analysis_item.reason_for_less_consumption
-				
-				# Find matching old tyre item for old_fitted_km_reading
-				if self.old_tyre_items:
-					matching_old = next((item for item in self.old_tyre_items 
-						if item.tyre_position == analysis_item.tyre_position), None)
-					if matching_old:
-						trd_analysis_item.old_fitted_km_reading = matching_old.fitted_km_reading
-		
-		# Insert the document
-		trd_doc.insert(ignore_permissions=True)
-		
-		frappe.msgprint(f"Tyre Recording Database Form {trd_doc.name} created successfully.")
-
+			# Try standard_life_time first, then custom_standard_life_time
+			if "standard_life_time" in field_names:
+				standard_life = frappe.db.get_value("Item", item_code, "standard_life_time")
+				return standard_life or 0
+			elif "custom_standard_life_time" in field_names:
+				standard_life = frappe.db.get_value("Item", item_code, "custom_standard_life_time")
+				return standard_life or 0
+		except Exception as e:
+			# If field doesn't exist or any error, return 0
+			frappe.log_error(f"Error getting standard_life_time for item {item_code}: {str(e)}", "Tyre Standard Life Time")
+			pass
+		return 0
