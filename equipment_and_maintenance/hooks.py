@@ -100,7 +100,8 @@ after_migrate = [
 	"equipment_and_maintenance.dashboard_fixtures.create_number_cards",
 	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks",
 	"equipment_and_maintenance.dashboard_fixtures.create_dashboard_charts",
-	"equipment_and_maintenance.dashboard_fixtures.create_dashboards"
+	"equipment_and_maintenance.dashboard_fixtures.create_dashboards",
+	"equipment_and_maintenance.install.recreate_workspaces.execute"
 ]
 
 # Uninstallation
