@@ -1,8 +1,17 @@
 {
  "app": "equipment_and_maintenance",
- "charts": [],
- "content": "[{\"id\": \"header_main\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h3\\\"><b>Equipment & Maintenance Dashboard</b></span>\", \"col\": 12}}, {\"id\": \"custom_block_stats\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Quick Stats\", \"col\": 12}}, {\"id\": \"spacer1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"number_card_total_equipment\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Equipment\", \"col\": 4}}, {\"id\": \"number_card_pending_requests\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Maintenance Requests\", \"col\": 4}}, {\"id\": \"number_card_open_work_orders\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open Work Orders\", \"col\": 4}}, {\"id\": \"spacer2\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header_modules\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Modules</b></span>\", \"col\": 12}}, {\"id\": \"custom_block_equipment\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Equipment Overview\", \"col\": 6}}, {\"id\": \"custom_block_maintenance\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Maintenance Overview\", \"col\": 6}}, {\"id\": \"spacer3\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"card_equipment\", \"type\": \"card\", \"data\": {\"card_name\": \"Equipment\", \"col\": 6}}, {\"id\": \"card_maintenance\", \"type\": \"card\", \"data\": {\"card_name\": \"Maintenance\", \"col\": 6}}]",
- "creation": "2026-02-17 11:08:17.607286",
+ "charts": [
+  {
+   "chart_name": "Maintenance Requests Trend",
+   "label": "Maintenance Requests Trend"
+  },
+  {
+   "chart_name": "Work Orders Status",
+   "label": "Work Orders Status"
+  }
+ ],
+ "content": "[{\"id\": \"header_main\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h3\\\"><b>Equipment & Maintenance Dashboard</b></span>\", \"col\": 12}}, {\"id\": \"chart_maintenance_trend\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Maintenance Requests Trend\", \"col\": 6}}, {\"id\": \"chart_work_orders\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Work Orders Status\", \"col\": 6}}, {\"id\": \"spacer1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"custom_block_stats\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Quick Stats\", \"col\": 12}}, {\"id\": \"spacer2\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"number_card_total_equipment\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Equipment\", \"col\": 4}}, {\"id\": \"number_card_pending_requests\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Maintenance Requests\", \"col\": 4}}, {\"id\": \"number_card_open_work_orders\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open Work Orders\", \"col\": 4}}, {\"id\": \"spacer3\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header_dashboard\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Dashboards</b></span>\", \"col\": 12}}, {\"id\": \"shortcut_dashboard_main\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Equipment and Maintenance Dashboard\", \"col\": 4}}, {\"id\": \"shortcut_dashboard_equipment\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Equipment Dashboard\", \"col\": 4}}, {\"id\": \"shortcut_dashboard_maintenance\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Maintenance Dashboard\", \"col\": 4}}, {\"id\": \"spacer4\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"header_modules\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Modules</b></span>\", \"col\": 12}}, {\"id\": \"custom_block_equipment\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Equipment Overview\", \"col\": 6}}, {\"id\": \"custom_block_maintenance\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"Maintenance Overview\", \"col\": 6}}, {\"id\": \"spacer5\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"card_equipment\", \"type\": \"card\", \"data\": {\"card_name\": \"Equipment\", \"col\": 6}}, {\"id\": \"card_maintenance\", \"type\": \"card\", \"data\": {\"card_name\": \"Maintenance\", \"col\": 6}}]",
+ "creation": "2026-02-17 12:43:01.704310",
  "custom_blocks": [
   {
    "custom_block_name": "Quick Stats"
@@ -43,7 +52,7 @@
    "type": "Card Break"
   }
  ],
- "modified": "2026-02-17 11:08:17.607286",
+ "modified": "2026-02-17 12:43:01.704310",
  "modified_by": "Administrator",
  "module": "Equipment And Maintenance",
  "name": "Equipment and Maintenance",
@@ -66,7 +75,26 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 10.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "doc_view": "",
+   "label": "Equipment and Maintenance Dashboard",
+   "link_to": "Equipment and Maintenance",
+   "type": "Dashboard"
+  },
+  {
+   "doc_view": "",
+   "label": "Equipment Dashboard",
+   "link_to": "Equipment",
+   "type": "Dashboard"
+  },
+  {
+   "doc_view": "",
+   "label": "Maintenance Dashboard",
+   "link_to": "Maintenance",
+   "type": "Dashboard"
+  }
+ ],
  "title": "Equipment and Maintenance",
  "type": "Workspace"
 }

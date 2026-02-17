@@ -309,3 +309,240 @@ def create_custom_blocks():
 			frappe.log_error(f"Created/Updated custom block: {block_data['name']}", "Custom Block Creation")
 		except Exception as e:
 			frappe.log_error(f"Error creating custom block {block_data['name']}: {str(e)}", "Custom Block Creation Error")
+
+
+def create_dashboard_charts():
+	"""Create dashboard charts for Equipment and Maintenance"""
+	# Delete problematic charts if they exist
+	charts_to_delete = ["Maintenance Requests by Status", "Equipment Count Over Time"]
+	for chart_name in charts_to_delete:
+		if frappe.db.exists("Dashboard Chart", chart_name):
+			try:
+				frappe.delete_doc("Dashboard Chart", chart_name, force=1)
+				frappe.db.commit()
+				frappe.log_error(f"Deleted chart: {chart_name}", "Dashboard Chart Cleanup")
+			except Exception as e:
+				frappe.log_error(f"Error deleting chart {chart_name}: {str(e)}", "Dashboard Chart Cleanup Error")
+	
+	charts = [
+		{
+			"doctype": "Dashboard Chart",
+			"chart_name": "Maintenance Requests Trend",
+			"chart_type": "Count",
+			"document_type": "Maintenance Request",
+			"type": "Bar",
+			"timeseries": 1,
+			"timespan": "Last Quarter",
+			"time_interval": "Weekly",
+			"based_on": "creation",
+			"filters_json": "[]",
+			"dynamic_filters_json": "",
+			"currency": "",
+			"is_public": 1,
+			"is_standard": 1,
+			"module": "Equipment And Maintenance",
+			"color": "#30a66d"
+		},
+		{
+			"doctype": "Dashboard Chart",
+			"chart_name": "Work Orders Status",
+			"chart_type": "Count",
+			"document_type": "Maintenance Work Order",
+			"type": "Bar",
+			"timeseries": 1,
+			"timespan": "Last Quarter",
+			"time_interval": "Monthly",
+			"based_on": "creation",
+			"filters_json": json.dumps([["Maintenance Work Order", "docstatus", "=", 1]]),
+			"dynamic_filters_json": "",
+			"currency": "",
+			"is_public": 1,
+			"is_standard": 1,
+			"module": "Equipment And Maintenance",
+			"color": "#ffa00a"
+		},
+		{
+			"doctype": "Dashboard Chart",
+			"chart_name": "Completed Maintenance Jobs Trend",
+			"chart_type": "Count",
+			"document_type": "Maintenance Job Completion",
+			"type": "Line",
+			"timeseries": 1,
+			"timespan": "Last Quarter",
+			"time_interval": "Monthly",
+			"based_on": "creation",
+			"filters_json": json.dumps([["Maintenance Job Completion", "docstatus", "=", 1]]),
+			"dynamic_filters_json": "",
+			"currency": "",
+			"is_public": 1,
+			"is_standard": 1,
+			"module": "Equipment And Maintenance",
+			"color": "#28a745"
+		},
+		{
+			"doctype": "Dashboard Chart",
+			"chart_name": "Equipment by Category",
+			"chart_type": "Group By",
+			"document_type": "Equipment Master",
+			"type": "Donut",
+			"timeseries": 0,
+			"group_by_type": "Count",
+			"group_by_based_on": "equipment_sub_category",
+			"filters_json": "[]",
+			"dynamic_filters_json": "",
+			"currency": "",
+			"is_public": 1,
+			"is_standard": 1,
+			"module": "Equipment And Maintenance",
+			"color": "#5e64ff"
+		},
+		{
+			"doctype": "Dashboard Chart",
+			"chart_name": "Fuel Requests Trend",
+			"chart_type": "Count",
+			"document_type": "Fuel Request",
+			"type": "Bar",
+			"timeseries": 1,
+			"timespan": "Last Quarter",
+			"time_interval": "Monthly",
+			"based_on": "creation",
+			"filters_json": json.dumps([["Fuel Request", "docstatus", "=", 1]]),
+			"dynamic_filters_json": "",
+			"currency": "",
+			"is_public": 1,
+			"is_standard": 1,
+			"module": "Equipment And Maintenance",
+			"color": "#ff5858"
+		},
+		{
+			"doctype": "Dashboard Chart",
+			"chart_name": "Equipment Transfer Requests",
+			"chart_type": "Count",
+			"document_type": "Equipment Transfer Form",
+			"type": "Line",
+			"timeseries": 1,
+			"timespan": "Last Quarter",
+			"time_interval": "Monthly",
+			"based_on": "creation",
+			"filters_json": "[]",
+			"dynamic_filters_json": "",
+			"currency": "",
+			"is_public": 1,
+			"is_standard": 1,
+			"module": "Equipment And Maintenance",
+			"color": "#e86c13"
+		}
+	]
+	
+	for chart_data in charts:
+		chart_name = chart_data["chart_name"]
+		if not frappe.db.exists("Dashboard Chart", chart_name):
+			try:
+				chart = frappe.get_doc(chart_data)
+				chart.insert(ignore_permissions=True)
+				frappe.db.commit()
+				frappe.log_error(f"Created dashboard chart: {chart_name}", "Dashboard Chart Creation")
+			except Exception as e:
+				frappe.log_error(f"Error creating dashboard chart {chart_name}: {str(e)}", "Dashboard Chart Creation Error")
+		else:
+			# Update existing chart
+			try:
+				chart = frappe.get_doc("Dashboard Chart", chart_name)
+				for key, value in chart_data.items():
+					if key != "doctype" and key != "name":
+						setattr(chart, key, value)
+				chart.save(ignore_permissions=True)
+				frappe.db.commit()
+				frappe.log_error(f"Updated dashboard chart: {chart_name}", "Dashboard Chart Update")
+			except Exception as e:
+				frappe.log_error(f"Error updating dashboard chart {chart_name}: {str(e)}", "Dashboard Chart Update Error")
+
+
+def create_dashboards():
+	"""Create dashboards for Equipment and Maintenance workspaces"""
+	# Create charts first
+	create_dashboard_charts()
+	
+	dashboards = [
+		{
+			"doctype": "Dashboard",
+			"dashboard_name": "Equipment and Maintenance",
+			"is_standard": 1,
+			"module": "Equipment And Maintenance",
+			"cards": [
+				{"card": "Total Equipment"},
+				{"card": "Pending Maintenance Requests"},
+				{"card": "Open Work Orders"},
+				{"card": "Completed Maintenance Jobs"}
+			],
+			"charts": [
+				{"chart": "Maintenance Requests Trend", "width": "Full"},
+				{"chart": "Work Orders Status", "width": "Half"},
+				{"chart": "Equipment by Category", "width": "Half"},
+				{"chart": "Completed Maintenance Jobs Trend", "width": "Half"},
+				{"chart": "Fuel Requests Trend", "width": "Half"},
+				{"chart": "Equipment Transfer Requests", "width": "Full"}
+			]
+		},
+		{
+			"doctype": "Dashboard",
+			"dashboard_name": "Equipment",
+			"is_standard": 1,
+			"module": "Equipment And Maintenance",
+			"cards": [
+				{"card": "Total Equipment"}
+			],
+			"charts": [
+				{"chart": "Equipment by Category", "width": "Full"},
+				{"chart": "Fuel Requests Trend", "width": "Half"},
+				{"chart": "Equipment Transfer Requests", "width": "Half"}
+			]
+		},
+		{
+			"doctype": "Dashboard",
+			"dashboard_name": "Maintenance",
+			"is_standard": 1,
+			"module": "Equipment And Maintenance",
+			"cards": [
+				{"card": "Pending Maintenance Requests"},
+				{"card": "Open Work Orders"},
+				{"card": "Completed Maintenance Jobs"}
+			],
+			"charts": [
+				{"chart": "Maintenance Requests Trend", "width": "Full"},
+				{"chart": "Work Orders Status", "width": "Half"},
+				{"chart": "Completed Maintenance Jobs Trend", "width": "Half"},
+				{"chart": "Fuel Requests Trend", "width": "Full"}
+			]
+		}
+	]
+	
+	for dashboard_data in dashboards:
+		dashboard_name = dashboard_data["dashboard_name"]
+		if not frappe.db.exists("Dashboard", dashboard_name):
+			try:
+				dashboard = frappe.get_doc(dashboard_data)
+				dashboard.insert(ignore_permissions=True)
+				frappe.db.commit()
+				frappe.log_error(f"Created dashboard: {dashboard_name}", "Dashboard Creation")
+			except Exception as e:
+				frappe.log_error(f"Error creating dashboard {dashboard_name}: {str(e)}", "Dashboard Creation Error")
+		else:
+			# Update existing dashboard
+			try:
+				dashboard = frappe.get_doc("Dashboard", dashboard_name)
+				# Update cards
+				dashboard.cards = []
+				for card_data in dashboard_data.get("cards", []):
+					dashboard.append("cards", card_data)
+				# Update charts
+				dashboard.charts = []
+				for chart_data in dashboard_data.get("charts", []):
+					dashboard.append("charts", chart_data)
+				dashboard.is_standard = dashboard_data.get("is_standard", 1)
+				dashboard.module = dashboard_data.get("module", "Equipment And Maintenance")
+				dashboard.save(ignore_permissions=True)
+				frappe.db.commit()
+				frappe.log_error(f"Updated dashboard: {dashboard_name}", "Dashboard Update")
+			except Exception as e:
+				frappe.log_error(f"Error updating dashboard {dashboard_name}: {str(e)}", "Dashboard Update Error")
