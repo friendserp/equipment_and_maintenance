@@ -91,6 +91,12 @@ after_install = [
 	"equipment_and_maintenance.dashboard_fixtures.create_number_cards"
 ]
 
+# After Migration
+# ------------
+after_migrate = [
+	"equipment_and_maintenance.dashboard_fixtures.create_number_cards"
+]
+
 # Uninstallation
 # ------------
 
