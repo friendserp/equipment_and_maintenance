@@ -1,0 +1,128 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-12-26 01:04:49.288665",
+  "name": "Review",
+  "workflow_action_name": "Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-09 14:39:20.660289",
+  "name": "Check",
+  "workflow_action_name": "Check"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-09 14:39:20.668191",
+  "name": "Send for Review",
+  "workflow_action_name": "Send for Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-09 14:39:20.669747",
+  "name": "Receive",
+  "workflow_action_name": "Receive"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-09 14:39:20.671214",
+  "name": "Maintenance Approve",
+  "workflow_action_name": "Maintenance Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-09 14:39:20.672600",
+  "name": "Admin Approve",
+  "workflow_action_name": "Admin Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-09 14:39:20.673984",
+  "name": "GM Approve",
+  "workflow_action_name": "GM Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-09 15:13:19.929060",
+  "name": "Collect",
+  "workflow_action_name": "Collect"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-10 18:18:10.589258",
+  "name": "Hand Over",
+  "workflow_action_name": "Hand Over"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-10 19:13:35.718566",
+  "name": "Cancel",
+  "workflow_action_name": "Cancel"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-10 21:05:13.347722",
+  "name": "Resubmit",
+  "workflow_action_name": "Resubmit"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-10 21:05:13.356057",
+  "name": "Equipment Dept Approve",
+  "workflow_action_name": "Equipment Dept Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-10 21:05:13.357674",
+  "name": "DGM Approve",
+  "workflow_action_name": "DGM Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-10 21:05:13.359354",
+  "name": "Survey Committee Approve",
+  "workflow_action_name": "Survey Committee Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-10 21:05:13.360710",
+  "name": "General Manager Approve",
+  "workflow_action_name": "General Manager Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-01-13 11:43:36.240310",
+  "name": "Request",
+  "workflow_action_name": "Request"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-12-26 01:04:49.287921",
+  "name": "Reject",
+  "workflow_action_name": "Reject"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-12-26 01:04:49.286293",
+  "name": "Approve",
+  "workflow_action_name": "Approve"
+ }
+]
