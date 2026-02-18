@@ -152,60 +152,8 @@
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [
-  {
-   "link_doctype": "Machinery Time Sheet Registration",
-   "link_fieldname": "plate_number"
-  },
-  {
-   "link_doctype": "Equipment Transfer Form",
-   "link_fieldname": "equipment_plate_no"
-  },
-  {
-   "is_child_table": 1,
-   "link_doctype": "Rental Agreement Items",
-   "link_fieldname": "created_equipment_id",
-   "parent_doctype": "Rental Agreement",
-   "table_fieldname": "equipments"
-  },
-  {
-   "link_doctype": "Bollo Followup Form",
-   "link_fieldname": "plate_number"
-  },
-  {
-   "link_doctype": "Insurance Followup Form",
-   "link_fieldname": "plate_number"
-  },
-  {
-   "link_doctype": "Fuel Request",
-   "link_fieldname": "plate_number"
-  },
-  {
-   "link_doctype": "Battery Request and Analysis Form",
-   "link_fieldname": "equipment_type"
-  },
-  {
-   "link_doctype": "Battery Issue and Return Report Form",
-   "link_fieldname": "equipment_type"
-  },
-  {
-   "link_doctype": "Battery Recording Database Form",
-   "link_fieldname": "equipment_type"
-  },
-  {
-   "link_doctype": "Preventive Maintenance Plan",
-   "link_fieldname": "equipment"
-  },
-  {
-   "link_doctype": "Preventive Maintenance Done",
-   "link_fieldname": "equipment"
-  },
-  {
-   "link_doctype": "Preventive Maintenance History",
-   "link_fieldname": "equipment"
-  }
- ],
- "modified": "2026-01-12 01:54:56.500442",
+ "links": [],
+ "modified": "2026-02-18 13:16:48.205730",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Equipment Master",

@@ -86,26 +86,26 @@ app_license = "mit"
 # ------------
 
 # before_install = "equipment_and_maintenance.install.before_install"
-after_install = [
-	"equipment_and_maintenance.install.create_workflows.create_workflows",
-	"equipment_and_maintenance.dashboard_fixtures.create_number_cards",
-	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks",
-	"equipment_and_maintenance.dashboard_fixtures.create_dashboard_charts",
-	"equipment_and_maintenance.dashboard_fixtures.create_dashboards",
-	"equipment_and_maintenance.install.setup_permissions.execute"
-]
+# after_install = [
+# 	"equipment_and_maintenance.install.create_workflows.create_workflows",
+# 	"equipment_and_maintenance.dashboard_fixtures.create_number_cards",
+# 	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks",
+# 	"equipment_and_maintenance.dashboard_fixtures.create_dashboard_charts",
+# 	"equipment_and_maintenance.dashboard_fixtures.create_dashboards",
+# 	"equipment_and_maintenance.install.setup_permissions.execute"
+# ]
 
 # After Migration
 # ------------
-after_migrate = [
-	"equipment_and_maintenance.dashboard_fixtures.create_number_cards",
-	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks",
-	"equipment_and_maintenance.dashboard_fixtures.create_dashboard_charts",
-	"equipment_and_maintenance.dashboard_fixtures.create_dashboards",
-	"equipment_and_maintenance.install.recreate_workspaces.execute",
-	"equipment_and_maintenance.install.create_workspace_sidebar.execute",
-	"equipment_and_maintenance.install.setup_permissions.execute"
-]
+# after_migrate = [
+# 	"equipment_and_maintenance.dashboard_fixtures.create_number_cards",
+# 	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks",
+# 	"equipment_and_maintenance.dashboard_fixtures.create_dashboard_charts",
+# 	"equipment_and_maintenance.dashboard_fixtures.create_dashboards",
+# 	"equipment_and_maintenance.install.recreate_workspaces.execute",
+# 	"equipment_and_maintenance.install.create_workspace_sidebar.execute",
+# 	"equipment_and_maintenance.install.setup_permissions.execute"
+# ]
 
 # Uninstallation
 # ------------
@@ -276,25 +276,4 @@ scheduler_events = {
 # ------------
 # Fixtures to export using bench export-fixtures
 # Export custom fields, property setters, and links for this app
-fixtures = [
-
-	{
-		"dt": "Workflow",
-	},
-	{
-		"dt": "Workflow State",
-	},
-	{
-		"dt": "Workflow Action Master",
-	},
-	{
-		"dt": "DocType Link",
-		"filters": {
-			"parent": ["in", [
-				"Equipment Master",
-				"Asset Category"
-			]]
-		}
-	}
-]
 
