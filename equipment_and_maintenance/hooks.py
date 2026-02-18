@@ -43,7 +43,9 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+	"Material Request": "public/js/material_request_status_indicator.js"
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -164,7 +166,32 @@ doc_events = {
 		"on_update_after_submit": [
 			"equipment_and_maintenance.equipment.doctype.material_request_hooks.update_battery_recording_on_mr_issue",
 			"equipment_and_maintenance.equipment.doctype.material_request_hooks.update_tyre_recording_on_mr_issue"
-		]
+		],
+		"on_update": [
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.sync_purchase_request_status_to_source_material_requests"
+		],
+	},
+	"Purchase Order": {
+		"on_submit": [
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.sync_source_mr_status_from_purchase_order"
+		],
+		"on_update_after_submit": [
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.sync_source_mr_status_from_purchase_order"
+		],
+		"on_cancel": [
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.sync_source_mr_status_from_purchase_order"
+		],
+	},
+	"Purchase Receipt": {
+		"on_submit": [
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.sync_source_mr_status_from_purchase_receipt"
+		],
+		"on_update_after_submit": [
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.sync_source_mr_status_from_purchase_receipt"
+		],
+		"on_cancel": [
+			"equipment_and_maintenance.equipment.doctype.material_request_hooks.sync_source_mr_status_from_purchase_receipt"
+		],
 	},
 	"Stock Entry": {
 		"on_submit": [

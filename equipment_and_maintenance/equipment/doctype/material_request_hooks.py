@@ -341,3 +341,129 @@ def update_tyre_recording_on_stock_entry(doc, method):
 					"last_material_request": doc.material_request,
 					"last_stock_entry": doc.name
 				})
+
+
+def sync_purchase_request_status_to_source_material_requests(doc, method):
+	"""Sync Purchase-type Material Request status to linked source Material Requests.
+
+	Use case:
+	- You create a Purchase Request using Material Request with items that have `custom_mr_number`
+	  pointing to the original Material Requests (typically Material Issue).
+	- When the Purchase Request is created (Draft) or its workflow/status changes later,
+	  we want to push that PR status into the original Material Requests' `custom_mr_status` field.
+	"""
+	# Only handle Material Request doctype
+	if doc.doctype != "Material Request":
+		return
+
+	# Only sync for Purchase-type Material Requests
+	if getattr(doc, "material_request_type", None) != "Purchase":
+		return
+
+	# Determine the status we want to propagate.
+	# Prefer the custom workflow-based status if present (PR Draft / PR Requested / etc.),
+	# otherwise fall back to the core document status.
+	pr_status = getattr(doc, "custom_mr_status", None) or getattr(doc, "status", None)
+	if not pr_status:
+		return
+
+	# Collect unique source Material Requests from child items' custom_mr_number
+	source_mrs = {
+		getattr(item, "custom_mr_number")
+		for item in (doc.items or [])
+		if getattr(item, "custom_mr_number", None)
+	}
+
+	if not source_mrs:
+		return
+
+	for mr_name in source_mrs:
+		if not mr_name:
+			continue
+
+		# Make sure the referenced Material Request exists
+		if not frappe.db.exists("Material Request", mr_name):
+			continue
+
+		# Avoid accidental loops if someone links Purchase → Purchase
+		mr_type = frappe.db.get_value("Material Request", mr_name, "material_request_type")
+		if mr_type == "Purchase":
+			continue
+
+		current_status = frappe.db.get_value("Material Request", mr_name, "custom_mr_status")
+		if current_status == pr_status:
+			continue
+
+		# Update without touching modified timestamp to keep the original MR history cleaner
+		frappe.db.set_value(
+			"Material Request",
+			mr_name,
+			"custom_mr_status",
+			pr_status,
+			update_modified=False,
+		)
+
+
+def sync_source_mr_status_from_purchase_order(doc, method):
+	"""When Purchase Order changes, update linked Purchase MRs and their source MRs' custom status.
+
+	This ensures that status changes like Pending → Ordered / Partially Ordered,
+	which are driven by Purchase Orders, are reflected back on the original
+	Material Requests referenced via `custom_mr_number`.
+	"""
+
+	# Collect distinct Material Requests linked on PO items
+	material_requests = {
+		getattr(item, "material_request")
+		for item in (doc.items or [])
+		if getattr(item, "material_request", None)
+	}
+
+	if not material_requests:
+		return
+
+	for mr_name in material_requests:
+		if not mr_name:
+			continue
+
+		if not frappe.db.exists("Material Request", mr_name):
+			continue
+
+		mr_doc = frappe.get_doc("Material Request", mr_name)
+
+		# Reuse the existing logic; this will:
+		# - Ensure it's a Purchase-type MR
+		# - Read its current status / custom_mr_status
+		# - Push that status into all source MRs via custom_mr_number
+		sync_purchase_request_status_to_source_material_requests(mr_doc, method)
+
+
+def sync_source_mr_status_from_purchase_receipt(doc, method):
+	"""When Purchase Receipt changes, update linked Purchase MRs and their source MRs' custom status.
+
+	This covers transitions like Ordered → Received / Partially Received that
+	are driven by Purchase Receipts.
+	"""
+
+	# Collect distinct Material Requests linked on PR items
+	material_requests = {
+		getattr(item, "material_request")
+		for item in (doc.items or [])
+		if getattr(item, "material_request", None)
+	}
+
+	if not material_requests:
+		return
+
+	for mr_name in material_requests:
+		if not mr_name:
+			continue
+
+		if not frappe.db.exists("Material Request", mr_name):
+			continue
+
+		mr_doc = frappe.get_doc("Material Request", mr_name)
+
+		# Reuse the same propagation logic from the Purchase MR
+		sync_purchase_request_status_to_source_material_requests(mr_doc, method)
+
