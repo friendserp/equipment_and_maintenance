@@ -288,36 +288,11 @@ fixtures = [
 		"dt": "Workflow Action Master",
 	},
 	{
-		"dt": "Workspace Sidebar",
-	},
-	{
 		"dt": "DocType Link",
 		"filters": {
-			"link_doctype": ["in", [
+			"parent": ["in", [
 				"Equipment Master",
-				"Asset Sub Category",
-				"Asset Category",
-				"Preventive Maintenance Task Interval",
-				"Preventive Maintenance Schedule Item",
-				"Preventive Maintenance Template",
-				"Preventive Maintenance Schedule",
-				"Preventive Maintenance Log Task",
-				"Preventive Maintenance Task",
-				"Preventive Maintenance Log",
-				"Maintenance Interval",
-				"Maintenance Job Completion",
-				"Maintenance Request",
-				"Maintenance Work Order",
-				"Maintenance Cost Summary",
-				"Maintenance Outside Repair Cost",
-				"Maintenance Miscellaneous Item Cost",
-				"Maintenance Lubricant Cost",
-				"Maintenance Spare Parts Cost",
-				"Maintenance Labor Cost",
-				"Maintenance Work Done",
-				"Maintenance Request Items"
-                "Asset Category",
-                "Asset Sub Category"
+				"Asset Category"
 			]]
 		}
 	}
