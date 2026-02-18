@@ -38,7 +38,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-01 12:00:00",
+ "modified": "2026-02-18 11:02:45.010130",
  "modified_by": "Administrator",
  "module": "Equipment And Maintenance",
  "name": "Fuel Price Item",
@@ -50,4 +50,3 @@
  "sort_order": "DESC",
  "states": []
 }
-
