@@ -48,7 +48,7 @@ def create_main_workspace():
 		"title": "Equipment and Maintenance",
 		"module": "Equipment And Maintenance",
 		"app": "equipment_and_maintenance",
-		"icon": "settings",
+		"icon": "dashboard-list",
 		"public": 1,
 		"sequence_id": 10.0,
 		"content": json.dumps([
@@ -156,10 +156,9 @@ def create_equipment_workspace():
 		"title": "Equipment",
 		"module": "Equipment And Maintenance",
 		"app": "equipment_and_maintenance",
-		"icon": "tool",
+		"icon": "money-coins-1",
 		"public": 1,
 		"sequence_id": 11.0,
-		"is_hidden": 1,
 		"parent_page": "Equipment and Maintenance",
 		"content": json.dumps([
 			{"id": "header_main", "type": "header", "data": {"text": "<span class=\"h3\"><b>Equipment Module</b></span>", "col": 12}},
@@ -423,10 +422,9 @@ def create_maintenance_workspace():
 		"title": "Maintenance",
 		"module": "Equipment And Maintenance",
 		"app": "equipment_and_maintenance",
-		"icon": "wrench",
+		"icon": "quantity-1",
 		"public": 1,
 		"sequence_id": 12.0,
-		"is_hidden": 1,
 		"parent_page": "Equipment and Maintenance",
 		"content": json.dumps([
 			{"id": "header_main", "type": "header", "data": {"text": "<span class=\"h3\"><b>Maintenance Module</b></span>", "col": 12}},

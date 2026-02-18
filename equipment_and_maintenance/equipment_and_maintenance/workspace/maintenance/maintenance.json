@@ -24,7 +24,7 @@
  "docstatus": 0,
  "doctype": "Workspace",
  "hide_custom": 0,
- "icon": "wrench",
+ "icon": "quantity-1",
  "idx": 0,
  "indicator_color": "green",
  "is_hidden": 1,
@@ -189,7 +189,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-02-17 13:31:00.466007",
+ "modified": "2026-02-18 11:09:27.506589",
  "modified_by": "Administrator",
  "module": "Equipment And Maintenance",
  "name": "Maintenance",

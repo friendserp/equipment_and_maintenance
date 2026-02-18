@@ -91,7 +91,8 @@ after_install = [
 	"equipment_and_maintenance.dashboard_fixtures.create_number_cards",
 	"equipment_and_maintenance.dashboard_fixtures.create_custom_blocks",
 	"equipment_and_maintenance.dashboard_fixtures.create_dashboard_charts",
-	"equipment_and_maintenance.dashboard_fixtures.create_dashboards"
+	"equipment_and_maintenance.dashboard_fixtures.create_dashboards",
+	"equipment_and_maintenance.install.setup_permissions.execute"
 ]
 
 # After Migration
@@ -102,7 +103,8 @@ after_migrate = [
 	"equipment_and_maintenance.dashboard_fixtures.create_dashboard_charts",
 	"equipment_and_maintenance.dashboard_fixtures.create_dashboards",
 	"equipment_and_maintenance.install.recreate_workspaces.execute",
-	"equipment_and_maintenance.install.create_workspace_sidebar.execute"
+	"equipment_and_maintenance.install.create_workspace_sidebar.execute",
+	"equipment_and_maintenance.install.setup_permissions.execute"
 ]
 
 # Uninstallation

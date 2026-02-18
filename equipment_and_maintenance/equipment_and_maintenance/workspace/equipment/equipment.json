@@ -20,7 +20,7 @@
  "docstatus": 0,
  "doctype": "Workspace",
  "hide_custom": 0,
- "icon": "tool",
+ "icon": "money-coins-1",
  "idx": 0,
  "indicator_color": "green",
  "is_hidden": 1,
@@ -294,7 +294,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-02-17 13:31:00.048633",
+ "modified": "2026-02-18 11:09:37.731036",
  "modified_by": "Administrator",
  "module": "Equipment And Maintenance",
  "name": "Equipment",

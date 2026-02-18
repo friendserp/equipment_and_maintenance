@@ -48,7 +48,7 @@
    "link_fieldname": "equipment_sub_category"
   }
  ],
- "modified": "2025-12-26 00:23:08.958134",
+ "modified": "2026-02-18 11:02:45.548203",
  "modified_by": "Administrator",
  "module": "Equipment And Maintenance",
  "name": "Asset Sub Category",
@@ -64,6 +64,30 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Maintenance User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Maintenance Manager",
    "share": 1,
    "write": 1
   }
