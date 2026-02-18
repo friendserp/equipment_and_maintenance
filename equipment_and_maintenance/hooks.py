@@ -279,9 +279,6 @@ scheduler_events = {
 fixtures = [
 
 	{
-		"dt": "Property Setter",
-	},
-	{
 		"dt": "Workflow",
 	},
 	{
