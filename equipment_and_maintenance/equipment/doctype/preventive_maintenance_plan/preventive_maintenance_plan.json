@@ -178,7 +178,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Planned Service Type",
-   "options": "A\nB\nC\nD\nT1\nT2\nT3\nT4\nWeekly\nMonthly\nQuarterly",
+   "options": "A\nB\nC\nD\nT1\nT2\nT3\nT4",
    "reqd": 1
   },
   {
@@ -249,7 +249,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-20 12:53:39.657140",
+ "modified": "2026-03-11 05:19:47.494750",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Preventive Maintenance Plan",

@@ -63,8 +63,6 @@ def load_pm_history(plan):
 			"remark": pm_done.remark or pm_done.completion_notes
 		})
 	
-	plan.save(ignore_permissions=True)
-
 
 @frappe.whitelist()
 def get_pm_history(equipment):
