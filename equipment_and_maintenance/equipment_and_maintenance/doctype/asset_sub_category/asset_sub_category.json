@@ -46,9 +46,17 @@
   {
    "link_doctype": "Equipment Master",
    "link_fieldname": "equipment_sub_category"
+  },
+  {
+   "link_doctype": "Equipment Master",
+   "link_fieldname": "equipment_sub_category"
+  },
+  {
+   "link_doctype": "Equipment Master",
+   "link_fieldname": "equipment_sub_category"
   }
  ],
- "modified": "2026-02-18 11:02:45.548203",
+ "modified": "2026-03-30 14:03:58.887133",
  "modified_by": "Administrator",
  "module": "Equipment And Maintenance",
  "name": "Asset Sub Category",
@@ -88,6 +96,31 @@
    "read": 1,
    "report": 1,
    "role": "Maintenance Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Quality Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Common Role",
    "share": 1,
    "write": 1
   }

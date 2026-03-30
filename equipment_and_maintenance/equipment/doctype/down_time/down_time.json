@@ -18,7 +18,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Shift",
-   "options": "Morning\nAfternoon",
+   "options": "Morning\nAfternoon\nNight",
    "reqd": 1
   },
   {
@@ -54,7 +54,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-05 00:00:00",
+ "modified": "2026-03-11 05:16:10.945110",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Down Time",
@@ -66,4 +66,3 @@
  "sort_order": "DESC",
  "states": []
 }
-

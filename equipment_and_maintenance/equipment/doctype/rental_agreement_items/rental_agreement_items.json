@@ -7,14 +7,17 @@
  "engine": "InnoDB",
  "field_order": [
   "equipment_type",
+  "agreement_type",
   "equipment_created",
   "created_equipment_id",
+  "plate_no",
   "column_break_lceh",
   "qty",
-  "price_per_day",
-  "price_per_month",
+  "payment_type",
+  "unit_price",
   "is_existing_equipment",
-  "plate_number"
+  "plate_number",
+  "amount"
  ],
  "fields": [
   {
@@ -22,7 +25,6 @@
    "fieldname": "is_existing_equipment",
    "fieldtype": "Check",
    "hidden": 1,
-   "in_list_view": 0,
    "label": "Existing Equipment",
    "print_hide": 1
   },
@@ -30,11 +32,8 @@
    "depends_on": "eval:doc.is_existing_equipment == 1",
    "fieldname": "plate_number",
    "fieldtype": "Link",
-   "hidden": 1,
-   "in_list_view": 0,
-   "label": "Plate Number",
-   "options": "Equipment Master",
-   "print_hide": 1
+   "label": "Equipment Master ID",
+   "options": "Equipment Master"
   },
   {
    "depends_on": "eval:doc.is_existing_equipment == 0",
@@ -48,7 +47,6 @@
    "depends_on": "eval:doc.is_existing_equipment == 0",
    "fieldname": "equipment_created",
    "fieldtype": "Check",
-   "in_list_view": 1,
    "label": "Equipment Created",
    "read_only": 1
   },
@@ -56,10 +54,8 @@
    "depends_on": "eval:doc.equipment_created == 1",
    "fieldname": "created_equipment_id",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Created Equipment ID",
    "options": "Equipment Master",
-   "print_hide": 0,
    "read_only": 1
   },
   {
@@ -67,31 +63,51 @@
    "fieldtype": "Column Break"
   },
   {
+   "columns": 1,
    "fieldname": "qty",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "\u1265\u12db\u1275"
   },
   {
-   "description": "Price is with out VAT",
-   "fieldname": "price_per_day",
-   "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "\u12e8\u12aa\u122b\u12ed \u12cb\u130b \u1260\u1240\u1295"
+   "fieldname": "plate_no",
+   "fieldtype": "Data",
+   "label": "Plate No"
   },
   {
+   "fieldname": "payment_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "\u12e8\u121a\u12a8\u1348\u120d\u1260\u1275 \u1201\u1294\u1273",
+   "options": "\u1230\u12d3\u1275\n\u1240\u1295\n\u12c8\u122d"
+  },
+  {
+   "fieldname": "agreement_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Agreement Type",
+   "options": "\u1240\u120b\u120d \u1218\u12aa\u1293\n\u12a8\u1263\u12f5 \u1218\u12aa\u1293 \u1260\u12a0\u12f5\u126b\u1295\u1235\n\u12a8\u1263\u12f5 \u1218\u12aa\u1293 \u1260\u1273\u12ed\u121d\u123d\u1275\n\u121b\u123d\u1290\u122a"
+  },
+  {
+   "columns": 1,
    "description": "Price is with out VAT",
-   "fieldname": "price_per_month",
+   "fieldname": "unit_price",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "\u12e8\u12aa\u122b\u12ed \u12cb\u130b \u1260\u12c8\u122d"
+   "label": "\u12e8\u12aa\u122b\u12ed \u12cb\u130b"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "\u1320\u1245\u120b\u120b \u12cb\u130b"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-01 10:57:07.992036",
+ "modified": "2026-03-14 11:33:58.490075",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Rental Agreement Items",

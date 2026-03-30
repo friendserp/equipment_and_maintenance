@@ -11,6 +11,7 @@
   "project",
   "column_break_depm",
   "end_date",
+  "equipment_request",
   "section_break_3yb7",
   "tenannt_info",
   "tenant",
@@ -189,6 +190,12 @@
    "fieldname": "check_number",
    "fieldtype": "Data",
    "label": "\u12e8\u127c\u12ad \u1241\u1325\u122d"
+  },
+  {
+   "fieldname": "equipment_request",
+   "fieldtype": "Link",
+   "label": "\u12e8\u121b\u123d\u1290\u122a \u1218\u1320\u12e8\u1242\u12eb",
+   "options": "Equipment Master"
   }
  ],
  "grid_page_length": 50,
@@ -200,7 +207,7 @@
    "link_fieldname": "rental_agreement"
   }
  ],
- "modified": "2026-01-01 12:09:42.786507",
+ "modified": "2026-03-14 12:51:47.346341",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Rental Agreement",

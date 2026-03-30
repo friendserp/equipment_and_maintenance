@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-03-11 11:37:03.165860",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "item_description",
+  "part_number",
+  "uom",
+  "requested",
+  "approved",
+  "unit_price",
+  "total_price",
+  "remark"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "columns": 2,
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Description"
+  },
+  {
+   "fetch_from": "item_code.stock_uom",
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "UOM",
+   "options": "UOM"
+  },
+  {
+   "columns": 1,
+   "fieldname": "requested",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Requested"
+  },
+  {
+   "columns": 1,
+   "fieldname": "approved",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Approved"
+  },
+  {
+   "columns": 1,
+   "fieldname": "total_price",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Price"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Data",
+   "label": "Remark"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_price",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Unit Pirce"
+  },
+  {
+   "fetch_from": "item_code.custom_part_no",
+   "fieldname": "part_number",
+   "fieldtype": "Data",
+   "label": "Part Number"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-03-11 12:32:36.628401",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Fuel Request Items",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

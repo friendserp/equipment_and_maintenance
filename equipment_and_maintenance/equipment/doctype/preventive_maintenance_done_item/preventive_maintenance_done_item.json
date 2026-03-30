@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2026-01-09 16:00:00.000000",
+ "creation": "2026-01-09 16:00:00",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -22,18 +22,21 @@
    "reqd": 1
   },
   {
+   "fetch_from": "item_code.item_name",
    "fieldname": "item_name",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Item Name"
   },
   {
+   "fetch_from": "item_code.custom_part_no",
    "fieldname": "part_no",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Part No"
   },
   {
+   "fetch_from": "item_code.stock_uom",
    "fieldname": "unit",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -50,12 +53,14 @@
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
- "modified": "2026-01-09 16:00:00.000000",
+ "links": [],
+ "modified": "2026-03-11 05:55:58.252074",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Preventive Maintenance Done Item",
  "owner": "Administrator",
  "permissions": [],
+ "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": []

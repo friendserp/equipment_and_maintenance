@@ -29,6 +29,7 @@
   "planned_week",
   "planned_service_type",
   "planned_hours_km",
+  "planned_date",
   "column_break_3",
   "is_maintenance_done",
   "section_break_2",
@@ -121,7 +122,8 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Department",
-   "options": "Department"
+   "options": "Department",
+   "reqd": 1
   },
   {
    "fieldname": "project",
@@ -184,8 +186,7 @@
   {
    "fieldname": "planned_hours_km",
    "fieldtype": "Float",
-   "label": "Planned Hours/Km",
-   "reqd": 1
+   "label": "Planned Hours/Km"
   },
   {
    "fieldname": "column_break_3",
@@ -238,18 +239,29 @@
   {
    "fieldname": "date",
    "fieldtype": "Date",
-   "label": "Date"
+   "label": "Date",
+   "reqd": 1
   },
   {
    "fieldname": "last_maintenance_column",
    "fieldtype": "Column Break",
    "label": "Last Maintenance"
+  },
+  {
+   "fieldname": "planned_date",
+   "fieldtype": "Date",
+   "label": "Planned Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2026-03-11 05:19:47.494750",
+ "links": [
+  {
+   "link_doctype": "Preventive Maintenance Done",
+   "link_fieldname": "plan"
+  }
+ ],
+ "modified": "2026-03-11 11:46:48.444748",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Preventive Maintenance Plan",
