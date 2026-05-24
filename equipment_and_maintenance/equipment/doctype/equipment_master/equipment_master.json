@@ -37,7 +37,8 @@
   {
    "fieldname": "plate_number",
    "fieldtype": "Data",
-   "label": "Plate Number"
+   "label": "Plate Number",
+   "reqd": 1
   },
   {
    "fieldname": "serial_number",
@@ -130,14 +131,16 @@
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Equipment Category",
-   "options": "Asset Category"
+   "options": "Asset Category",
+   "reqd": 1
   },
   {
    "fieldname": "equipment_sub_category",
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Equipment Sub Category",
-   "options": "Asset Sub Category"
+   "options": "Asset Sub Category",
+   "reqd": 1
   },
   {
    "fieldname": "equipment_name",
@@ -152,8 +155,60 @@
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-02-18 13:16:48.205730",
+ "links": [
+  {
+   "link_doctype": "Bollo Followup Form",
+   "link_fieldname": "plate_number"
+  },
+  {
+   "link_doctype": "Preventive Maintenance Done",
+   "link_fieldname": "equipment"
+  },
+  {
+   "link_doctype": "Machinery Time Sheet Registration",
+   "link_fieldname": "plate_number"
+  },
+  {
+   "link_doctype": "Equipment Transfer Form",
+   "link_fieldname": "equipment_plate_no"
+  },
+  {
+   "link_doctype": "Insurance Followup Form",
+   "link_fieldname": "plate_number"
+  },
+  {
+   "is_child_table": 1,
+   "link_doctype": "Rental Agreement Items",
+   "link_fieldname": "created_equipment_id",
+   "parent_doctype": "Rental Agreement",
+   "table_fieldname": "equipments"
+  },
+  {
+   "link_doctype": "Battery Recording Database Form",
+   "link_fieldname": "equipment_type"
+  },
+  {
+   "link_doctype": "Battery Issue and Return Report Form",
+   "link_fieldname": "equipment_type"
+  },
+  {
+   "link_doctype": "Fuel Request",
+   "link_fieldname": "plate_number"
+  },
+  {
+   "link_doctype": "Preventive Maintenance History",
+   "link_fieldname": "equipment"
+  },
+  {
+   "link_doctype": "Battery Request and Analysis Form",
+   "link_fieldname": "equipment_type"
+  },
+  {
+   "link_doctype": "Preventive Maintenance Plan",
+   "link_fieldname": "equipment"
+  }
+ ],
+ "modified": "2026-05-14 11:00:34.566269",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Equipment Master",
@@ -173,6 +228,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
  "show_title_field_in_link": 1,

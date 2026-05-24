@@ -52,7 +52,8 @@
    "fieldname": "approved",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Approved"
+   "label": "Approved",
+   "reqd": 1
   },
   {
    "columns": 1,
@@ -84,7 +85,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-03-11 12:32:36.628401",
+ "modified": "2026-05-15 16:20:23.888268",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Fuel Request Items",

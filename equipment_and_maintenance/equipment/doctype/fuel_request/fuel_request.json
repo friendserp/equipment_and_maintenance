@@ -236,7 +236,8 @@
    "fieldname": "items",
    "fieldtype": "Table",
    "label": "Items",
-   "options": "Fuel Request Items"
+   "options": "Fuel Request Items",
+   "reqd": 1
   },
   {
    "fetch_from": "plate_number.operators_name",
@@ -262,7 +263,7 @@
    "table_fieldname": "items"
   }
  ],
- "modified": "2026-03-26 14:42:25.971777",
+ "modified": "2026-04-06 11:21:30.963191",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Fuel Request",

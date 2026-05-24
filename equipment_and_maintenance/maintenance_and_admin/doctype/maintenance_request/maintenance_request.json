@@ -29,7 +29,8 @@
   "column_break_aeat",
   "received_by",
   "date_received",
-  "receiver_sign"
+  "receiver_sign",
+  "amended_from"
  ],
  "fields": [
   {
@@ -153,12 +154,23 @@
    "fieldname": "request_items",
    "fieldtype": "Table",
    "options": "Maintenance Request Items"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Maintenance Request",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2026-01-10 21:27:24.129416",
+ "modified": "2026-04-04 09:58:33.042990",
  "modified_by": "Administrator",
  "module": "Maintenance and Admin",
  "name": "Maintenance Request",

@@ -9,7 +9,7 @@
    "label": "Fuel Requests Trend"
   }
  ],
- "content": "[{\"id\":\"header_main\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h3\\\"><b>Equipment Module</b></span>\",\"col\":12}},{\"id\":\"chart_equipment_category\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Equipment by Category\",\"col\":6}},{\"id\":\"chart_fuel_requests\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Fuel Requests Trend\",\"col\":6}},{\"id\":\"spacer0\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"custom_block_equipment_overview\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"Equipment Overview\",\"col\":12}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"number_card_total_equipment\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Equipment\",\"col\":6}},{\"id\":\"spacer2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_dashboard\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Dashboard</b></span>\",\"col\":12}},{\"id\":\"shortcut_dashboard_equipment\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Equipment Dashboard\",\"col\":4}},{\"id\":\"spacer3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_shortcuts\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"shortcut_equipment_master\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Equipment Master\",\"col\":3}},{\"id\":\"shortcut_fuel_request\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Fuel Request\",\"col\":3}},{\"id\":\"6Rw0sGCBz4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Equipment Request\",\"col\":3}},{\"id\":\"shortcut_equipment_transfer\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Equipment Transfer Form\",\"col\":3}},{\"id\":\"shortcut_vehicle_movement\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicle Daily Movement\",\"col\":3}},{\"id\":\"shortcut_equipment_disposal\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Equipment Disposal Request\",\"col\":3}},{\"id\":\"shortcut_rental_agreement\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rental Agreement\",\"col\":3}},{\"id\":\"spacer4\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_forms\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Forms &amp; Reports</b></span>\",\"col\":12}},{\"id\":\"card_equipment_masters\",\"type\":\"card\",\"data\":{\"card_name\":\"Equipment Masters\",\"col\":6}},{\"id\":\"card_battery_tyre\",\"type\":\"card\",\"data\":{\"card_name\":\"Battery & Tyre\",\"col\":6}},{\"id\":\"card_equipment_forms\",\"type\":\"card\",\"data\":{\"card_name\":\"Equipment Forms\",\"col\":12}},{\"id\":\"card_followup_forms\",\"type\":\"card\",\"data\":{\"card_name\":\"Followup Forms\",\"col\":6}}]",
+ "content": "[{\"id\":\"header_main\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h3\\\"><b>Equipment Module</b></span>\",\"col\":12}},{\"id\":\"chart_equipment_category\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Equipment by Category\",\"col\":6}},{\"id\":\"chart_fuel_requests\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Fuel Requests Trend\",\"col\":6}},{\"id\":\"spacer0\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"number_card_total_equipment\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Equipment\",\"col\":6}},{\"id\":\"spacer2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_dashboard\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Dashboard</b></span>\",\"col\":12}},{\"id\":\"shortcut_dashboard_equipment\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Equipment Dashboard\",\"col\":4}},{\"id\":\"spacer3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_shortcuts\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"shortcut_equipment_master\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Equipment Master\",\"col\":3}},{\"id\":\"shortcut_fuel_request\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Fuel Request\",\"col\":3}},{\"id\":\"FTU0bO57G9\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Fuel Distribution\",\"col\":3}},{\"id\":\"6Rw0sGCBz4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Equipment Request\",\"col\":3}},{\"id\":\"shortcut_equipment_transfer\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Equipment Transfer Form\",\"col\":3}},{\"id\":\"shortcut_vehicle_movement\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicle Daily Movement\",\"col\":3}},{\"id\":\"shortcut_equipment_disposal\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Equipment Disposal Request\",\"col\":3}},{\"id\":\"shortcut_rental_agreement\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rental Agreement\",\"col\":3}},{\"id\":\"spacer4\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_forms\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Forms &amp; Reports</b></span>\",\"col\":12}},{\"id\":\"card_equipment_masters\",\"type\":\"card\",\"data\":{\"card_name\":\"Equipment Masters\",\"col\":6}},{\"id\":\"card_battery_tyre\",\"type\":\"card\",\"data\":{\"card_name\":\"Battery & Tyre\",\"col\":6}},{\"id\":\"card_equipment_forms\",\"type\":\"card\",\"data\":{\"card_name\":\"Equipment Forms\",\"col\":12}},{\"id\":\"card_followup_forms\",\"type\":\"card\",\"data\":{\"card_name\":\"Followup Forms\",\"col\":6}}]",
  "creation": "2026-02-18 11:16:06.859348",
  "custom_blocks": [],
  "docstatus": 0,
@@ -288,7 +288,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-03-24 11:56:32.610785",
+ "modified": "2026-04-07 12:11:58.490508",
  "modified_by": "Administrator",
  "module": "Equipment And Maintenance",
  "name": "Equipment",
@@ -319,6 +319,14 @@
    "doc_view": "",
    "label": "Equipment Master",
    "link_to": "Equipment Master",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Fuel Distribution",
+   "link_to": "Stock Entry",
+   "stats_filter": "[[\"Stock Entry\",\"custom_entry_type\",\"=\",\"Fuel,Oil & Lubricant Distribution Voucher\",false]]",
    "type": "DocType"
   },
   {
@@ -364,6 +372,12 @@
    "label": "Equipment Dashboard",
    "link_to": "Equipment",
    "type": "Dashboard"
+  },
+  {
+   "doc_view": "",
+   "label": "Fuel Destribution",
+   "link_to": "Stock Entry",
+   "type": "DocType"
   }
  ],
  "title": "Equipment"

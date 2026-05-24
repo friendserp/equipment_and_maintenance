@@ -11,12 +11,16 @@
   "project",
   "machine_type",
   "operators_name",
+  "column_break_khyo",
+  "year",
+  "month",
   "section_break_2",
-  "date",
   "column_break_1",
   "total_operation_hours",
   "total_idle_hours",
   "total_down_hours",
+  "column_break_snnh",
+  "total_days",
   "operation_tab",
   "operation_time",
   "idle_tab",
@@ -24,20 +28,16 @@
   "down_tab",
   "down_time",
   "section_break_3",
-  "fuels_lubricant_used",
-  "operators_signature",
   "time_keeper",
+  "fuels_lubricant_used",
   "column_break_2",
   "performed_work",
   "section_break_4",
   "prepared_by",
-  "prepared_by_signature",
   "column_break_3",
   "checked_by",
-  "checked_by_signature",
   "column_break_4",
-  "approved_by",
-  "approved_by_signature"
+  "approved_by"
  ],
  "fields": [
   {
@@ -84,14 +84,6 @@
    "fieldname": "section_break_2",
    "fieldtype": "Section Break",
    "label": "Time Sheet Details"
-  },
-  {
-   "default": "Today",
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Date",
-   "reqd": 1
   },
   {
    "fieldname": "column_break_1",
@@ -157,11 +149,6 @@
    "label": "Signatures and Additional Information"
   },
   {
-   "fieldname": "operators_signature",
-   "fieldtype": "Signature",
-   "label": "Operator's Sign"
-  },
-  {
    "fieldname": "time_keeper",
    "fieldtype": "Data",
    "label": "Time Keeper"
@@ -192,11 +179,6 @@
    "options": "User"
   },
   {
-   "fieldname": "prepared_by_signature",
-   "fieldtype": "Signature",
-   "label": "Prepared by Signature"
-  },
-  {
    "fieldname": "column_break_3",
    "fieldtype": "Column Break"
   },
@@ -205,11 +187,6 @@
    "fieldtype": "Link",
    "label": "Checked by",
    "options": "User"
-  },
-  {
-   "fieldname": "checked_by_signature",
-   "fieldtype": "Signature",
-   "label": "Checked by Signature"
   },
   {
    "fieldname": "column_break_4",
@@ -222,14 +199,38 @@
    "options": "User"
   },
   {
-   "fieldname": "approved_by_signature",
-   "fieldtype": "Signature",
-   "label": "Approved By Signature"
+   "fieldname": "column_break_khyo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Select",
+   "label": "Year",
+   "options": "2018\n2019\n2020\n2021\n2022\n2023\n2024\n2025\n2026\n2027\n2028\n2029\n2030",
+   "reqd": 1
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Month",
+   "options": "\nJanuary\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_snnh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_days",
+   "fieldtype": "Int",
+   "label": "Total Days",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-10 18:40:17.250487",
+ "modified": "2026-03-30 23:21:56.536701",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Machinery Time Sheet Registration",
@@ -256,7 +257,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "All",
+   "role": "Maintenance User",
    "share": 1,
    "write": 1
   }

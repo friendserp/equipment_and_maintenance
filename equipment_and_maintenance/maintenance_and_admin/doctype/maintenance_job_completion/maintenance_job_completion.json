@@ -47,7 +47,9 @@
   {
    "fieldname": "date",
    "fieldtype": "Date",
-   "label": "Date"
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
   },
   {
    "fieldname": "time",
@@ -72,25 +74,34 @@
   {
    "fieldname": "work_order_no",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Work Order No",
-   "options": "Maintenance Work Order"
+   "options": "Maintenance Work Order",
+   "reqd": 1
   },
   {
+   "fetch_from": "plate_no.equipment_sub_category",
    "fieldname": "equipment_type",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "Equipment Type",
    "options": "Asset Category"
   },
   {
    "fetch_from": "work_order_no.plate_no",
    "fieldname": "plate_no",
-   "fieldtype": "Data",
-   "label": "Plate No"
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Plate No",
+   "options": "Equipment Master",
+   "reqd": 1
   },
   {
+   "fetch_from": "work_order_no.engine_hour__km_reading",
    "fieldname": "engine_hour__km_reading",
    "fieldtype": "Float",
-   "label": "Engine Hour / Km Reading"
+   "in_list_view": 1,
+   "label": "Engine Hour / Km Reading",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_jqsz",
@@ -148,8 +159,8 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-26 14:28:17.518741",
- "modified_by": "Administrator",
+ "modified": "2026-05-15 14:14:54.871099",
+ "modified_by": "friendserpnext@gmail.com",
  "module": "Maintenance and Admin",
  "name": "Maintenance Job Completion",
  "naming_rule": "Expression (old style)",

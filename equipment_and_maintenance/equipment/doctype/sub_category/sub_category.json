@@ -23,6 +23,7 @@
   {
    "fieldname": "main_category",
    "fieldtype": "Link",
+   "in_global_search": 1,
    "label": "Main Category",
    "options": "Item Group"
   }
@@ -30,8 +31,8 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-11 08:50:03.448406",
- "modified_by": "Administrator",
+ "modified": "2026-05-23 09:54:46.269280",
+ "modified_by": "friendserpnext@gmail.com",
  "module": "Equipment",
  "name": "Sub Category",
  "owner": "Administrator",

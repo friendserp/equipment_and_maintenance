@@ -10,6 +10,8 @@
   "amended_from",
   "maintenance_request_id",
   "plate_no",
+  "make",
+  "model",
   "engine_hour__km_reading",
   "column_break_pthv",
   "requested_by",
@@ -63,14 +65,18 @@
    "fetch_from": "maintenance_request_id.plate_no",
    "fieldname": "plate_no",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Plate No",
-   "options": "Equipment Master"
+   "options": "Equipment Master",
+   "reqd": 1
   },
   {
    "fetch_from": "maintenance_request_id.engine_hour__km_reading",
    "fieldname": "engine_hour__km_reading",
    "fieldtype": "Float",
-   "label": "Engine Hour / Km Reading"
+   "in_list_view": 1,
+   "label": "Engine Hour / Km Reading",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_pthv",
@@ -174,7 +180,8 @@
   {
    "fieldname": "work_done_items",
    "fieldtype": "Table",
-   "options": "Maintenance Work Done"
+   "options": "Maintenance Work Done",
+   "reqd": 1
   },
   {
    "fieldname": "labor_cost_items",
@@ -206,33 +213,36 @@
    "fieldtype": "Table",
    "options": "Maintenance Cost Summary",
    "read_only": 1
+  },
+  {
+   "fetch_from": "plate_no.make",
+   "fieldname": "make",
+   "fieldtype": "Data",
+   "label": "Make"
+  },
+  {
+   "fetch_from": "plate_no.model",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2026-01-05 11:32:07.546661",
- "modified_by": "Administrator",
+ "links": [
+  {
+   "link_doctype": "Maintenance Job Completion",
+   "link_fieldname": "work_order_no"
+  }
+ ],
+ "modified": "2026-05-15 15:55:50.003968",
+ "modified_by": "friendserpnext@gmail.com",
  "module": "Maintenance and Admin",
  "name": "Maintenance Work Order",
  "naming_rule": "Expression (old style)",
  "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "submit": 1,
-   "write": 1
-  }
- ],
+ "permissions": [],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
  "sort_field": "creation",
