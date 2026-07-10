@@ -96,6 +96,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fetch_from": "work_order_no.engine_hour__km_reading",
    "fieldname": "engine_hour__km_reading",
    "fieldtype": "Float",
@@ -159,8 +160,8 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-05-15 14:14:54.871099",
- "modified_by": "friendserpnext@gmail.com",
+ "modified": "2026-06-09 16:55:22.809941",
+ "modified_by": "Administrator",
  "module": "Maintenance and Admin",
  "name": "Maintenance Job Completion",
  "naming_rule": "Expression (old style)",

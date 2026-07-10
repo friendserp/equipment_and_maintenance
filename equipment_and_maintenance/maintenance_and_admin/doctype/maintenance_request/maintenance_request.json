@@ -73,7 +73,9 @@
   {
    "fieldname": "engine_hour__km_reading",
    "fieldtype": "Float",
-   "label": "Engine Hour / Km Reading"
+   "in_list_view": 1,
+   "label": "Engine Hour / Km Reading",
+   "reqd": 1
   },
   {
    "fetch_from": "plate_no.operators_name",
@@ -170,7 +172,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-04 09:58:33.042990",
+ "modified": "2026-07-02 10:13:26.977144",
  "modified_by": "Administrator",
  "module": "Maintenance and Admin",
  "name": "Maintenance Request",

@@ -26,7 +26,9 @@
   "operators_name",
   "operators_phone_no",
   "ownership_type",
-  "rental_agreement"
+  "rental_agreement",
+  "tab_2_tab",
+  "fuel_usage"
  ],
  "fields": [
   {
@@ -151,6 +153,18 @@
    "fieldname": "model",
    "fieldtype": "Data",
    "label": "Model"
+  },
+  {
+   "fieldname": "tab_2_tab",
+   "fieldtype": "Tab Break",
+   "label": "Fuel Usage"
+  },
+  {
+   "fieldname": "fuel_usage",
+   "fieldtype": "Table",
+   "label": "Fuel Usage",
+   "options": "Equipment Master Fuel Usage",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
@@ -208,8 +222,8 @@
    "link_fieldname": "equipment"
   }
  ],
- "modified": "2026-05-14 11:00:34.566269",
- "modified_by": "Administrator",
+ "modified": "2026-05-28 22:20:04.133620",
+ "modified_by": "friendserpnext@gmail.com",
  "module": "Equipment",
  "name": "Equipment Master",
  "naming_rule": "By fieldname",

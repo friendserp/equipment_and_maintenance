@@ -71,6 +71,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fetch_from": "maintenance_request_id.engine_hour__km_reading",
    "fieldname": "engine_hour__km_reading",
    "fieldtype": "Float",
@@ -236,8 +237,8 @@
    "link_fieldname": "work_order_no"
   }
  ],
- "modified": "2026-05-15 15:55:50.003968",
- "modified_by": "friendserpnext@gmail.com",
+ "modified": "2026-06-09 16:55:41.389564",
+ "modified_by": "Administrator",
  "module": "Maintenance and Admin",
  "name": "Maintenance Work Order",
  "naming_rule": "Expression (old style)",

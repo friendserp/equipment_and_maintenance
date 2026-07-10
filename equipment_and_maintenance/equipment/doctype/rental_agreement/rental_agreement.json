@@ -15,6 +15,7 @@
   "section_break_3yb7",
   "tenannt_info",
   "tenant",
+  "region_t",
   "district_t",
   "city_t",
   "wereda_t",
@@ -24,6 +25,7 @@
   "tin_t",
   "hirere_inf0",
   "hirer",
+  "region_h",
   "district_h",
   "city_h",
   "wereda_h",
@@ -35,8 +37,10 @@
   "equipments",
   "section_break_evbm",
   "advance_payment",
+  "advanced_payment_vat",
   "column_break_jlna",
-  "check_number"
+  "check_number",
+  "advance_payment_in_word"
  ],
  "fields": [
   {
@@ -196,6 +200,27 @@
    "fieldtype": "Link",
    "label": "\u12e8\u121b\u123d\u1290\u122a \u1218\u1320\u12e8\u1242\u12eb",
    "options": "Equipment Master"
+  },
+  {
+   "fieldname": "advanced_payment_vat",
+   "fieldtype": "Float",
+   "label": "\u12a0\u12f5\u126b\u1295\u1235 \u1354\u12ed\u1218\u1295\u1275 \u12a8 \u126b\u1275 \u130b\u122d"
+  },
+  {
+   "fieldname": "advance_payment_in_word",
+   "fieldtype": "Data",
+   "label": "\u12a0\u12f5\u126b\u1295\u1235 \u1354\u12ed\u1218\u1295\u1275  \u12a8 \u126b\u1275 \u130b\u122d \u1260\u134a\u12f0\u120d"
+  },
+  {
+   "default": "\u12a0\u12f2\u1230 \u12a0\u1260\u1263",
+   "fieldname": "region_t",
+   "fieldtype": "Data",
+   "label": "\u12ad\u120d\u120d"
+  },
+  {
+   "fieldname": "region_h",
+   "fieldtype": "Data",
+   "label": "\u12ad\u120d\u120d"
   }
  ],
  "grid_page_length": 50,
@@ -207,8 +232,8 @@
    "link_fieldname": "rental_agreement"
   }
  ],
- "modified": "2026-03-14 12:51:47.346341",
- "modified_by": "Administrator",
+ "modified": "2026-06-20 09:37:18.287635",
+ "modified_by": "elias.tadele@kushladder.com",
  "module": "Equipment",
  "name": "Rental Agreement",
  "naming_rule": "Expression (old style)",

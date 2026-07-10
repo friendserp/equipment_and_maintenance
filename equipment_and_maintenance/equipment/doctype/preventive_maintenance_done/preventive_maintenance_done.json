@@ -107,7 +107,8 @@
    "fieldname": "plan",
    "fieldtype": "Link",
    "label": "Preventive Maintenance Plan",
-   "options": "Preventive Maintenance Plan"
+   "options": "Preventive Maintenance Plan",
+   "reqd": 1
   },
   {
    "fieldname": "planned_week",
@@ -190,7 +191,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-20 12:55:35.342073",
+ "modified": "2026-06-22 11:01:35.979787",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Preventive Maintenance Done",

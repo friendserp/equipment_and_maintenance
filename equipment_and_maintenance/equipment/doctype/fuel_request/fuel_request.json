@@ -261,9 +261,13 @@
    "link_fieldname": "custom_fuel_request",
    "parent_doctype": "Stock Entry",
    "table_fieldname": "items"
+  },
+  {
+   "link_doctype": "Material Request",
+   "link_fieldname": "custom_fuel_request"
   }
  ],
- "modified": "2026-04-06 11:21:30.963191",
+ "modified": "2026-06-04 10:40:47.660263",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Fuel Request",
