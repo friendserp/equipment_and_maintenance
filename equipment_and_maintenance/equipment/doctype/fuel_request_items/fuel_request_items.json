@@ -23,6 +23,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Item Code",
+   "link_filters": "[]",
    "options": "Item"
   },
   {
@@ -85,7 +86,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-05-15 16:20:23.888268",
+ "modified": "2026-07-21 15:28:50.623018",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Fuel Request Items",

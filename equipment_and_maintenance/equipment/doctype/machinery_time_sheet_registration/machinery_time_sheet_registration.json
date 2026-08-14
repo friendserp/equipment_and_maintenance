@@ -230,7 +230,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-30 23:21:56.536701",
+ "modified": "2026-07-10 11:49:59.641324",
  "modified_by": "Administrator",
  "module": "Equipment",
  "name": "Machinery Time Sheet Registration",
@@ -263,6 +263,7 @@
   }
  ],
  "row_format": "Dynamic",
+ "search_fields": "plate_number",
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": []

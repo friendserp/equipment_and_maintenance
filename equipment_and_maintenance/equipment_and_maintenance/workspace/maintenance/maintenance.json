@@ -13,7 +13,7 @@
    "label": "Completed Maintenance Jobs Trend"
   }
  ],
- "content": "[{\"id\":\"header_main\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h3\\\"><b>Maintenance Module</b></span>\",\"col\":12}},{\"id\":\"chart_maintenance_trend\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Maintenance Requests Trend\",\"col\":12}},{\"id\":\"spacer_charts\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"chart_work_orders\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Work Orders Status\",\"col\":6}},{\"id\":\"chart_completed_jobs\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Completed Maintenance Jobs Trend\",\"col\":6}},{\"id\":\"spacer0\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"custom_block_maintenance_overview\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"Maintenance Overview\",\"col\":12}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"number_card_pending_requests\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Pending Maintenance Requests\",\"col\":4}},{\"id\":\"number_card_open_work_orders\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open Work Orders\",\"col\":4}},{\"id\":\"number_card_completed_jobs\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Completed Maintenance Jobs\",\"col\":4}},{\"id\":\"spacer2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_dashboard\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Dashboard</b></span>\",\"col\":12}},{\"id\":\"shortcut_dashboard_maintenance\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Maintenance Dashboard\",\"col\":4}},{\"id\":\"spacer3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_shortcuts\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"shortcut_maintenance_request\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Maintenance Request\",\"col\":3}},{\"id\":\"shortcut_work_order\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Maintenance Work Order\",\"col\":3}},{\"id\":\"NvrP6jW9r7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Preventive Maintenance Plan\",\"col\":3}},{\"id\":\"HFROf0YXGy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Preventive Maintenance Done\",\"col\":3}},{\"id\":\"spacer4\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"YmUFxau7J-\",\"type\":\"card\",\"data\":{\"card_name\":\"Preventive Maintenances\",\"col\":6}},{\"id\":\"card_maintenance_forms\",\"type\":\"card\",\"data\":{\"card_name\":\"Maintenance Forms\",\"col\":6}}]",
+ "content": "[{\"id\":\"header_main\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h3\\\"><b>Maintenance Module</b></span>\",\"col\":12}},{\"id\":\"chart_maintenance_trend\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Maintenance Requests Trend\",\"col\":12}},{\"id\":\"spacer_charts\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"chart_work_orders\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Work Orders Status\",\"col\":6}},{\"id\":\"chart_completed_jobs\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Completed Maintenance Jobs Trend\",\"col\":6}},{\"id\":\"spacer0\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"number_card_pending_requests\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Pending Maintenance Requests\",\"col\":4}},{\"id\":\"number_card_open_work_orders\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open Work Orders\",\"col\":4}},{\"id\":\"number_card_completed_jobs\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Completed Maintenance Jobs\",\"col\":4}},{\"id\":\"spacer2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_dashboard\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Dashboard</b></span>\",\"col\":12}},{\"id\":\"shortcut_dashboard_maintenance\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Maintenance Dashboard\",\"col\":4}},{\"id\":\"spacer3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header_shortcuts\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"shortcut_maintenance_request\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Maintenance Request\",\"col\":3}},{\"id\":\"cpnIyW8JEu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase receipt\",\"col\":3}},{\"id\":\"shortcut_work_order\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Maintenance Work Order\",\"col\":3}},{\"id\":\"NvrP6jW9r7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Preventive Maintenance Plan\",\"col\":3}},{\"id\":\"HFROf0YXGy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Preventive Maintenance Done\",\"col\":3}},{\"id\":\"spacer4\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"YmUFxau7J-\",\"type\":\"card\",\"data\":{\"card_name\":\"Preventive Maintenances\",\"col\":6}},{\"id\":\"card_maintenance_forms\",\"type\":\"card\",\"data\":{\"card_name\":\"Maintenance Forms\",\"col\":6}}]",
  "creation": "2026-02-18 11:16:06.915156",
  "custom_blocks": [],
  "docstatus": 0,
@@ -109,7 +109,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Preventive Maintenances",
-   "link_count": 3,
+   "link_count": 4,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -143,9 +143,19 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Fuel Utilization",
+   "link_count": 0,
+   "link_to": "Fuel Utilization",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-03-11 05:52:13.296679",
+ "modified": "2026-08-12 14:52:28.594721",
  "modified_by": "Administrator",
  "module": "Equipment And Maintenance",
  "name": "Maintenance",
@@ -164,7 +174,7 @@
   }
  ],
  "owner": "Administrator",
- "parent_page": "Equipment and Maintenance",
+ "parent_page": "",
  "public": 1,
  "quick_lists": [],
  "roles": [
@@ -175,12 +185,20 @@
    "role": "Maintenance Manager"
   }
  ],
- "sequence_id": 12.0,
+ "sequence_id": 22.0,
  "shortcuts": [
   {
    "doc_view": "",
    "label": "Maintenance Request",
    "link_to": "Maintenance Request",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Purchase receipt",
+   "link_to": "Purchase Receipt",
+   "stats_filter": "[]",
    "type": "DocType"
   },
   {
