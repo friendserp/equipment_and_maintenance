@@ -1,0 +1,198 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-05 11:36:46.592715",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "date_section",
+  "date",
+  "equipment_section",
+  "type",
+  "column_break_rzwa",
+  "plate_number",
+  "tyre_section",
+  "brand",
+  "column_break_ynxe",
+  "size",
+  "other_tyre_details_section",
+  "new_tyre_serial_no",
+  "column_break_vgkc",
+  "quantity",
+  "column_break_dise",
+  "new_tyre_assembled_km",
+  "remark_section",
+  "remark",
+  "approvals_section",
+  "requested_by",
+  "requested_by_signature",
+  "column_break_ljqi",
+  "checked_by",
+  "checked_by_signature",
+  "column_break_hojg",
+  "approved_by",
+  "approved_by_signature"
+ ],
+ "fields": [
+  {
+   "fieldname": "approvals_section",
+   "fieldtype": "Section Break",
+   "label": "Approvals"
+  },
+  {
+   "fieldname": "requested_by",
+   "fieldtype": "Link",
+   "label": "Requested By",
+   "options": "User"
+  },
+  {
+   "fieldname": "requested_by_signature",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "column_break_ljqi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "checked_by",
+   "fieldtype": "Link",
+   "label": "Checked By",
+   "options": "User"
+  },
+  {
+   "fieldname": "checked_by_signature",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "column_break_hojg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User"
+  },
+  {
+   "fieldname": "approved_by_signature",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "date_section",
+   "fieldtype": "Section Break",
+   "label": "Date"
+  },
+  {
+   "fieldname": "equipment_section",
+   "fieldtype": "Section Break",
+   "label": "Equipment"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Link",
+   "label": "Type",
+   "options": "Equipment Master"
+  },
+  {
+   "fieldname": "column_break_rzwa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "plate_number",
+   "fieldtype": "Data",
+   "label": "Plate Number"
+  },
+  {
+   "fieldname": "tyre_section",
+   "fieldtype": "Section Break",
+   "label": "Tyre"
+  },
+  {
+   "fieldname": "brand",
+   "fieldtype": "Data",
+   "label": "Brand"
+  },
+  {
+   "fieldname": "column_break_ynxe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "size",
+   "fieldtype": "Float",
+   "label": "Size"
+  },
+  {
+   "fieldname": "other_tyre_details_section",
+   "fieldtype": "Section Break",
+   "label": "Other Tyre Details"
+  },
+  {
+   "fieldname": "new_tyre_serial_no",
+   "fieldtype": "Data",
+   "label": "New Tyre Serial No"
+  },
+  {
+   "fieldname": "column_break_vgkc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "column_break_dise",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "new_tyre_assembled_km",
+   "fieldtype": "Float",
+   "label": "New Tyre Assembled KM"
+  },
+  {
+   "fieldname": "remark_section",
+   "fieldtype": "Section Break",
+   "label": "Remark"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Data",
+   "label": "Remark"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-05 12:09:30.735523",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Tyre Management Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

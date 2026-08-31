@@ -1,0 +1,85 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-05 11:22:57.215758",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "type",
+  "capacity",
+  "other_identification",
+  "qty",
+  "date_needed",
+  "duration_of_usage",
+  "project"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "Equipment Master"
+  },
+  {
+   "columns": 2,
+   "fieldname": "capacity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Capacity"
+  },
+  {
+   "columns": 2,
+   "fieldname": "other_identification",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Other Identification"
+  },
+  {
+   "columns": 2,
+   "fieldname": "qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "columns": 2,
+   "fieldname": "date_needed",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date Needed"
+  },
+  {
+   "columns": 2,
+   "fieldname": "duration_of_usage",
+   "fieldtype": "Duration",
+   "in_list_view": 1,
+   "label": "Duration of Usage"
+  },
+  {
+   "columns": 2,
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project",
+   "options": "Project"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-05 11:28:25.956775",
+ "modified_by": "Administrator",
+ "module": "Equipment",
+ "name": "Equipment Request Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
